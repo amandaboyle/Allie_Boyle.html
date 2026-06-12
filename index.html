@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Allie's Learning Platform</title>
+    <style>
+        :root {
+            --main-pink: #ff9a9e;
+            --main-purple: #a18cd1;
+            --main-yellow: #fbc2eb;
+            --text-color: #4a4a4a;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--main-pink), var(--main-purple));
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+            border: 8px solid white;
+        }
+
+        h1 { color: #d63384; font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .position { color: #6f42c1; font-weight: bold; font-size: 1.2rem; margin-bottom: 1rem; }
+        
+        .eagle-badge {
+            background: #008080;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 800;
+            display: inline-block;
+            margin: 10px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .btn {
+            display: inline-block;
+            background: #6f42c1;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: transform 0.2s;
+        }
+
+        .btn:hover { transform: scale(1.05); background: #5a32a3; }
+
+        button {
+            background: #ff7eb9;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>Allie's Learning Platform</h1>
+        <p class="position">Student Extraordinaire</p>
+        <div class="eagle-badge">TCS Eagle</div>
+        
+        <p id="greeting">Ready to learn something new today?</p>
+        
+        <button onclick="surprise()">Click for a boost!</button>
+        <br>
+        <a href="infections.html" class="btn">Explore Infections Study</a>
+        <br>
+        <a href="learning_style.html" class="btn">Explore Learning Styles</a>
+    </div>
+
+    <script>
+        function surprise() {
+            const greeting = document.getElementById('greeting');
+            greeting.innerText = "You're doing great, Allie! Keep soaring! 🦅✨";
+            greeting.style.color = "#d63384";
+        }
+    </script>
+</body>
+</html>
