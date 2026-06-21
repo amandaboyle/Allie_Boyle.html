@@ -42,7 +42,7 @@
 
 <script>
     const units = [
-        { id: 1, title: "The First Americans", desc: "Migration, early indigenous cultures, and environmental adaptations.", link: "https://www.nps.gov/subjects/archeology/first-americans.htm", extraLink: "American_History_Unit1.html", extraLabel: "View Unit 1 Document" },
+        { id: 1, title: "The First Americans", desc: "Migration, early indigenous cultures, and environmental adaptations.", link: "https://www.nps.gov/subjects/archeology/first-americans.htm", extraLink: "American_History_Unit1.html", extraLabel: "View Unit 1 Document", videoLink: "https://www.youtube.com/watch?v=fyZNYdZynb0", videoTitle: "The Ice Age" },
         { id: 2, title: "Exploration and colonization", desc: "European voyages, the Columbian Exchange, and early interactions.", link: "https://www.loc.gov/collections/exploring-the-early-americas/", extraLink: "American_History_Unit2.html", extraLabel: "View Unit 2 Document" },
         { id: 3, title: "Colonial America", desc: "Regional differences in New England, Middle, and Southern colonies.", link: "https://www.ushistory.org/us/2.asp", extraLink: "American_History_Unit3.html", extraLabel: "View Unit 3 Document" },
         { id: 4, title: "The Road to Revolution", desc: "Tensions, French & Indian War, and the path to independence.", link: "https://www.history.com/topics/american-revolution/road-to-revolution", extraLink: "American_History_Unit4.html", extraLabel: "View Unit 4 Document" },
@@ -77,6 +77,10 @@
             if (unit.extraLink) {
                 htmlContent += `<a href="${unit.extraLink}" target="_blank" class="link-item">${unit.extraLabel}</a>`;
             }
+
+            if (unit.videoLink) {
+                htmlContent += `<a href="${unit.videoLink}" target="_blank" class="link-item">${unit.videoTitle}</a>`;
+            }
             
             htmlContent += `</div>`;
             content.innerHTML = htmlContent;
@@ -85,5 +89,7 @@
     });
 </script>
 
+</body>
+</html>
 </body>
 </html>
