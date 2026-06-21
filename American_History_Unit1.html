@@ -1,0 +1,1703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive U.S. History: Unit 1 Explorer Pro</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Playfair Display for headings, Inter for body -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    h1, h2, h3, .serif-font {
+      font-family: 'Playfair Display', serif;
+    }
+    /* Card Flip CSS */
+    .flip-card {
+      background-color: transparent;
+      perspective: 1000px;
+    }
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+    }
+    .flip-card.flipped .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+    .flip-card-front, .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      border-radius: 0.75rem;
+    }
+    .flip-card-back {
+      transform: rotateY(180deg);
+    }
+    /* Map Interaction */
+    .map-region {
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .map-region:hover {
+      fill-opacity: 0.8;
+      filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.3));
+    }
+    .map-region.active-region {
+      fill-opacity: 0.95;
+      stroke: #ffffff;
+      stroke-width: 3px;
+    }
+  </style>
+</head>
+<body class="bg-[#fcf8f2] text-slate-800 min-h-screen flex flex-col selection:bg-amber-200">
+
+  <!-- Header Banner -->
+  <header class="bg-emerald-900 text-white shadow-md border-b-4 border-amber-500 py-5 px-4 md:px-8 relative overflow-hidden">
+    <!-- Overlay Pattern -->
+    <div class="absolute inset-0 bg-grid-pattern opacity-5 pointer-events-none"></div>
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 relative z-10">
+      <div class="flex items-center gap-3">
+        <!-- SVG Compass/Shield Icon -->
+        <svg class="w-12 h-12 text-amber-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
+        </svg>
+        <div>
+          <span class="text-xs font-bold tracking-widest text-amber-300 uppercase block">McDougal & Littell • Companion Edition</span>
+          <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight">Unit 1: Three Worlds Meet</h1>
+        </div>
+      </div>
+      
+      <!-- Progress tracker -->
+      <div class="flex items-center gap-4 w-full md:w-auto justify-between md:justify-end">
+        <div class="bg-emerald-950/80 px-4 py-2 rounded-xl border border-emerald-800 text-right w-full md:w-auto">
+          <p class="text-[10px] text-emerald-300 font-extrabold tracking-wider">HISTORIAN RANK</p>
+          <div class="w-36 bg-emerald-950 h-2.5 rounded-full overflow-hidden mt-1 inline-block">
+            <div id="overall-progress-bar" class="bg-gradient-to-r from-amber-400 to-amber-500 h-full w-[5%] transition-all duration-500"></div>
+          </div>
+          <p id="overall-progress-text" class="text-xs font-bold text-amber-300 mt-1">Explorer (5%)</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Area -->
+  <main class="flex-grow max-w-6xl w-full mx-auto p-4 md:p-6 flex flex-col lg:flex-row gap-6">
+    
+    <!-- Sidebar / Nav & Teacher Guide -->
+    <aside class="w-full lg:w-1/4 flex flex-col gap-6">
+      
+      <!-- Teacher Avatar Box -->
+      <div class="bg-white rounded-2xl shadow-md border border-slate-200 p-5 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-24 h-24 bg-amber-100 rounded-full -mr-8 -mt-8 opacity-40"></div>
+        <div class="flex items-center gap-3 mb-4">
+          <!-- SVG Teacher Avatar -->
+          <div class="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center border-2 border-amber-400">
+            <svg class="w-8 h-8 text-amber-700" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-2.35-.174l-.152-.01a1 1 0 01-.81-.996V10.9a1 1 0 01.622-.924l.001-.001zm13.38 0a1 1 0 01.622.923v1.638a1 1 0 01-.81.996l-.152.01a8.969 8.969 0 00-2.35.174v-4.1l1.69-.724z"></path>
+              <path d="M7.167 11.854l1.94.83a3 3 0 002.386 0l1.94-.83A11.963 11.963 0 0110 14.282a11.963 11.963 0 01-2.833-2.428z"></path>
+            </svg>
+          </div>
+          <div>
+            <h4 class="font-bold text-slate-800">Coach Henderson</h4>
+            <span class="text-[10px] bg-amber-100 text-amber-800 font-bold px-2 py-0.5 rounded-full">Class Guide</span>
+          </div>
+        </div>
+        <p id="teacher-bubble" class="text-sm text-slate-600 italic bg-amber-50/50 p-3 rounded-lg border-l-4 border-amber-400">
+          "Hello! Let's get started. Create your Historian card below, and let's explore Unit One with our brand-new interactive simulators!"
+        </p>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <nav class="bg-white rounded-2xl shadow-md border border-slate-200 p-4 flex flex-col gap-1">
+        <h5 class="text-xs font-bold text-slate-400 uppercase tracking-widest px-3 mb-2">Lesson Sections</h5>
+        
+        <button onclick="switchTab('welcome')" id="tab-welcome" class="tab-btn w-full text-left px-4 py-2.5 rounded-xl flex items-center gap-3 font-semibold transition-all duration-200 bg-emerald-50 text-emerald-800 border-l-4 border-emerald-600 text-sm">
+          <span class="text-base">👋</span> Welcome Desk
+        </button>
+        
+        <button onclick="switchTab('peopling')" id="tab-peopling" class="tab-btn w-full text-left px-4 py-2.5 rounded-xl flex items-center gap-3 font-semibold transition-all duration-200 text-slate-600 hover:bg-slate-50 text-sm">
+          <span class="text-base">❄️</span> 1. Ice Age Land Bridge
+        </button>
+        
+        <button onclick="switchTab('regions')" id="tab-regions" class="tab-btn w-full text-left px-4 py-2.5 rounded-xl flex items-center gap-3 font-semibold transition-all duration-200 text-slate-600 hover:bg-slate-50 text-sm">
+          <span class="text-base">🗺️</span> 2. Clickable Region Map
+        </button>
+        
+        <button onclick="switchTab('civilizations')" id="tab-civilizations" class="tab-btn w-full text-left px-4 py-2.5 rounded-xl flex items-center gap-3 font-semibold transition-all duration-200 text-slate-600 hover:bg-slate-50 text-sm">
+          <span class="text-base">🏛️</span> 3. Early Civilizations
+        </button>
+        
+        <button onclick="switchTab('cultures')" id="tab-cultures" class="tab-btn w-full text-left px-4 py-2.5 rounded-xl flex items-center gap-3 font-semibold transition-all duration-200 text-slate-600 hover:bg-slate-50 text-sm">
+          <span class="text-base">🔥</span> 4. Council Fire Sim
+        </button>
+
+        <button onclick="switchTab('vocab')" id="tab-vocab" class="tab-btn w-full text-left px-4 py-2.5 rounded-xl flex items-center gap-3 font-semibold transition-all duration-200 text-slate-600 hover:bg-slate-50 text-sm">
+          <span class="text-base">📝</span> 5. Vocabulary Sandbox
+        </button>
+        
+        <button onclick="switchTab('quiz')" id="tab-quiz" class="tab-btn w-full text-left px-4 py-2.5 rounded-xl flex items-center gap-3 font-semibold transition-all duration-200 text-slate-600 hover:bg-slate-50 border-t border-slate-100 pt-3 mt-2 text-sm">
+          <span class="text-base">🏆</span> Historian Challenge
+        </button>
+      </nav>
+
+    </aside>
+
+    <!-- Main Content Panel -->
+    <section class="w-full lg:w-3/4 bg-white rounded-3xl shadow-xl border border-slate-200 p-6 md:p-8 min-h-[550px] flex flex-col justify-between">
+      
+      <!-- TAB: WELCOME -->
+      <div id="content-welcome" class="tab-content block">
+        <div class="text-center max-w-2xl mx-auto py-4">
+          <span class="text-emerald-700 font-extrabold text-xs tracking-widest uppercase bg-emerald-50 px-3 py-1 rounded-full">Unit 1: Beginnings to 1500</span>
+          <h2 class="text-3xl md:text-4xl font-bold mt-4 mb-4 text-slate-800">Three Worlds Meet</h2>
+          <p class="text-slate-600 leading-relaxed mb-6 text-sm">
+            Before European ships crossed the Atlantic Ocean, North America was a thriving continent filled with massive cities, intricate trade networks, complex farming systems, and incredibly diverse cultures. In this interactive lesson, we'll examine how the first humans adapted to varied physical environments and built unique societies.
+          </p>
+
+          <div class="bg-amber-50/70 border border-amber-200 p-6 rounded-2xl mb-6 text-left">
+            <h3 class="font-bold text-amber-900 mb-2 flex items-center gap-2">
+              <span class="text-xl">✍️</span> Setup Your Historian Notebook:
+            </h3>
+            <p class="text-xs text-amber-800 mb-4">Your name will be written on your official Certificate of Completion at the end of the unit challenge!</p>
+            <div class="flex flex-col sm:flex-row gap-3">
+              <input type="text" id="student-name" placeholder="Enter Your Name..." class="flex-grow px-4 py-3 rounded-xl border-2 border-amber-300 focus:outline-none focus:border-amber-500 text-slate-700 font-semibold shadow-sm text-sm">
+              <button onclick="startJourney()" class="bg-amber-500 hover:bg-amber-600 text-white font-bold px-6 py-3 rounded-xl shadow-md transition-colors duration-200 shrink-0 text-sm">
+                Begin Exploration
+              </button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4">
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 text-center">
+              <span class="text-xl block mb-1"> Beringia</span>
+              <span class="text-[9px] font-semibold text-slate-500 uppercase">Migration Map</span>
+            </div>
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 text-center">
+              <span class="text-xl block mb-1">🗺️ SVG Map</span>
+              <span class="text-[9px] font-semibold text-slate-500 uppercase">Interactive Explorer</span>
+            </div>
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 text-center">
+              <span class="text-xl block mb-1">🏛️ Cahokia</span>
+              <span class="text-[9px] font-semibold text-slate-500 uppercase">Mounds & Cities</span>
+            </div>
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 text-center">
+              <span class="text-xl block mb-1">📝 Sandbox</span>
+              <span class="text-[9px] font-semibold text-slate-500 uppercase">Interactive Glossary</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB: PEOPLING THE AMERICAS (ICE AGE SLIDER) -->
+      <div id="content-peopling" class="tab-content hidden">
+        <div class="mb-4">
+          <span class="text-xs font-bold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-full uppercase">SECTION 1: Peopling of the Americas</span>
+          <h2 class="text-2xl font-bold mt-2 text-slate-800">The Ice Age & Beringia Land Bridge</h2>
+        </div>
+
+        <p class="text-slate-600 mb-4 leading-relaxed text-sm">
+          How did people first reach North America? Around 15,000 to 30,000 years ago, our planet was locked in a bitter Ice Age. Glaciers trapped seawater, lowering global ocean levels. Drag the slider below to control global temperatures and see the land bridge appear!
+        </p>
+
+        <!-- Beringia Interactive Map Simulator with dynamic sea level slider -->
+        <div class="bg-slate-900 text-white rounded-2xl p-5 mb-6 border border-slate-700 relative">
+          
+          <!-- Climate/Temperature Controller Slider -->
+          <div class="bg-slate-850 p-4 rounded-xl border border-slate-700/60 mb-4">
+            <div class="flex justify-between items-center mb-1 text-xs">
+              <span class="text-sky-300 font-bold flex items-center gap-1">❄️ Ice Age Era</span>
+              <span id="temp-indicator-text" class="font-extrabold text-amber-400">Deep Freeze (-8°C)</span>
+              <span class="text-amber-500 font-bold flex items-center gap-1">☀️ Warm Era</span>
+            </div>
+            <input type="range" id="climate-slider" min="1" max="100" value="20" class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-amber-400" oninput="updateClimateSim(this.value)">
+          </div>
+
+          <!-- Simulation Graphic Container -->
+          <div class="relative h-56 bg-sky-950 rounded-xl overflow-hidden mb-4 border border-sky-900 flex items-center justify-center">
+            
+            <div id="sim-map" class="absolute inset-0 w-full h-full p-4 flex flex-col justify-between">
+              
+              <!-- Map Layout Base Canvas/SVGs -->
+              <svg class="absolute inset-0 w-full h-full opacity-80 pointer-events-none" viewBox="0 0 400 200" preserveAspectRatio="none">
+                <!-- Water BG -->
+                <rect width="100%" height="100%" fill="#101f30" />
+                <!-- Siberia -->
+                <path d="M 0,0 L 110,0 Q 130,100 100,160 L 0,200 Z" fill="#2d3748" stroke="#1a202c" stroke-width="2"/>
+                <!-- Alaska -->
+                <path d="M 400,0 L 290,0 Q 270,100 300,160 L 400,200 Z" fill="#2d3748" stroke="#1a202c" stroke-width="2"/>
+                
+                <!-- Beringia Land Bridge (OPACITY AND SCALE CONTROLLED BY JS SLIDER) -->
+                <path id="land-bridge-polygon" d="M 110,30 Q 200,10 290,30 L 295,110 Q 200,160 105,110 Z" fill="#556b2f" stroke="#3b4a20" stroke-width="2" class="transition-all duration-200" />
+                
+                <!-- Dynamic Glacier Overlays (Siberia and Alaska ice caps) -->
+                <path id="glacier-left" d="M 0,0 L 80,0 Q 90,70 50,110 L 0,130 Z" fill="#e2e8f0" opacity="0.85" />
+                <path id="glacier-right" d="M 400,0 L 320,0 Q 310,70 350,110 L 400,130 Z" fill="#e2e8f0" opacity="0.85" />
+
+                <!-- Migration Path Line (Dotted) -->
+                <path id="migration-path-svg" d="M 60,60 Q 200,90 340,60" fill="none" stroke="#f59e0b" stroke-dasharray="6" stroke-width="3" class="opacity-100 transition-opacity duration-300" />
+                
+                <!-- Migrator Human Dots -->
+                <g id="human-migrators" class="transition-transform duration-300">
+                  <circle id="mig-dot-1" cx="90" cy="65" r="5" fill="#f43f5e" class="animate-pulse" />
+                  <circle id="mig-dot-2" cx="190" cy="80" r="5" fill="#f43f5e" class="animate-pulse" />
+                  <circle id="mig-dot-3" cx="290" cy="70" r="5" fill="#f43f5e" class="animate-pulse" />
+                </g>
+              </svg>
+
+              <!-- Map Labels (Interactive) -->
+              <div class="relative z-10 flex justify-between h-full pointer-events-none text-[10px] tracking-wide">
+                <div class="text-left font-bold text-slate-300">
+                  <span class="bg-slate-800/90 px-1.5 py-0.5 rounded">SIBERIA</span>
+                </div>
+                <div id="bridge-center-label" class="self-center text-center">
+                  <span id="bridge-badge" class="bg-emerald-600 text-white font-extrabold px-2.5 py-0.5 rounded shadow-sm text-xs">LAND BRIDGE OPEN</span>
+                  <span id="sea-depth" class="block text-[8px] text-amber-300 font-bold mt-0.5">Sea Level: -320 feet</span>
+                </div>
+                <div class="text-right font-bold text-slate-300">
+                  <span class="bg-slate-800/90 px-1.5 py-0.5 rounded">ALASKA</span>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Descriptive Overlay Panel -->
+            <div class="absolute bottom-2 left-2 right-2 bg-slate-900/95 p-3 rounded-lg border border-slate-700/80 text-xs">
+              <h4 id="sim-status-title" class="font-bold text-amber-400">Phase: Ice Age Deep Freeze</h4>
+              <p id="sim-status-desc" class="text-slate-300">Vast glacial caps hold global sea waters. The Beringia corridor is fully exposed and covered in rich tundra vegetation, inviting herds of megafauna and hunting clans to walk across.</p>
+            </div>
+          </div>
+
+          <!-- Quick interactive migration game -->
+          <div class="flex flex-col sm:flex-row justify-between items-center gap-3">
+            <span class="text-[11px] text-slate-400 text-center sm:text-left">Adjust the slider until the bridge is fully green to unlock migration!</span>
+            <button onclick="triggerMigration()" id="migration-action-btn" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold px-4 py-2 rounded-lg text-xs tracking-wider uppercase transition-all shadow-md">
+              👣 Guide Hunter-Gatherers Across
+            </button>
+          </div>
+        </div>
+
+        <!-- The Agricultural Shift Checkpoint -->
+        <div class="bg-emerald-50 border border-emerald-100 rounded-2xl p-5 mt-4">
+          <div class="flex items-start gap-4">
+            <div class="bg-emerald-100 text-emerald-800 p-2 rounded-xl font-bold text-xl flex-shrink-0">🌾</div>
+            <div>
+              <h3 class="font-bold text-emerald-900 text-sm mb-1">The Great Agricultural Revolution</h3>
+              <p class="text-slate-600 text-xs leading-relaxed mb-3">
+                Over thousands of years, early Americans moved south. Eventually, in central Mexico, they domesticated a simple grass called Teosinte into **Maize (Corn)**. Try this question to proceed:
+              </p>
+              
+              <!-- Mini Maize Game -->
+              <div class="bg-white p-3.5 rounded-xl border border-emerald-100 shadow-sm">
+                <p class="text-xs font-bold text-slate-700 mb-2">How did farming Maize alter early American civilizations compared to nomadic life?</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                  <button onclick="checkWelcomePuzzle(this, false, 'Actually, nomads lacked settled centers. Try again!')" class="p-2.5 text-left border rounded-lg hover:bg-slate-50 text-[11px] text-slate-700 transition-all font-medium">
+                    A) It forced clans to move even faster to hunt woolly mammoths.
+                  </button>
+                  <button onclick="checkWelcomePuzzle(this, true, 'Excellent! Agriculture created food surpluses, allowing people to build permanent cities, organize governments, and specialize in jobs.')" class="p-2.5 text-left border rounded-lg hover:bg-slate-50 text-[11px] text-slate-700 transition-all font-medium">
+                    B) It anchored permanent villages, stimulated job specialization, and grew cities.
+                  </button>
+                </div>
+                <p id="maize-feedback" class="mt-2 text-xs font-semibold text-emerald-800 hidden"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- TAB: GEOGRAPHIC REGIONS (INTERACTIVE MAP) -->
+      <div id="content-regions" class="tab-content hidden">
+        <div class="mb-4">
+          <span class="text-xs font-bold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-full uppercase">SECTION 2: Geographic Regions</span>
+          <h2 class="text-2xl font-bold mt-2 text-slate-800">Adaptive Climates of North America</h2>
+        </div>
+
+        <p class="text-slate-600 mb-4 leading-relaxed text-xs">
+          Physical landscapes shaped how native societies adapted. Hover and **click directly on the interactive regional map** below to study each area's distinctive climate, survival style, and architecture!
+        </p>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start mb-6">
+          
+          <!-- Interactive Map SVG Column -->
+          <div class="lg:col-span-6 bg-slate-900 border border-slate-700 rounded-2xl p-4 shadow-inner relative">
+            <h4 class="text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-2 text-center flex items-center justify-center gap-1">
+              <span>📍</span> Interactive Map (Tap to Explore)
+            </h4>
+            
+            <div class="aspect-square w-full">
+              <!-- SVG map of North America representing regions -->
+              <svg viewBox="0 0 400 400" class="w-full h-full drop-shadow-md">
+                <!-- Background sea -->
+                <rect width="100%" height="100%" fill="#14213d" rx="12" />
+                
+                <!-- Continental land outline (Gray base) -->
+                <path d="M 40,80 Q 80,40 180,30 T 360,50 Q 380,180 340,300 T 200,380 Q 150,300 110,240 T 40,80 Z" fill="#334155" />
+                
+                <!-- Interactive Region: Pacific Northwest (Green) -->
+                <path id="svg-reg-northwest" onclick="clickRegionSvg('northwest')" class="map-region fill-emerald-600 stroke-emerald-400 stroke-2" fill-opacity="0.6" d="M 40,80 Q 75,40 100,55 L 110,120 L 70,180 L 45,110 Z" />
+                
+                <!-- Interactive Region: Southwest (Orange/Sandy) -->
+                <path id="svg-reg-southwest" onclick="clickRegionSvg('southwest')" class="map-region fill-amber-500 stroke-amber-400 stroke-2" fill-opacity="0.6" d="M 70,180 L 110,120 L 170,150 L 160,250 L 95,230 Z" />
+                
+                <!-- Interactive Region: Great Plains (Yellow/Golden) -->
+                <path id="svg-reg-plains" onclick="clickRegionSvg('plains')" class="map-region fill-yellow-500 stroke-yellow-400 stroke-2" fill-opacity="0.6" d="M 110,120 L 180,60 L 250,70 L 260,200 L 160,250 Z" />
+                
+                <!-- Interactive Region: Eastern Woodlands (Rust/Brown) -->
+                <path id="svg-reg-woodlands" onclick="clickRegionSvg('woodlands')" class="map-region fill-orange-800 stroke-orange-600 stroke-2" fill-opacity="0.6" d="M 250,70 L 360,50 Q 380,180 340,240 L 260,200 Z" />
+
+                <!-- Text labels -->
+                <text x="50" y="100" fill="#fff" font-size="10" font-weight="bold" pointer-events="none" class="opacity-80">NORTHWEST</text>
+                <text x="110" y="190" fill="#fff" font-size="10" font-weight="bold" pointer-events="none" class="opacity-80">SOUTHWEST</text>
+                <text x="175" y="110" fill="#fff" font-size="10" font-weight="bold" pointer-events="none" class="opacity-80">PLAINS</text>
+                <text x="280" y="140" fill="#fff" font-size="10" font-weight="bold" pointer-events="none" class="opacity-80">WOODLANDS</text>
+              </svg>
+            </div>
+            
+            <div class="flex justify-between mt-2 text-[9px] text-slate-400">
+              <span>⬅️ Pacific Ocean</span>
+              <span>Atlantic Ocean ➡️</span>
+            </div>
+          </div>
+
+          <!-- Region Detail Card Display -->
+          <div class="lg:col-span-6 h-full flex flex-col justify-between">
+            <div id="region-card" class="bg-amber-50/50 border border-slate-200 rounded-2xl p-5 transition-all duration-300">
+              <div class="flex items-center gap-2.5 mb-2">
+                <span id="region-icon" class="text-3xl">🏜️</span>
+                <h3 id="region-title" class="font-bold text-xl text-slate-800">The Southwest</h3>
+              </div>
+              <p id="region-desc" class="text-slate-600 text-xs leading-relaxed mb-4">
+                The Southwest region covers dry desert valleys and canyons. Groups like the Anasazi (Ancestral Puebloans) adapted by building multi-story apartments using clay mud called adobe.
+              </p>
+              
+              <div class="grid grid-cols-2 gap-3 bg-white p-3 rounded-xl border border-slate-200 text-[10px] mb-4">
+                <div>
+                  <span class="font-bold text-slate-400 uppercase block">Shelter Style</span>
+                  <p id="region-shelter" class="font-bold text-slate-800 mt-0.5">Adobe Complexes</p>
+                </div>
+                <div>
+                  <span class="font-bold text-slate-400 uppercase block">Key Strategy</span>
+                  <p id="region-key" class="font-bold text-slate-800 mt-0.5">Irrigation Systems</p>
+                </div>
+              </div>
+
+              <!-- Adaptation Mini Challenge -->
+              <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                <span class="text-[10px] bg-amber-100 text-amber-800 font-bold px-2 py-0.5 rounded-full uppercase tracking-wider block mb-2 w-max">Survival Challenge!</span>
+                <p id="challenge-question" class="text-xs font-semibold text-slate-800 mb-3">Loading Challenge...</p>
+                
+                <div id="challenge-answers" class="flex flex-col gap-1.5">
+                  <!-- Dynamic options loaded via JS -->
+                </div>
+                <p id="challenge-feedback" class="mt-2 text-[11px] font-semibold hidden"></p>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- TAB: EARLY CIVILIZATIONS -->
+      <div id="content-civilizations" class="tab-content hidden">
+        <div class="mb-4">
+          <span class="text-xs font-bold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-full uppercase">SECTION 3: Early Civilizations in North America</span>
+          <h2 class="text-2xl font-bold mt-2 text-slate-800">Architects of Clay and Earthen Mounds</h2>
+        </div>
+
+        <p class="text-slate-600 mb-4 leading-relaxed text-xs">
+          While empires like the Maya and Aztec built monumental structures in Mesoamerica, early societies in North America constructed amazing engineering marvels. Complete the matchmaker game below by clicking a civilization and its famous architectural masterpiece to connect them!
+        </p>
+
+        <!-- Interactive Matchmaker Game -->
+        <div class="bg-indigo-50 border border-indigo-100 rounded-2xl p-5">
+          <div class="flex flex-col md:flex-row items-center justify-between gap-3 border-b border-indigo-200 pb-3 mb-3">
+            <div>
+              <h3 class="font-bold text-indigo-950 text-base flex items-center gap-1.5">
+                <span>🧩</span> Architectural Matchmaker
+              </h3>
+              <p class="text-[11px] text-indigo-800">Select a civilization on the left, then select its achievement on the right.</p>
+            </div>
+            <div class="bg-indigo-900 text-white px-3 py-1 rounded-lg text-xs font-bold">
+              Correct Pairs: <span id="match-score">0 / 4</span>
+            </div>
+          </div>
+
+          <!-- Match Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Civilizations Cards (Left) -->
+            <div class="flex flex-col gap-2">
+              <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest block">CIVILIZATION</span>
+              <button onclick="selectCiv('anasazi', this)" class="civ-card p-3 rounded-xl border-2 border-slate-200 bg-white hover:border-indigo-400 text-left font-semibold text-xs transition-all shadow-sm">
+                🏚️ Ancestral Puebloan (Anasazi)
+              </button>
+              <button onclick="selectCiv('mississippian', this)" class="civ-card p-3 rounded-xl border-2 border-slate-200 bg-white hover:border-indigo-400 text-left font-semibold text-xs transition-all shadow-sm">
+                ⛰️ Mississippian Culture
+              </button>
+              <button onclick="selectCiv('aztec', this)" class="civ-card p-3 rounded-xl border-2 border-slate-200 bg-white hover:border-indigo-400 text-left font-semibold text-xs transition-all shadow-sm">
+                🏝️ Aztec Empire
+              </button>
+              <button onclick="selectCiv('hohokam', this)" class="civ-card p-3 rounded-xl border-2 border-slate-200 bg-white hover:border-indigo-400 text-left font-semibold text-xs transition-all shadow-sm">
+                💦 Hohokam Civilization
+              </button>
+            </div>
+
+            <!-- Achievements Cards (Right) -->
+            <div class="flex flex-col gap-2">
+              <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest block">FAMOUS ACHIEVEMENT</span>
+              <button onclick="selectAch('cliff-dwellings', this)" class="ach-card p-3 rounded-xl border-2 border-slate-200 bg-white hover:border-indigo-400 text-left text-[11px] text-slate-700 transition-all shadow-sm flex items-center">
+                Built multi-story sandstone dwellings carved deep into high canyon walls like Mesa Verde.
+              </button>
+              <button onclick="selectAch('cahokia', this)" class="ach-card p-3 rounded-xl border-2 border-slate-200 bg-white hover:border-indigo-400 text-left text-[11px] text-slate-700 transition-all shadow-sm flex items-center">
+                Constructed massive flat-topped dirt pyramids like Monk's Mound in Cahokia, a metropolitan center of 20,000 people.
+              </button>
+              <button onclick="selectAch('tenochtitlan', this)" class="ach-card p-3 rounded-xl border-2 border-slate-200 bg-white hover:border-indigo-400 text-left text-[11px] text-slate-700 transition-all shadow-sm flex items-center">
+                Built a magnificent capital city, Tenochtitlan, directly on floating gardens within Lake Texcoco.
+              </button>
+              <button onclick="selectAch('canal-irrigation', this)" class="ach-card p-3 rounded-xl border-2 border-slate-200 bg-white hover:border-indigo-400 text-left text-[11px] text-slate-700 transition-all shadow-sm flex items-center">
+                Engineered hundreds of miles of deep irrigation trenches to route water from rivers directly to crops in the desert.
+              </button>
+            </div>
+          </div>
+          
+          <p id="matchmaker-feedback" class="mt-3 text-xs font-semibold text-indigo-950 text-center bg-indigo-100 p-2 rounded-xl hidden">Awesome! That's a perfect match!</p>
+        </div>
+
+      </div>
+
+      <!-- TAB: NATIVE AMERICAN CULTURES (COUNCIL SIMULATOR) -->
+      <div id="content-cultures" class="tab-content hidden">
+        <div class="mb-4">
+          <span class="text-xs font-bold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-full uppercase">SECTION 4: Shared Beliefs & Iroquois Council</span>
+          <h2 class="text-2xl font-bold mt-2 text-slate-800">The Spiritual Web & The Council Fire</h2>
+        </div>
+
+        <p class="text-slate-600 mb-4 leading-relaxed text-xs">
+          Early Americans did not write laws on paper; they shared stories and governed themselves collectively. They believed no person could own land. Instead, it was a sacred, shared trust. Click the cards below to examine their values, then resolve a tribal issue in the **Council Fire Simulator**!
+        </p>
+
+        <!-- Flip Cards grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+          <!-- Card 1 -->
+          <div onclick="flipCard(this)" class="flip-card h-40 cursor-pointer group">
+            <div class="flip-card-inner duration-500 w-full h-full">
+              <div class="flip-card-front bg-emerald-800 text-white p-4 flex flex-col justify-between border border-emerald-700 shadow-sm">
+                <span class="text-2xl">🌱</span>
+                <h4 class="font-bold text-sm">1. Connection to Land</h4>
+                <p class="text-[10px] text-emerald-200">Click to flip...</p>
+              </div>
+              <div class="flip-card-back bg-white text-slate-700 p-4 flex flex-col justify-center border-2 border-emerald-800 shadow-sm text-left">
+                <h4 class="font-bold text-emerald-800 text-xs mb-1">Sacred Stewardship</h4>
+                <p class="text-[10px] leading-relaxed">
+                  Unlike Europeans, Native Americans **did not believe individuals could own land**. Land was a sacred element of nature, to be shared and protected by all.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div onclick="flipCard(this)" class="flip-card h-40 cursor-pointer group">
+            <div class="flip-card-inner duration-500 w-full h-full">
+              <div class="flip-card-front bg-amber-700 text-white p-4 flex flex-col justify-between border border-amber-800 shadow-sm">
+                <span class="text-2xl">💨</span>
+                <h4 class="font-bold text-sm">2. Spiritual World</h4>
+                <p class="text-[10px] text-amber-100">Click to flip...</p>
+              </div>
+              <div class="flip-card-back bg-white text-slate-700 p-4 flex flex-col justify-center border-2 border-amber-700 shadow-sm text-left">
+                <h4 class="font-bold text-amber-700 text-xs mb-1">Natural Spirits</h4>
+                <p class="text-[10px] leading-relaxed">
+                  They believed the natural world was filled with living spirits (animism). Everything from wind and rain to animals held deep significance and demanded respect.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div onclick="flipCard(this)" class="flip-card h-40 cursor-pointer group">
+            <div class="flip-card-inner duration-500 w-full h-full">
+              <div class="flip-card-front bg-slate-800 text-white p-4 flex flex-col justify-between border border-slate-700 shadow-sm">
+                <span class="text-2xl">👥</span>
+                <h4 class="font-bold text-sm">3. Kinship (Clans)</h4>
+                <p class="text-[10px] text-slate-300">Click to flip...</p>
+              </div>
+              <div class="flip-card-back bg-white text-slate-700 p-4 flex flex-col justify-center border-2 border-slate-800 shadow-sm text-left">
+                <h4 class="font-bold text-slate-800 text-xs mb-1">Strong Kinship Bonds</h4>
+                <p class="text-[10px] leading-relaxed">
+                  Customs focused on family clans. Elders passed down oral histories and rules. Division of labor was balanced: men hunted, women farmed.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Council Fire Simulator Panel -->
+        <div class="bg-amber-950 text-amber-100 rounded-2xl p-5 border border-amber-800 shadow-lg relative overflow-hidden">
+          <div class="absolute right-4 top-4 w-12 h-12 bg-orange-600 rounded-full blur-xl opacity-30 animate-pulse"></div>
+          
+          <h3 class="font-bold text-base text-amber-400 mb-2 flex items-center gap-1.5">
+            <span>🔥</span> Live Iroquois Council Fire Simulator
+          </h3>
+          <p class="text-[11px] text-amber-200 leading-relaxed mb-4">
+            You are a leader representing your clan at the **Iroquois Confederacy Grand Council**. A dispute has broken out: *The Seneca and Mohawk clans are arguing over who has hunting rights to the beaver valley.* How will you advise them?
+          </p>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3" id="council-options">
+            <button onclick="makeCouncilDecision('claim')" class="p-3 bg-stone-900 hover:bg-stone-850 rounded-xl border border-stone-800 text-left text-xs transition-all text-amber-200">
+              <span class="font-extrabold text-amber-400 block mb-1">Option A: Claim Territories</span>
+              Award the land to the Mohawk exclusively and build stone border walls to keep out others.
+            </button>
+            <button onclick="makeCouncilDecision('share')" class="p-3 bg-stone-900 hover:bg-stone-850 rounded-xl border border-stone-800 text-left text-xs transition-all text-amber-200">
+              <span class="font-extrabold text-amber-400 block mb-1">Option B: Shared Stewardship</span>
+              Remind both clans that the land belongs to the Great Spirit; they must hunt seasonally in turn and share the harvest.
+            </button>
+            <button onclick="makeCouncilDecision('fight')" class="p-3 bg-stone-900 hover:bg-stone-850 rounded-xl border border-stone-800 text-left text-xs transition-all text-amber-200">
+              <span class="font-extrabold text-amber-400 block mb-1">Option C: Combat Trial</span>
+              Organize a physical challenge between the two strongest warriors to decide sole ownership.
+            </button>
+          </div>
+
+          <div id="council-feedback-panel" class="mt-4 p-4 rounded-xl bg-orange-950/40 border border-orange-900/50 hidden text-xs leading-relaxed">
+            <!-- Feed back generated via JS -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- TAB: VOCABULARY EXPLORER AND SELF-TEST -->
+      <div id="content-vocab" class="tab-content hidden">
+        <div class="mb-4">
+          <span class="text-xs font-bold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-full uppercase">SECTION 5: Vocabulary Sandbox</span>
+          <h2 class="text-2xl font-bold mt-2 text-slate-800">Unit 1 Historian's Dictionary</h2>
+          <p class="text-slate-600 text-xs mt-0.5">Explore key historical terms from your McDougal & Littell textbook. Click cards to flip them, use the search filter, or try the match game below!</p>
+        </div>
+
+        <!-- Live Search Filter -->
+        <div class="mb-4 flex gap-2">
+          <span class="bg-amber-100 text-amber-800 px-3 py-2 rounded-xl flex items-center justify-center font-bold text-sm">🔍</span>
+          <input type="text" id="vocab-search" oninput="filterVocab(this.value)" placeholder="Search vocabulary terms (e.g., Beringia, Mesoamerica, Hohokam)..." class="w-full px-4 py-2 border-2 border-slate-200 focus:border-amber-400 focus:outline-none rounded-xl text-xs font-medium text-slate-700">
+        </div>
+
+        <!-- Vocabulary Flip Card Board Container (Scrollable) -->
+        <div class="max-h-[360px] overflow-y-auto border border-slate-100 p-2 rounded-2xl bg-amber-50/20 mb-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3" id="vocab-grid-container">
+            <!-- Populated dynamically via JS -->
+          </div>
+        </div>
+
+        <!-- Interactive Vocabulary Self-Test Matcher -->
+        <div class="bg-amber-50/70 border border-amber-200 rounded-2xl p-5">
+          <h3 class="font-bold text-base text-amber-900 mb-2 flex items-center gap-1.5">
+            <span>🎓</span> Vocabulary Quick-Match Challenge
+          </h3>
+          <p class="text-[11px] text-amber-800 leading-relaxed mb-4">
+            Test your memory! Match the highlighted term to its correct definition below to lock in your master vocabulary progress.
+          </p>
+
+          <div class="bg-white p-4 rounded-xl border border-amber-200/60 shadow-sm mb-4">
+            <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">CHOSEN HISTORICAL WORD:</span>
+            <div id="vocab-game-term" class="text-lg font-black text-slate-800 mt-0.5">...</div>
+          </div>
+
+          <div class="grid grid-cols-1 gap-2.5" id="vocab-game-options">
+            <!-- Option buttons populated by JS -->
+          </div>
+
+          <p id="vocab-game-feedback" class="mt-3 text-xs font-bold p-2.5 rounded-lg border hidden"></p>
+        </div>
+      </div>
+
+      <!-- TAB: FINAL CHALLENGE (QUIZ) -->
+      <div id="content-quiz" class="tab-content hidden">
+        <div class="mb-4">
+          <span class="text-xs font-bold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-full uppercase">THE HISTORIAN'S CHALLENGE</span>
+          <h2 class="text-2xl font-bold mt-1 text-slate-800">Unit 1 Assessment</h2>
+          <p class="text-slate-600 text-xs mt-0.5">Let's prove your mastery of these pre-Columbian American history topics!</p>
+        </div>
+
+        <!-- Quiz Container -->
+        <div id="quiz-question-box" class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm mb-6">
+          <div class="flex justify-between items-center mb-3">
+            <span class="text-xs text-slate-400 font-bold uppercase" id="quiz-question-number">Question 1 of 6</span>
+            <span class="text-xs text-emerald-800 bg-emerald-100 font-bold px-2.5 py-0.5 rounded-full" id="quiz-badge">Level: Historian</span>
+          </div>
+
+          <h3 class="font-bold text-base text-slate-800 mb-4" id="quiz-question-text">Preparing challenge...</h3>
+
+          <!-- Answers Grid -->
+          <div class="grid grid-cols-1 gap-2.5" id="quiz-options">
+            <!-- Dynamic button generators -->
+          </div>
+
+          <div id="quiz-feedback-box" class="mt-3 p-3.5 rounded-xl border hidden text-xs">
+            <!-- Dynamic feedback -->
+          </div>
+        </div>
+
+        <!-- Certificate Container (Hidden until quiz passes) -->
+        <div id="certificate-box" class="hidden border-8 border-double border-amber-600 bg-white rounded-3xl p-6 max-w-2xl mx-auto shadow-2xl text-center relative overflow-hidden">
+          
+          <!-- Decorative Background Elements -->
+          <div class="absolute -top-12 -left-12 w-32 h-32 bg-amber-100 rounded-full opacity-30"></div>
+          <div class="absolute -bottom-12 -right-12 w-32 h-32 bg-amber-100 rounded-full opacity-30"></div>
+
+          <span class="text-amber-800 font-bold text-[10px] tracking-widest uppercase block mb-1">MCDOUGAL LITTELL AMERICAN HISTORY</span>
+          <h3 class="serif-font text-2xl font-extrabold text-amber-900 border-b border-amber-200 pb-3 mb-4">CERTIFICATE OF HISTORIAN MASTERY</h3>
+          
+          <p class="text-slate-500 italic text-xs mb-1">This official document certifies that</p>
+          <h4 id="cert-student-name" class="serif-font text-2xl font-extrabold text-slate-800 tracking-wider mb-2">JUNIOR HISTORIAN</h4>
+          <p class="text-slate-600 text-xs max-w-md mx-auto mb-4 leading-relaxed">
+            has successfully mastered the historical principles of Unit 1: **Beginnings through Reconstruction (Peopling of the Americas, Geographic Regions, and Early Civilizations)**.
+          </p>
+
+          <!-- Interactive Seal Customizer inside Certificate -->
+          <div class="bg-amber-50/60 p-3 rounded-xl border border-amber-200 mb-4 max-w-sm mx-auto text-[10px] text-amber-900">
+            <span class="font-bold uppercase block mb-1.5">Customize Your Clan Crest Seal:</span>
+            <div class="flex justify-center gap-2">
+              <button onclick="setSeal('🐻 Bear')" class="px-2 py-1 bg-white border rounded hover:bg-amber-100 font-semibold transition-all">🐻 Bear Clan</button>
+              <button onclick="setSeal('🦅 Eagle')" class="px-2 py-1 bg-white border rounded hover:bg-amber-100 font-semibold transition-all">🦅 Eagle Clan</button>
+              <button onclick="setSeal('🐢 Turtle')" class="px-2 py-1 bg-white border rounded hover:bg-amber-100 font-semibold transition-all">🐢 Turtle Clan</button>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between border-t border-amber-200 pt-4 mt-4 max-w-md mx-auto text-xs text-slate-500">
+            <div>
+              <p class="font-bold text-slate-800">Coach Henderson</p>
+              <p class="italic text-[9px]">8th Grade History Guide</p>
+            </div>
+            <!-- Custom Dynamic Seal Graphic -->
+            <div class="w-16 h-16 bg-amber-100 rounded-full border-2 border-amber-500 flex flex-col items-center justify-center text-amber-800 shadow-md transform rotate-12">
+              <span id="custom-seal-icon" class="text-xl">🐻</span>
+              <span class="text-[8px] font-extrabold tracking-tight uppercase">Mastery Seal</span>
+            </div>
+            <div>
+              <p class="font-bold text-slate-800" id="cert-date">June 21, 2026</p>
+              <p class="italic text-[9px]">Date of Accomplishment</p>
+            </div>
+          </div>
+          
+          <button onclick="window.print()" class="mt-6 bg-emerald-700 hover:bg-emerald-800 text-white font-bold px-6 py-2 rounded-xl shadow text-xs transition-colors">
+            🖨️ Print Certificate
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Navigation Footer -->
+      <footer class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+        <button id="btn-footer-prev" onclick="navigateTab(-1)" class="flex items-center gap-2 px-4 py-2 text-slate-500 hover:text-slate-800 font-semibold text-xs transition-all" disabled>
+          ← Back
+        </button>
+        <span id="p-indicator-text" class="text-[10px] text-slate-400 font-bold tracking-wider uppercase">Progress: Welcome</span>
+        <button id="btn-footer-next" onclick="navigateTab(1)" class="flex items-center gap-2 px-5 py-2.5 bg-emerald-700 text-white hover:bg-emerald-800 font-semibold text-xs rounded-xl shadow-md transition-all">
+          Next Section →
+        </button>
+      </footer>
+
+    </section>
+
+  </main>
+
+  <!-- Modal custom popup for milestone celebrations -->
+  <div id="milestone-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
+    <div class="bg-white rounded-3xl max-w-sm w-full p-6 text-center shadow-2xl border border-slate-100 transform scale-95 transition-transform duration-300">
+      <span class="text-5xl block mb-2">🎉</span>
+      <h3 class="font-bold text-xl text-slate-800 mb-2" id="modal-title">Milestone Met!</h3>
+      <p class="text-slate-500 text-xs mb-6" id="modal-desc">You've successfully completed this historical segment.</p>
+      <button onclick="closeMilestoneModal()" class="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 rounded-xl transition-colors text-sm">
+        Awesome, Keep Going!
+      </button>
+    </div>
+  </div>
+
+  <footer class="bg-slate-900 text-slate-400 text-[10px] py-4 text-center border-t border-slate-800 mt-6">
+    <div class="max-w-6xl mx-auto px-4">
+      <p>© U.S. History Curriculum Companion • Adapted from McDougal and Littell • Interactive Learning Edition</p>
+      <p class="mt-1 text-slate-600">Middle School Social Studies Classrooms.</p>
+    </div>
+  </footer>
+
+  <script>
+    // ----------------------------------------------------
+    // SYSTEM APP STATE
+    // ----------------------------------------------------
+    let state = {
+      studentName: 'Junior Historian',
+      activeTab: 'welcome',
+      progress: {
+        welcome: true,
+        peopling: false,
+        regions: false,
+        civilizations: false,
+        cultures: false,
+        vocab: false,
+        quiz: false
+      },
+      simClimateValue: 20, // 1 to 100
+      selectedRegion: 'southwest',
+      matchGame: {
+        selectedCiv: null,
+        selectedAch: null,
+        matchedCount: 0,
+        matches: {
+          'anasazi': 'cliff-dwellings',
+          'mississippian': 'cahokia',
+          'aztec': 'tenochtitlan',
+          'hohokam': 'canal-irrigation'
+        },
+        civilizationElements: {},
+        achievementElements: {}
+      },
+      vocabGame: {
+        termKey: '',
+        correctIdx: 0
+      },
+      quiz: {
+        currentQuestion: 0,
+        score: 0,
+        completed: false
+      }
+    };
+
+    const tabSequence = ['welcome', 'peopling', 'regions', 'civilizations', 'cultures', 'vocab', 'quiz'];
+
+    // Geographic Regions Data
+    const regionsData = {
+      southwest: {
+        title: "The Southwest Culture Area",
+        icon: "🏜️",
+        desc: "Constructed massive multi-story adobe and sandstone apartments inside high canyon cliffs like Mesa Verde to insulate against harsh desert temperatures. They dug canals to route scarce river water directly to crop zones.",
+        shelter: "Adobe Pueblos & Cliff Dwellings",
+        key: "Irrigation Systems for Corn/Beans",
+        question: "To store precious, scarce water and keep your community cool under the blinding sun, what adaptation matches best?",
+        answers: [
+          { text: "A) Build thick-walled adobe dwellings that block daytime desert heat.", correct: true },
+          { text: "B) Construct light birchbark lodges and move down rivers.", correct: false }
+        ]
+      },
+      northwest: {
+        title: "The Pacific Northwest Coast",
+        icon: "🌲",
+        desc: "With vast rainfall and redwood forests, these tribes lived near water. They relied on rich ocean salmon and whales. Using cedar, they built huge plank houses, ocean canoes, and carved beautiful family crest Totem Poles.",
+        shelter: "Giant Cedar Wood Plank Longhouses",
+        key: "Ocean Harpoon Fishing & Totems",
+        question: "Your clan wants to show off its wealth and strengthen relationships with neighboring tribes. What do you host?",
+        answers: [
+          { text: "A) A massive dry desert bison hunt.", correct: false },
+          { text: "B) A Potlatch feast, giving gifts and sharing food to display status.", correct: true }
+        ]
+      },
+      plains: {
+        title: "The Great Plains Region",
+        icon: "🦬",
+        desc: "Sprawling, open grasslands dominated by millions of bison. Nomadic groups followed the herds, using collapsible skin-covered Tepees to travel easily and utilizing every part of the bison for meat, bone tools, and hide blankets.",
+        shelter: "Portable Buffalo-hide Tepees",
+        key: "Nomadic Buffalo Hunting & Tracking",
+        question: "Since buffalo herds migrate constantly, you must move your camp in under an hour. What is your strategy?",
+        answers: [
+          { text: "A) Quickly break down lightweight wood-framed hide tepees.", correct: true },
+          { text: "B) Erect heavy, permanent earthen temple complexes.", correct: false }
+        ]
+      },
+      woodlands: {
+        title: "The Eastern Woodlands",
+        icon: "🍂",
+        desc: "Thick forests stretch from the Great Lakes to the Atlantic. Tribes gathered lumber, hunted forest game, and grew corn, squash, and beans ('The Three Sisters'). It was home to the democratic, five-nation Iroquois League.",
+        shelter: "Sapling and Bark-covered Longhouses",
+        key: "Timber Longhouses & Democratic Councils",
+        question: "Conflict has broken out over hunting ranges. How does the allied Iroquois League structurally resolve it?",
+        answers: [
+          { text: "A) Launching total war until only one clan remains.", correct: false },
+          { text: "B) Gathering representatives at the Grand Council fire to reach consensus.", correct: true }
+        ]
+      }
+    };
+
+    // EXPANDED Vocabulary Dictionary Database (Comprehensive Unit 1 textbook terms)
+    const vocabularyList = [
+      {
+        term: "Beringia",
+        emoji: "🗺️",
+        def: "A frozen land bridge that once connected Siberia (Asia) and Alaska (North America) during the last Ice Age.",
+        context: "Nomadic hunters used this corridor to follow migratory megafauna directly into the Americas."
+      },
+      {
+        term: "Nomad",
+        emoji: "⛺",
+        def: "A person or group with no permanent home, moving constantly in search of food, water, and hunting lands.",
+        context: "Early Americans lived as nomadic hunters before domesticating agricultural crops."
+      },
+      {
+        term: "Maize",
+        emoji: "🌾",
+        def: "An early form of cultivated corn developed in central Mexico around 5000 BCE.",
+        context: "Domesticating maize provided a stable food surplus, allowing populations to transition to settled village life."
+      },
+      {
+        term: "Adobe",
+        emoji: "🧱",
+        def: "A sun-dried building brick made of clay mud, water, and straw.",
+        context: "Southwestern Puebloan tribes used adobe to construct magnificent, insulating multi-story canyon towns."
+      },
+      {
+        term: "Cahokia",
+        emoji: "⛰️",
+        def: "A pre-Columbian trade metropolis near modern-day St. Louis, famous for massive ceremonial flat-topped earth pyramids.",
+        context: "At its peak, Cahokia housed over 20,000 residents and served as a central religious and trade crossroads."
+      },
+      {
+        term: "Iroquois League",
+        emoji: "🌲",
+        def: "An alliance of five (later six) Eastern Woodlands nations governed collectively by consensus.",
+        context: "Created by Hiawatha and Deganawida to establish the Great Law of Peace, stopping inter-clan warfare."
+      },
+      {
+        term: "Animism",
+        emoji: "💨",
+        def: "The spiritual belief that living spirits inhabit all natural features, including weather, plants, animals, and rocks.",
+        context: "This view guided early Native American resource conservation and relationship with the wilderness."
+      },
+      {
+        term: "Kinship",
+        emoji: "👥",
+        def: "The strong family ties and clan lineages that formed the primary foundation of Native social systems.",
+        context: "Clans organized labor, passed down history orally through elders, and managed collective territory."
+      },
+      {
+        term: "Potlatch",
+        emoji: "🎁",
+        def: "A ceremonial feast observed by Pacific Northwest Coast tribes used to give away possessions and display wealth.",
+        context: "Hosting a generous Potlatch demonstrated elite clan status and distributed local wealth across villages."
+      },
+      {
+        term: "Ice Age",
+        emoji: "❄️",
+        def: "A geological period of global cold where vast glaciers expanded across the Earth, trapping ocean waters and lowering sea levels.",
+        context: "This environmental shift exposed the land bridge allowing human migration into North America."
+      },
+      {
+        term: "Migration",
+        emoji: "👣",
+        def: "The movement of people or animals from one homeland or region to settle in another.",
+        context: "Early hunter-gatherers completed a slow, generational migration throughout the American continent."
+      },
+      {
+        term: "Hunter-Gatherers",
+        emoji: "🏹",
+        def: "People who obtain food by hunting wild animals and harvesting wild plants, roots, nuts, and berries.",
+        context: "They relied on mobility and simple tools before the discovery of agricultural methods."
+      },
+      {
+        term: "Mesoamerica",
+        emoji: "🏺",
+        def: "The historical region extending from central Mexico through Belize, Guatemala, El Salvador, and Honduras.",
+        context: "This region birthed advanced pre-Columbian societies like the Olmecs, Mayas, and Aztecs."
+      },
+      {
+        term: "Olmec",
+        emoji: "🗿",
+        def: "The first major civilization in Mesoamerica, often called the 'mother culture' of the region, dating back to 1200 BCE.",
+        context: "They are famous for carving colossal stone heads and creating early writing systems."
+      },
+      {
+        term: "Maya",
+        emoji: "📅",
+        def: "A major Mesoamerican civilization famous for its complex written language, advanced mathematics, and accurate calendar system.",
+        context: "They built magnificent stone temple-pyramids throughout the Yucatán Peninsula."
+      },
+      {
+        term: "Aztec",
+        emoji: "☀️",
+        def: "A powerful Mesoamerican empire that built the capital city of Tenochtitlan on floating gardens in Lake Texcoco.",
+        context: "They conquered a vast empire through aggressive military alliances before the Spanish arrival."
+      },
+      {
+        term: "Inca",
+        emoji: "⛰️",
+        def: "A colossal South American empire spanning 2,500 miles along the high Andes mountain range.",
+        context: "They engineered complex mountain highway networks and agricultural mountain terraces."
+      },
+      {
+        term: "Hohokam",
+        emoji: "💦",
+        def: "An early agricultural society of the desert Southwest that pioneered sophisticated river canal irrigation systems.",
+        context: "Their canals successfully routed river water to desert fields of maize, squash, and beans."
+      },
+      {
+        term: "Anasazi",
+        emoji: "🏚️",
+        def: "An early Southwestern society (Ancestral Puebloans) famous for multi-story stone dwellings carved in canyon alcoves.",
+        context: "They built incredible masonry structures at Chaco Canyon and Mesa Verde before climate shifts forced migration."
+      },
+      {
+        term: "Mound Builders",
+        emoji: "⛰️",
+        def: "Various ancient Eastern Woodlands societies (Adena, Hopewell, Mississippian) that built colossal earthen mounds.",
+        context: "Mounds were used for burials, elite residential bases, and sacred religious ceremonies."
+      },
+      {
+        term: "Pueblo",
+        emoji: "🧱",
+        def: "A Spanish word meaning 'town,' describing both the Southwestern multi-story mud-brick villages and the peoples who lived in them.",
+        context: "Pueblo structures were engineered with ladders that could be pulled up in case of external raids."
+      },
+      {
+        term: "Totem Pole",
+        emoji: "🌲",
+        def: "A large cedar wooden pillar carved with symbols, spirits, and animals by Northwest Coast Native clans.",
+        context: "These pillars documented clan histories, family lineages, and celebrated historical events."
+      },
+      {
+        term: "Kiva",
+        emoji: "🌀",
+        def: "An underground ceremonial chamber used by Southwestern Pueblo communities for religious rituals and meetings.",
+        context: "Elders gathered in the circular kiva to communicate with ancestral spirits."
+      },
+      {
+        term: "Longhouse",
+        emoji: "🪵",
+        def: "A large, permanent, bark-covered wooden shelter built by Eastern Woodlands cultures, housing dozens of families.",
+        context: "The Iroquois League referred to themselves metaphorically as 'people of the longhouse' to symbolize unity."
+      },
+      {
+        term: "Division of Labor",
+        emoji: "🔨",
+        def: "The assignment of different tasks and roles to different individuals based on age, gender, and social status.",
+        context: "Early tribes divided labor evenly: men hunted and handled defense, while women harvested crops and managed clans."
+      }
+    ];
+
+    // Master Historian Quiz Data
+    const quizQuestions = [
+      {
+        question: "According to current theories, how did early humans migrate into North America during the late Ice Age?",
+        options: [
+          "A) By navigating large sailing ships across the Atlantic Ocean.",
+          "B) By crossing a frozen land bridge named Beringia from Asia to Alaska.",
+          "C) By digging deep underground mining routes underneath polar ice sheets.",
+          "D) By moving northward from South America on domestic horses."
+        ],
+        answer: 1,
+        feedback: "Correct! The Beringia land bridge was exposed due to lower ocean levels caused by massive polar glaciers trapping world waters."
+      },
+      {
+        question: "Which plant was domesticated in central Mexico ~5,000 BCE, sparking the transition from mobile hunting to permanent farming civilizations?",
+        options: [
+          "A) Potatoes",
+          "B) Wheat",
+          "C) Maize (Corn)",
+          "D) Rice"
+        ],
+        answer: 2,
+        feedback: "Correct! Maize cultivation allowed large populations to settle down, establish structural villages, and specialize in unique jobs."
+      },
+      {
+        question: "Which geographic adaptation matches the Hohokam and Anasazi cultures of the hot Southwest Desert?",
+        options: [
+          "A) Constructing portable birchbark tepees for nomadic hunting.",
+          "B) Building heavy wooden log longhouses inside redwood forests.",
+          "C) Crafting fast dugout canoes for whaling in coastal sounds.",
+          "D) Engineering extensive adobe complexes and complex canal irrigation networks."
+        ],
+        answer: 3,
+        feedback: "Correct! Clay/mud adobe brick helped insulate against intense daytime temperatures, and canals channeled scarce water to thirsty desert fields."
+      },
+      {
+        question: "Which civilization is recognized for creating the metropolitan trade city of Cahokia containing large, flat-topped ceremonial earthen mounds?",
+        options: [
+          "A) Mississippian Mound Builders",
+          "B) Aztec Empire",
+          "C) Kwakiutl Sea Harvesters",
+          "D) Incan Road Engineers"
+        ],
+        answer: 0,
+        feedback: "Correct! Mississippians constructed magnificent earthen pyramids across the Mississippi Valley, with Cahokia acting as a central religious and political node."
+      },
+      {
+        question: "What core environmental belief was shared among nearly all North American Native groups?",
+        options: [
+          "A) Land was an individual asset to be bought, sold, and fully controlled.",
+          "B) Earth and its wildlife were spiritual and held no room for individual ownership.",
+          "C) Large-scale factories should be built quickly across forest regions.",
+          "D) Sea environments were useless and should be completely avoided."
+        ],
+        answer: 1,
+        feedback: "Correct! They believed land was sacred, a collective resources to be protected and co-inhabited, not sliced up for private deeds."
+      },
+      {
+        question: "What was the primary goal of the Iroquois League formed in the Eastern Woodlands?",
+        options: [
+          "A) Creating dynamic whaling strategies using ocean canoes.",
+          "B) Forging a regional alliance and constitution to ensure peace between five warring clans.",
+          "C) Migrating entirely to the dry Great Plains to hunt wild horses.",
+          "D) Building massive stone temples to observe astronomical patterns."
+        ],
+        answer: 1,
+        feedback: "Correct! The Iroquois League (Haudenosaunee) formed one of the earliest democratic structures in the Americas, unifying the Mohawk, Oneida, Onondaga, Cayuga, and Seneca."
+      }
+    ];
+
+    // ----------------------------------------------------
+    // INITIALIZATION & DYNAMIC UI ROUTER
+    // ----------------------------------------------------
+    window.onload = function() {
+      // Set current formatted date
+      const dateEl = document.getElementById('cert-date');
+      if (dateEl) {
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        dateEl.innerText = new Date().toLocaleDateString('en-US', options);
+      }
+      
+      // Initialize Climate Simulation on startup
+      updateClimateSim(20);
+      
+      // Populate Region Card on startup
+      showRegion('southwest');
+      
+      // Build Match game elements
+      buildMatchGameMap();
+      
+      // Setup default active map region
+      document.getElementById('svg-reg-southwest').classList.add('active-region');
+
+      // Populate Vocabulary Cards
+      populateVocabGrid(vocabularyList);
+
+      // Generate first quick-match quiz
+      generateVocabGame();
+    };
+
+    function startJourney() {
+      const nameInput = document.getElementById('student-name');
+      if (nameInput.value.trim() !== '') {
+        state.studentName = nameInput.value.trim();
+      }
+      document.getElementById('cert-student-name').innerText = state.studentName;
+      
+      triggerCoachSpeak(`Superb to have you on board, ${state.studentName}! Let's slide back in time to the Ice Age in Section 1!`);
+      
+      state.progress.peopling = true;
+      navigateTab(1);
+    }
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('bg-emerald-50', 'text-emerald-800', 'border-l-4', 'border-emerald-600');
+        btn.classList.add('text-slate-600', 'hover:bg-slate-50');
+      });
+      document.querySelectorAll('.tab-content').forEach(content => {
+        content.classList.add('hidden');
+        content.classList.remove('block');
+      });
+
+      const activeBtn = document.getElementById(`tab-${tabId}`);
+      if (activeBtn) {
+        activeBtn.classList.remove('text-slate-600', 'hover:bg-slate-50');
+        activeBtn.classList.add('bg-emerald-50', 'text-emerald-800', 'border-l-4', 'border-emerald-600');
+      }
+
+      const activeContent = document.getElementById(`content-${tabId}`);
+      if (activeContent) {
+        activeContent.classList.remove('hidden');
+        activeContent.classList.add('block');
+      }
+
+      state.activeTab = tabId;
+      state.progress[tabId] = true;
+      updateProgressBar();
+      updateNavigationButtons();
+
+      if (tabId === 'quiz') {
+        if (!state.quiz.completed) {
+          document.getElementById('quiz-question-box').classList.remove('hidden');
+          document.getElementById('certificate-box').classList.add('hidden');
+          state.quiz.currentQuestion = 0;
+          state.quiz.score = 0;
+          renderQuizQuestion();
+        } else {
+          document.getElementById('quiz-question-box').classList.add('hidden');
+          document.getElementById('certificate-box').classList.remove('hidden');
+        }
+      }
+    }
+
+    function updateProgressBar() {
+      let unlockedCount = 0;
+      const total = Object.keys(state.progress).length;
+      for (const tab in state.progress) {
+        if (state.progress[tab] === true) unlockedCount++;
+      }
+      const percentage = Math.round((unlockedCount / total) * 100);
+      document.getElementById('overall-progress-bar').style.width = `${percentage}%`;
+      
+      let rank = "Explorer";
+      if (percentage > 25) rank = "Scribe";
+      if (percentage > 50) rank = "Scholar";
+      if (percentage > 75) rank = "Master Historian";
+      document.getElementById('overall-progress-text').innerText = `${rank} (${percentage}%)`;
+    }
+
+    function updateNavigationButtons() {
+      const currentIndex = tabSequence.indexOf(state.activeTab);
+      
+      const backBtn = document.getElementById('btn-footer-prev');
+      backBtn.disabled = (currentIndex === 0);
+
+      const nextBtn = document.getElementById('btn-footer-next');
+      if (currentIndex === tabSequence.length - 1) {
+        nextBtn.innerHTML = `Restart Course 🏆`;
+      } else {
+        nextBtn.innerHTML = `Next Section →`;
+      }
+
+      const progressLabel = document.getElementById('p-indicator-text');
+      const prettyNames = {
+        'welcome': 'Introduction',
+        'peopling': '1. Beringia Crossing',
+        'regions': '2. Geographic Adaptability',
+        'civilizations': '3. Pre-Columbian Mounds',
+        'cultures': '4. Shared Cultural Roots',
+        'vocab': '5. Vocabulary Sandbox',
+        'quiz': '6. Ultimate Challenge'
+      };
+      progressLabel.innerText = `Topic: ${prettyNames[state.activeTab]}`;
+    }
+
+    function navigateTab(direction) {
+      const currentIndex = tabSequence.indexOf(state.activeTab);
+      const nextIndex = currentIndex + direction;
+
+      if (nextIndex >= 0 && nextIndex < tabSequence.length) {
+        switchTab(tabSequence[nextIndex]);
+        
+        const feedbackMessages = {
+          'welcome': `Welcome back to the starting desk. Be sure to put down your name!`,
+          'peopling': `Glaciers frozen across Siberia and Alaska exposed a highway! Drag that slider to see!`,
+          'regions': `Click elements of the physical map to examine regional survival adaptations.`,
+          'civilizations': `Let's connect architectural marvels. Match the civilizations to their creations!`,
+          'cultures': `Step into the legendary Council Fire Simulator. Choose option B to see standard consensus democracy!`,
+          'vocab': `Let's drill down on key terms. Explore the glossary cards or test yourself before taking the final quiz!`,
+          'quiz': `This is it, ${state.studentName}! Complete the quiz and claim your certified diploma.`
+        };
+        triggerCoachSpeak(feedbackMessages[tabSequence[nextIndex]]);
+      } else if (nextIndex === tabSequence.length) {
+        state.progress = { welcome: true, peopling: false, regions: false, civilizations: false, cultures: false, vocab: false, quiz: false };
+        state.quiz.completed = false;
+        state.quiz.currentQuestion = 0;
+        state.quiz.score = 0;
+        switchTab('welcome');
+      }
+    }
+
+    function triggerCoachSpeak(message) {
+      document.getElementById('teacher-bubble').innerText = `"${message}"`;
+    }
+
+    function showMilestoneModal(title, desc) {
+      document.getElementById('modal-title').innerText = title;
+      document.getElementById('modal-desc').innerText = desc;
+      const modal = document.getElementById('milestone-modal');
+      modal.classList.remove('hidden');
+      setTimeout(() => {
+        modal.classList.remove('opacity-0');
+        modal.querySelector('div').classList.remove('scale-95');
+      }, 50);
+    }
+
+    // ----------------------------------------------------
+    // SECTION 1: DYNAMIC CLIMATE SIMULATOR
+    // ----------------------------------------------------
+    function updateClimateSim(val) {
+      state.simClimateValue = parseInt(val);
+      const bridgePoly = document.getElementById('land-bridge-polygon');
+      const leftGlacier = document.getElementById('glacier-left');
+      const rightGlacier = document.getElementById('glacier-right');
+      const bridgeBadge = document.getElementById('bridge-badge');
+      const seaLevelText = document.getElementById('sea-depth');
+      const actionBtn = document.getElementById('migration-action-btn');
+      
+      const isIceAge = state.simClimateValue < 45;
+      const seaLevelDrop = Math.round(350 - (state.simClimateValue * 3.5));
+      const temperature = Math.round(-15 + (state.simClimateValue * 0.35));
+
+      document.getElementById('temp-indicator-text').innerText = `Global Temp: ${temperature}°C`;
+
+      if (isIceAge) {
+        bridgePoly.style.fill = "#4d7c0f";
+        bridgePoly.style.stroke = "#34510b";
+        bridgePoly.style.opacity = "1";
+        leftGlacier.style.opacity = "0.9";
+        rightGlacier.style.opacity = "0.9";
+        
+        bridgeBadge.innerText = "LAND BRIDGE EXPOSED";
+        bridgeBadge.className = "bg-emerald-600 text-white font-extrabold px-2.5 py-0.5 rounded shadow-sm text-xs";
+        seaLevelText.innerText = `Sea Level: -${seaLevelDrop} feet`;
+        
+        document.getElementById('sim-status-title').innerText = "Phase: Ice Age Glacier Lock";
+        document.getElementById('sim-status-desc').innerText = `Deep temperatures freeze ocean water into ice sheets. Sea levels plunge over 300 feet, creating Beringia—a dry, walkable grassland bridging Siberia and Alaska.`;
+        actionBtn.disabled = false;
+        actionBtn.className = "bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold px-4 py-2 rounded-lg text-xs tracking-wider uppercase transition-all shadow-md cursor-pointer";
+      } else {
+        bridgePoly.style.fill = "#0f2238";
+        bridgePoly.style.stroke = "#0b1828";
+        bridgePoly.style.opacity = "0.2";
+        leftGlacier.style.opacity = "0.2";
+        rightGlacier.style.opacity = "0.2";
+        
+        bridgeBadge.innerText = "BERING STRAIT FLOODED";
+        bridgeBadge.className = "bg-blue-600 text-white font-extrabold px-2.5 py-0.5 rounded shadow-sm text-xs";
+        seaLevelText.innerText = `Sea Level: Normal (+${Math.max(0, 100 - seaLevelDrop)}ft)`;
+        
+        document.getElementById('sim-status-title').innerText = "Phase: Meltdown & Isolation";
+        document.getElementById('sim-status-desc').innerText = "Warmer global temperatures melt glaciers. Seawater flows back to flood Beringia. The corridor becomes the Bering Strait, isolating people in the Americas.";
+        actionBtn.disabled = true;
+        actionBtn.className = "bg-slate-700 text-slate-400 font-extrabold px-4 py-2 rounded-lg text-xs tracking-wider uppercase transition-all shadow-md cursor-not-allowed";
+      }
+    }
+
+    function triggerMigration() {
+      if (state.simClimateValue >= 45) {
+        triggerCoachSpeak("Watch out! Sea levels are too high! Lower the temperature on the slider to reveal the dry land bridge first.");
+        return;
+      }
+      
+      const dot1 = document.getElementById('mig-dot-1');
+      const dot2 = document.getElementById('mig-dot-2');
+      const dot3 = document.getElementById('mig-dot-3');
+
+      dot1.setAttribute('cx', '60');
+      dot2.setAttribute('cx', '70');
+      dot3.setAttribute('cx', '80');
+      
+      setTimeout(() => {
+        dot1.setAttribute('cx', '180');
+        dot2.setAttribute('cx', '200');
+        dot3.setAttribute('cx', '190');
+      }, 800);
+
+      setTimeout(() => {
+        dot1.setAttribute('cx', '310');
+        dot2.setAttribute('cx', '330');
+        dot3.setAttribute('cx', '340');
+        showMilestoneModal("Migration Successful! 👣", "You successfully guided nomadic hunting bands across Beringia! Over thousands of years, their descendants will populate the entire Western Hemisphere.");
+      }, 1600);
+    }
+
+    function checkWelcomePuzzle(btn, isCorrect, feedback) {
+      const feedbackEl = document.getElementById('maize-feedback');
+      feedbackEl.classList.remove('hidden');
+      feedbackEl.innerText = feedback;
+      
+      if (isCorrect) {
+        feedbackEl.className = "mt-2 text-xs font-bold text-emerald-800 bg-emerald-50 p-2.5 rounded-lg border border-emerald-100";
+        triggerCoachSpeak("Exactly! Agriculture changes everything. It's the blueprint for complex societies.");
+      } else {
+        feedbackEl.className = "mt-2 text-xs font-bold text-red-800 bg-red-50 p-2.5 rounded-lg border border-red-100";
+      }
+    }
+
+    // ----------------------------------------------------
+    // SECTION 2: INTERACTIVE SVG MAP & REGIONS
+    // ----------------------------------------------------
+    function clickRegionSvg(regionKey) {
+      document.querySelectorAll('.map-region').forEach(el => {
+        el.classList.remove('active-region');
+      });
+      
+      const selectedPath = document.getElementById(`svg-reg-${regionKey}`);
+      if (selectedPath) {
+        selectedPath.classList.add('active-region');
+      }
+
+      showRegion(regionKey);
+    }
+
+    function showRegion(regionKey) {
+      state.selectedRegion = regionKey;
+      const data = regionsData[regionKey];
+      
+      document.getElementById('region-icon').innerText = data.icon;
+      document.getElementById('region-title').innerText = data.title;
+      document.getElementById('region-desc').innerText = data.desc;
+      document.getElementById('region-shelter').innerText = data.shelter;
+      document.getElementById('region-key').innerText = data.key;
+
+      document.getElementById('challenge-question').innerText = data.question;
+      const ansContainer = document.getElementById('challenge-answers');
+      ansContainer.innerHTML = '';
+      
+      data.answers.forEach((ans) => {
+        const btn = document.createElement('button');
+        btn.onclick = () => checkRegionChallenge(ans.correct);
+        btn.className = "w-full p-2.5 text-left border rounded-lg hover:bg-slate-50 text-[11px] transition-all font-semibold text-slate-700 bg-white shadow-sm";
+        btn.innerText = ans.text;
+        ansContainer.appendChild(btn);
+      });
+
+      document.getElementById('challenge-feedback').classList.add('hidden');
+    }
+
+    function checkRegionChallenge(isCorrect) {
+      const feedback = document.getElementById('challenge-feedback');
+      feedback.classList.remove('hidden');
+      if (isCorrect) {
+        feedback.className = "mt-2 text-xs font-bold text-emerald-800 bg-emerald-50 p-2 rounded-lg border border-emerald-100";
+        feedback.innerText = "Excellent historical reasoning! That represents the exact regional adaptation.";
+        triggerCoachSpeak("Yes! Environmental adaptability is why early cultures were so unique.");
+      } else {
+        feedback.className = "mt-2 text-xs font-bold text-red-800 bg-red-50 p-2 rounded-lg border border-red-100";
+        feedback.innerText = "Incorrect. Think about how local environmental resources define their materials!";
+      }
+    }
+
+    // ----------------------------------------------------
+    // SECTION 3: ARCHITECTURAL MATCHMAKER GAME
+    // ----------------------------------------------------
+    function buildMatchGameMap() {
+      const civs = document.querySelectorAll('.civ-card');
+      const achs = document.querySelectorAll('.ach-card');
+
+      state.matchGame.civilizationElements = {};
+      state.matchGame.achievementElements = {};
+
+      civs.forEach(c => {
+        if (c.innerText.includes("Puebloan")) state.matchGame.civilizationElements['anasazi'] = c;
+        if (c.innerText.includes("Mississippian")) state.matchGame.civilizationElements['mississippian'] = c;
+        if (c.innerText.includes("Aztec")) state.matchGame.civilizationElements['aztec'] = c;
+        if (c.innerText.includes("Hohokam")) state.matchGame.civilizationElements['hohokam'] = c;
+      });
+
+      achs.forEach(a => {
+        if (a.innerText.includes("sandstone dwellings")) state.matchGame.achievementElements['cliff-dwellings'] = a;
+        if (a.innerText.includes("flat-topped dirt pyramids")) state.matchGame.achievementElements['cahokia'] = a;
+        if (a.innerText.includes("floating gardens")) state.matchGame.achievementElements['tenochtitlan'] = a;
+        if (a.innerText.includes("irrigation trenches")) state.matchGame.achievementElements['canal-irrigation'] = a;
+      });
+    }
+
+    function selectCiv(civId, element) {
+      for (const k in state.matchGame.civilizationElements) {
+        state.matchGame.civilizationElements[k].classList.remove('border-indigo-600', 'bg-indigo-50/70');
+      }
+
+      state.matchGame.selectedCiv = civId;
+      element.classList.add('border-indigo-600', 'bg-indigo-50/70');
+
+      checkMatch();
+    }
+
+    // ----------------------------------------------------
+    // SECTION 4: FLIP CARDS & COUNCIL FIRE SIMULATOR
+    // ----------------------------------------------------
+    function selectAch(achId, element) {
+      for (const k in state.matchGame.achievementElements) {
+        state.matchGame.achievementElements[k].classList.remove('border-indigo-600', 'bg-indigo-50/70');
+      }
+
+      state.matchGame.selectedAch = achId;
+      element.classList.add('border-indigo-600', 'bg-indigo-50/70');
+
+      checkMatch();
+    }
+
+    function checkMatch() {
+      const civ = state.matchGame.selectedCiv;
+      const ach = state.matchGame.selectedAch;
+
+      if (civ && ach) {
+        if (state.matchGame.matches[civ] === ach) {
+          state.matchGame.matchedCount++;
+          document.getElementById('match-score').innerText = `${state.matchGame.matchedCount} / 4`;
+
+          const civCard = state.matchGame.civilizationElements[civ];
+          const achCard = state.matchGame.achievementElements[ach];
+
+          civCard.className = "p-3 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-slate-700 text-left font-semibold text-xs transition-all shadow-sm cursor-not-allowed";
+          achCard.className = "p-3 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-slate-700 text-left text-[11px] transition-all shadow-sm cursor-not-allowed flex items-center";
+          
+          civCard.onclick = null;
+          achCard.onclick = null;
+
+          triggerCoachSpeak("Brilliant matching! You've linked that civilization to its architectural wonder.");
+
+          state.matchGame.selectedCiv = null;
+          state.matchGame.selectedAch = null;
+
+          if (state.matchGame.matchedCount === 4) {
+            document.getElementById('matchmaker-feedback').classList.remove('hidden');
+            showMilestoneModal("Ancient Engineering Unlocked! 🏛️", "You have matched all four historical societies to their advanced structural achievements! Keep exploring!");
+          }
+        } else {
+          const civCard = state.matchGame.civilizationElements[civ];
+          const achCard = state.matchGame.achievementElements[ach];
+
+          civCard.classList.remove('border-indigo-600', 'bg-indigo-50/70');
+          achCard.classList.remove('border-indigo-600', 'bg-indigo-50/70');
+
+          civCard.classList.add('border-red-400', 'bg-red-50');
+          achCard.classList.add('border-red-400', 'bg-red-50');
+
+          triggerCoachSpeak("Hmm, those don't match. Re-read the regional descriptions and try again!");
+
+          setTimeout(() => {
+            civCard.classList.remove('border-red-400', 'bg-red-50');
+            achCard.classList.remove('border-red-400', 'bg-red-50');
+          }, 1200);
+
+          state.matchGame.selectedCiv = null;
+          state.matchGame.selectedAch = null;
+        }
+      }
+    }
+
+    function makeCouncilDecision(choice) {
+      const panel = document.getElementById('council-feedback-panel');
+      panel.classList.remove('hidden');
+      
+      const btns = document.getElementById('council-options').children;
+      for(let i=0; i<btns.length; i++) {
+        btns[i].classList.remove('border-emerald-500', 'border-red-500', 'bg-emerald-950/40', 'bg-red-950/40');
+      }
+
+      if (choice === 'share') {
+        panel.className = "mt-4 p-4 rounded-xl bg-emerald-950/80 border-2 border-emerald-500 text-emerald-100 text-xs leading-relaxed";
+        panel.innerHTML = `
+          <strong class="text-emerald-400 text-sm block mb-1">🌲 Great Consensus Reached!</strong>
+          You selected **Shared Stewardship**. Because Native Americans do not believe individuals or clans own the earth, both clans agree to share the beaver valley according to seasonal hunting caps. Peace is preserved at the Council Fire without a single arrow drawn!
+        `;
+        triggerCoachSpeak("Exceptional! Consensual representation and collective stewardship were the pillars of the democratic Iroquois Confederacy.");
+      } else if (choice === 'claim') {
+        panel.className = "mt-4 p-4 rounded-xl bg-red-950/80 border-2 border-red-500 text-red-100 text-xs leading-relaxed";
+        panel.innerHTML = `
+          <strong class="text-red-400 text-sm block mb-1">⚠️ Boundary Dispute Intensifies!</strong>
+          You selected **Claim Territories**. By attempting to award the land exclusively and building walls, you violate the core belief that land cannot be privately owned. The Seneca are deeply insulted. Conflict threatens the unity of the League. Try another option!
+        `;
+        triggerCoachSpeak("Oh no! Private borders and land deeds were concepts brought later by Europeans; Native Americans avoided them.");
+      } else {
+        panel.className = "mt-4 p-4 rounded-xl bg-red-950/80 border-2 border-red-500 text-red-100 text-xs leading-relaxed";
+        panel.innerHTML = `
+          <strong class="text-red-400 text-sm block mb-1">💥 Peace Shatters!</strong>
+          You selected **Combat Trial**. Forcing a combat trial ignores the values of kinship ties and democratic representation. The Great Law of Peace was created precisely to stop clan bloodshed. The League elders strongly reject your advice. Choose a different path!
+        `;
+        triggerCoachSpeak("Avoid warfare! The Grand Council was engineered specifically to prevent physical conflict among the Five Nations.");
+      }
+    }
+
+    // ----------------------------------------------------
+    // SECTION 5: INTERACTIVE VOCABULARY ENGINE
+    // ----------------------------------------------------
+    function populateVocabGrid(list) {
+      const container = document.getElementById('vocab-grid-container');
+      container.innerHTML = '';
+      
+      list.forEach((item) => {
+        const card = document.createElement('div');
+        card.className = "flip-card h-40 cursor-pointer group";
+        card.setAttribute('onclick', 'flipCard(this)');
+        card.innerHTML = `
+          <div class="flip-card-inner duration-500 w-full h-full">
+            <div class="flip-card-front bg-amber-600/90 text-white p-4 flex flex-col justify-between border border-amber-700 shadow-sm">
+              <span class="text-2xl">${item.emoji}</span>
+              <h4 class="font-extrabold text-xs tracking-wide">${item.term}</h4>
+              <p class="text-[8px] text-amber-100 uppercase tracking-widest">Click to Flip</p>
+            </div>
+            <div class="flip-card-back bg-white text-slate-750 p-3.5 flex flex-col justify-center border-2 border-amber-500 shadow-sm text-left">
+              <h5 class="font-black text-amber-800 text-[11px] mb-1">${item.term}</h5>
+              <p class="text-[10px] leading-relaxed mb-1 text-slate-700 font-medium">${item.def}</p>
+              <p class="text-[9px] italic text-slate-500 leading-tight">"${item.context}"</p>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function filterVocab(query) {
+      const filtered = vocabularyList.filter(item => 
+        item.term.toLowerCase().includes(query.toLowerCase()) || 
+        item.def.toLowerCase().includes(query.toLowerCase())
+      );
+      populateVocabGrid(filtered);
+    }
+
+    function generateVocabGame() {
+      const target = vocabularyList[Math.floor(Math.random() * vocabularyList.length)];
+      document.getElementById('vocab-game-term').innerText = `${target.emoji} ${target.term}`;
+      
+      let answers = [target.def];
+      while (answers.length < 3) {
+        const randDef = vocabularyList[Math.floor(Math.random() * vocabularyList.length)].def;
+        if (!answers.includes(randDef)) {
+          answers.push(randDef);
+        }
+      }
+      
+      answers.sort(() => Math.random() - 0.5);
+      
+      const optionsContainer = document.getElementById('vocab-game-options');
+      optionsContainer.innerHTML = '';
+      
+      answers.forEach((ans) => {
+        const btn = document.createElement('button');
+        btn.onclick = () => checkVocabAnswer(ans, target.def);
+        btn.className = "w-full text-left p-2.5 border-2 border-slate-200 hover:border-amber-400 rounded-xl text-xs font-semibold bg-white text-slate-700 shadow-sm transition-all";
+        btn.innerText = ans;
+        optionsContainer.appendChild(btn);
+      });
+
+      document.getElementById('vocab-game-feedback').classList.add('hidden');
+    }
+
+    function checkVocabAnswer(selected, correct) {
+      const feedback = document.getElementById('vocab-game-feedback');
+      feedback.classList.remove('hidden');
+      
+      const options = document.getElementById('vocab-game-options').children;
+      for (let i = 0; i < options.length; i++) {
+        options[i].disabled = true;
+        if (options[i].innerText === correct) {
+          options[i].className = "w-full text-left p-2.5 border-2 border-emerald-500 rounded-xl text-xs font-bold bg-emerald-50 text-emerald-800 cursor-not-allowed";
+        } else if (options[i].innerText === selected) {
+          options[i].className = "w-full text-left p-2.5 border-2 border-red-500 rounded-xl text-xs font-bold bg-red-50 text-red-800 cursor-not-allowed";
+        } else {
+          options[i].className = "w-full text-left p-2.5 border border-slate-200 rounded-xl text-xs text-slate-400 bg-slate-100 cursor-not-allowed";
+        }
+      }
+
+      if (selected === correct) {
+        feedback.className = "mt-3 text-xs font-bold p-2.5 rounded-lg border border-emerald-200 bg-emerald-50 text-emerald-800";
+        feedback.innerText = "🎉 Spot on! That's the perfect match.";
+        triggerCoachSpeak("Sensational vocabulary control! You're ready to absolutely crush the final challenge.");
+        
+        state.progress.vocab = true;
+        updateProgressBar();
+      } else {
+        feedback.className = "mt-3 text-xs font-bold p-2.5 rounded-lg border border-red-200 bg-red-50 text-red-800";
+        feedback.innerText = "❌ That's not the correct match. Check the glossary cards above and try again!";
+        triggerCoachSpeak("Not quite! Take a quick peek at the glossary flashcards to review the terms.");
+      }
+
+      const retryBtn = document.createElement('button');
+      retryBtn.innerText = "Test Another Term 🔄";
+      retryBtn.onclick = () => generateVocabGame();
+      retryBtn.className = "mt-2 block bg-slate-800 hover:bg-slate-700 text-white font-bold px-3 py-1.5 rounded-lg text-[10px] transition-all ml-auto";
+      feedback.appendChild(retryBtn);
+    }
+
+    // ----------------------------------------------------
+    // SECTION 6: MASTER HISTORIAN QUIZ
+    // ----------------------------------------------------
+    function renderQuizQuestion() {
+      const qIndex = state.quiz.currentQuestion;
+      
+      if (qIndex >= quizQuestions.length) {
+        completeQuiz();
+        return;
+      }
+
+      const qData = quizQuestions[qIndex];
+      document.getElementById('quiz-question-number').innerText = `Question ${qIndex + 1} of ${quizQuestions.length}`;
+      document.getElementById('quiz-question-text').innerText = qData.question;
+
+      const optsContainer = document.getElementById('quiz-options');
+      optsContainer.innerHTML = '';
+
+      qData.options.forEach((opt) => {
+        const btn = document.createElement('button');
+        btn.onclick = () => selectQuizAnswer(opt);
+        btn.className = "w-full text-left p-3 border-2 border-slate-200 hover:border-amber-400 rounded-xl font-medium text-xs transition-all bg-slate-50 text-slate-700 shadow-sm";
+        btn.innerText = opt;
+        optsContainer.appendChild(btn);
+      });
+
+      document.getElementById('quiz-feedback-box').classList.add('hidden');
+    }
+
+    function selectQuizAnswer(idx) {
+      const qIndex = state.quiz.currentQuestion;
+      const qData = quizQuestions[qIndex];
+      const feedbackBox = document.getElementById('quiz-feedback-box');
+      
+      feedbackBox.classList.remove('hidden');
+      
+      const options = document.getElementById('quiz-options').children;
+      for (let i = 0; i < options.length; i++) {
+        options[i].disabled = true;
+        if (i === qData.answer) {
+          options[i].className = "w-full text-left p-3 border-2 border-emerald-500 rounded-xl font-bold text-xs bg-emerald-50 text-emerald-800 shadow-sm cursor-not-allowed";
+        } else if (i === idx) {
+          options[i].className = "w-full text-left p-3 border-2 border-red-500 rounded-xl font-bold text-xs bg-red-50 text-red-800 shadow-sm cursor-not-allowed";
+        } else {
+          options[i].className = "w-full text-left p-3 border border-slate-200 rounded-xl text-xs text-slate-400 bg-slate-100 shadow-sm cursor-not-allowed";
+        }
+      }
+
+      if (idx === qData.answer) {
+        state.quiz.score++;
+        feedbackBox.className = "mt-3 p-3.5 rounded-xl border border-emerald-200 bg-emerald-50 text-emerald-800 text-xs font-semibold leading-relaxed";
+        feedbackBox.innerText = `✅ Excellent! ${qData.feedback}`;
+        triggerCoachSpeak(`Superb! That's another point on your diploma.`);
+      } else {
+        feedbackBox.className = "mt-3 p-3.5 rounded-xl border border-red-200 bg-red-50 text-red-800 text-xs font-semibold leading-relaxed";
+        feedbackBox.innerText = `❌ Incorrect. ${qData.feedback}`;
+        triggerCoachSpeak(`A minor bump in our timeline! Review your facts and let's try the next one.`);
+      }
+
+      const nextQBtn = document.createElement('button');
+      nextQBtn.innerText = "Next Question →";
+      nextQBtn.onclick = () => {
+        state.quiz.currentQuestion++;
+        renderQuizQuestion();
+      };
+      nextQBtn.className = "mt-3 bg-slate-800 hover:bg-slate-700 text-white font-bold px-4 py-1.5 rounded-lg text-xs transition-all float-right block";
+      feedbackBox.appendChild(nextQBtn);
+    }
+
+    function setSeal(sealName) {
+      document.getElementById('custom-seal-icon').innerText = sealName.split(' ')[0];
+      triggerCoachSpeak(`Splendid choice! The ${sealName} will look excellent on your certified parchment.`);
+    }
+
+    function completeQuiz() {
+      state.quiz.completed = true;
+      document.getElementById('quiz-question-box').classList.add('hidden');
+      
+      const certBox = document.getElementById('certificate-box');
+      certBox.classList.remove('hidden');
+
+      state.progress.quiz = true;
+      updateProgressBar();
+
+      const passRate = (state.quiz.score / quizQuestions.length) * 100;
+      
+      if (passRate >= 70) {
+        showMilestoneModal("Graduation Complete! 🎓", `Congratulations! You scored ${state.quiz.score} / ${quizQuestions.length}. You have earned your certificate in pre-Columbian US History.`);
+        triggerCoachSpeak(`Splendid work, ${state.studentName}! You scored a ${Math.round(passRate)}% and passed our Unit Assessment. Customize your seal and print it!`);
+      } else {
+        showMilestoneModal("Quiz Completed! 📝", `You scored ${state.quiz.score} / ${quizQuestions.length}. Review the materials and tap the assessment tab to boost your score to 100%!`);
+        triggerCoachSpeak(`Nice try, ${state.studentName}! Review your notes and let's try again for a higher score!`);
+      }
+    }
+
+    function closeMilestoneModal() {
+      const modal = document.getElementById('milestone-modal');
+      modal.classList.add('opacity-0');
+      modal.querySelector('div').classList.add('scale-95');
+      setTimeout(() => {
+        modal.classList.add('hidden');
+      }, 300);
+    }
+
+  </script>
+</body>
+</html>
