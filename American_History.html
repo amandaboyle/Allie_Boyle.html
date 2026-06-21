@@ -3,31 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>American History Course</title>
+    <title>American History Course - Neon Edition</title>
     <style>
         :root {
-            --primary: #2c3e50;
-            --secondary: #e67e22;
-            --bg: #f4f7f6;
-            --text: #333;
+            --neon-bg: #0d0221;
+            --neon-border: #ff00ff;
+            --neon-glow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+            --neon-cyan: #00f2ff;
+            --neon-text: #fff;
         }
-        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
-        header { background: var(--primary); color: white; padding: 1.5rem; text-align: center; }
-        .container { display: flex; flex: 1; max-width: 1200px; margin: auto; width: 100%; gap: 20px; padding: 20px; box-sizing: border-box; }
-        nav { width: 300px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        main { flex: 1; background: white; padding: 40px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .unit-btn { display: block; width: 100%; padding: 12px; margin-bottom: 8px; border: none; background: #ecf0f1; text-align: left; border-radius: 4px; cursor: pointer; transition: 0.3s; }
-        .unit-btn:hover { background: #dcdde1; }
-        .unit-btn.active { background: var(--secondary); color: white; }
-        h2 { color: var(--primary); border-bottom: 2px solid var(--secondary); padding-bottom: 10px; }
-        .link-group { margin-top: 15px; }
-        .link-item { display: block; margin-bottom: 5px; color: var(--secondary); font-weight: bold; text-decoration: none; }
+        body { 
+            font-family: 'Courier New', Courier, monospace; 
+            background: var(--neon-bg); 
+            color: var(--neon-text); 
+            margin: 0; 
+            display: flex; 
+            flex-direction: column; 
+            min-height: 100vh; 
+        }
+        header { 
+            border-bottom: 4px solid var(--neon-border);
+            padding: 2rem; 
+            text-align: center;
+            text-shadow: 0 0 10px #fff, 0 0 20px var(--neon-border);
+        }
+        .container { display: flex; flex: 1; max-width: 1200px; margin: auto; width: 100%; gap: 20px; padding: 20px; }
+        nav { width: 300px; padding: 20px; }
+        main { flex: 1; padding: 40px; border: 2px solid var(--neon-cyan); box-shadow: 0 0 15px var(--neon-cyan); border-radius: 15px; }
+        .unit-btn { 
+            display: block; width: 100%; padding: 15px; margin-bottom: 10px; 
+            background: transparent; color: var(--neon-cyan); 
+            border: 1px solid var(--neon-cyan); border-radius: 5px;
+            cursor: pointer; transition: 0.3s; text-transform: uppercase;
+        }
+        .unit-btn:hover { background: var(--neon-cyan); color: black; box-shadow: 0 0 20px var(--neon-cyan); }
+        .unit-btn.active { background: var(--neon-border); color: white; border-color: white; box-shadow: var(--neon-glow); }
+        h2 { color: var(--neon-border); text-shadow: 0 0 5px var(--neon-border); }
+        .link-item { color: var(--neon-cyan); font-weight: bold; text-decoration: none; display: block; margin: 10px 0; }
+        .link-item:hover { text-shadow: 0 0 10px var(--neon-cyan); }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>American History: 12 Units of Discovery</h1>
+    <h1>AMERICAN HISTORY: 12 UNITS</h1>
 </header>
 
 <div class="container">
@@ -35,8 +54,8 @@
         <!-- Units will be injected here -->
     </nav>
     <main id="content">
-        <h2>Welcome</h2>
-        <p>Select a unit from the left menu to view detailed information and resources.</p>
+        <h2>SELECT A UNIT</h2>
+        <p>USE THE SIDEBAR TO EXPLORE THE TIMELINE.</p>
     </main>
 </div>
 
@@ -48,10 +67,13 @@
             desc: "Migration, early indigenous cultures, and environmental adaptations.", 
             link: "https://www.nps.gov/subjects/archeology/first-americans.htm", 
             extraLink: "American_History_Unit1.html", 
-            extraLabel: "View Unit 1 Document", 
+            extraLabel: "Unit 1 Interactive App", 
             videos: [
                 { url: "https://www.youtube.com/watch?v=fyZNYdZynb0", title: "The Ice Age" },
-                { url: "https://www.youtube.com/watch?v=Pg0Z3LappEM", title: "Geography of the Ice Age" }
+                { url: "https://www.youtube.com/watch?v=Pg0Z3LappEM", title: "Geography of the Ice Age" },
+                { url: "https://www.youtube.com/watch?v=PQ-sWeOqAS0&t=46s", title: "What America was like during the Ice Age" },
+                { url: "https://www.youtube.com/watch?v=gjvW38Oq4t8", title: "How Glaciers Carved North America" },
+                { url: "https://www.youtube.com/watch?v=7gwSNN-z5sM", title: "Beringia Land Bridge" }
             ]
         },
         { id: 2, title: "Exploration and colonization", desc: "European voyages, the Columbian Exchange, and early interactions.", link: "https://www.loc.gov/collections/exploring-the-early-americas/", extraLink: "American_History_Unit2.html", extraLabel: "View Unit 2 Document" },
@@ -79,19 +101,22 @@
             btn.classList.add('active');
             
             let htmlContent = `
-                <h2>Unit ${unit.id}: ${unit.title}</h2>
-                <p>${unit.desc}</p>
+                <h2>UNIT ${unit.id}: ${unit.title.toUpperCase()}</h2>
+                <p>${unit.desc.toUpperCase()}</p>
                 <div class="link-group">
-                    <a href="${unit.link}" target="_blank" class="link-item">Explore more about this unit</a>
             `;
             
+            if (unit.id !== 1) {
+                htmlContent += `<a href="${unit.link}" target="_blank" class="link-item">> EXPLORE UNIT</a>`;
+            }
+            
             if (unit.extraLink) {
-                htmlContent += `<a href="${unit.extraLink}" target="_blank" class="link-item">${unit.extraLabel}</a>`;
+                htmlContent += `<a href="${unit.extraLink}" target="_blank" class="link-item">> ${unit.extraLabel.toUpperCase()}</a>`;
             }
 
             if (unit.videos) {
                 unit.videos.forEach(video => {
-                    htmlContent += `<a href="${video.url}" target="_blank" class="link-item">${video.title}</a>`;
+                    htmlContent += `<a href="${video.url}" target="_blank" class="link-item">> ${video.title.toUpperCase()}</a>`;
                 });
             }
             
