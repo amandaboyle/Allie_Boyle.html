@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>American History Course</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #e67e22;
+            --bg: #f4f7f6;
+            --text: #333;
+        }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+        header { background: var(--primary); color: white; padding: 1.5rem; text-align: center; }
+        .container { display: flex; flex: 1; max-width: 1200px; margin: auto; width: 100%; gap: 20px; padding: 20px; box-sizing: border-box; }
+        nav { width: 300px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        main { flex: 1; background: white; padding: 40px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .unit-btn { display: block; width: 100%; padding: 12px; margin-bottom: 8px; border: none; background: #ecf0f1; text-align: left; border-radius: 4px; cursor: pointer; transition: 0.3s; }
+        .unit-btn:hover { background: #dcdde1; }
+        .unit-btn.active { background: var(--secondary); color: white; }
+        h2 { color: var(--primary); border-bottom: 2px solid var(--secondary); padding-bottom: 10px; }
+        .link-group { margin-top: 15px; }
+        .link-item { display: block; margin-bottom: 5px; color: var(--secondary); font-weight: bold; text-decoration: none; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>American History: 12 Units of Discovery</h1>
+</header>
+
+<div class="container">
+    <nav id="sidebar">
+        <!-- Units will be injected here -->
+    </nav>
+    <main id="content">
+        <h2>Welcome</h2>
+        <p>Select a unit from the left menu to view detailed information and resources.</p>
+    </main>
+</div>
+
+<script>
+    const units = [
+        { id: 1, title: "The First Americans", desc: "Migration, early indigenous cultures, and environmental adaptations.", link: "https://www.nps.gov/subjects/archeology/first-americans.htm", extraLink: "American_History_Unit1.html", extraLabel: "View Unit 1 Document" },
+        { id: 2, title: "Exploration and colonization", desc: "European voyages, the Columbian Exchange, and early interactions.", link: "https://www.loc.gov/collections/exploring-the-early-americas/", extraLink: "American_History_Unit2.html", extraLabel: "View Unit 2 Document" },
+        { id: 3, title: "Colonial America", desc: "Regional differences in New England, Middle, and Southern colonies.", link: "https://www.ushistory.org/us/2.asp", extraLink: "American_History_Unit3.html", extraLabel: "View Unit 3 Document" },
+        { id: 4, title: "The Road to Revolution", desc: "Tensions, French & Indian War, and the path to independence.", link: "https://www.history.com/topics/american-revolution/road-to-revolution", extraLink: "American_History_Unit4.html", extraLabel: "View Unit 4 Document" },
+        { id: 5, title: "The American Revolution", desc: "The conflict, key battles, and the creation of a new nation.", link: "https://www.nps.gov/revwar/index.html", extraLink: "American_History_Unit5.html", extraLabel: "View Unit 5 Document" },
+        { id: 6, title: "Creating a New Nation", desc: "Drafting the Constitution and establishing government.", link: "https://www.archives.gov/founding-docs/constitution", extraLink: "American_History_Unit6.html", extraLabel: "View Unit 6 Document" },
+        { id: 7, title: "The Early Republic", desc: "The first presidencies and the Louisiana Purchase.", link: "https://www.mountvernon.org/", extraLink: "American_History_Unit7.html", extraLabel: "View Unit 7 Document" },
+        { id: 8, title: "Growth and Expansion", desc: "Manifest Destiny and westward movement.", link: "https://www.loc.gov/exhibits/odyssey/archive.html", extraLink: "American_History_Unit8.html", extraLabel: "View Unit 8 Document" },
+        { id: 9, title: "The North and South", desc: "Economic and social divide, slavery, and industrialization.", link: "https://www.history.com/topics/19th-century/north-and-south", extraLink: "American_History_Unit9.html", extraLabel: "View Unit 9 Document" },
+        { id: 10, title: "Reform Movements", desc: "Abolitionism, women's suffrage, and temperance.", link: "https://www.gilderlehrman.org/", extraLink: "American_History_Unit10.html", extraLabel: "View Unit 10 Document" },
+        { id: 11, title: "Sectionalism and the Civil War", desc: "Crisis of the Union and the war itself.", link: "https://www.battlefields.org/learn/civil-war", extraLink: "American_History_Unit11.html", extraLabel: "View Unit 11 Document" },
+        { id: 12, title: "Reconstruction", desc: "Efforts to rebuild the South and rights of freedmen.", link: "https://www.history.com/topics/american-civil-war/reconstruction", extraLink: "American_History_Unit12.html", extraLabel: "View Unit 12 Document" }
+    ];
+
+    const sidebar = document.getElementById('sidebar');
+    const content = document.getElementById('content');
+
+    units.forEach(unit => {
+        const btn = document.createElement('button');
+        btn.className = 'unit-btn';
+        btn.textContent = `Unit ${unit.id}: ${unit.title}`;
+        btn.onclick = () => {
+            document.querySelectorAll('.unit-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            let htmlContent = `
+                <h2>Unit ${unit.id}: ${unit.title}</h2>
+                <p>${unit.desc}</p>
+                <div class="link-group">
+                    <a href="${unit.link}" target="_blank" class="link-item">Explore more about this unit</a>
+            `;
+            
+            if (unit.extraLink) {
+                htmlContent += `<a href="${unit.extraLink}" target="_blank" class="link-item">${unit.extraLabel}</a>`;
+            }
+            
+            htmlContent += `</div>`;
+            content.innerHTML = htmlContent;
+        };
+        sidebar.appendChild(btn);
+    });
+</script>
+
+</body>
+</html>
