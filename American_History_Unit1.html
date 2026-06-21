@@ -271,7 +271,7 @@
 
             <!-- Descriptive Overlay Panel -->
             <div class="absolute bottom-2 left-2 right-2 bg-slate-900/95 p-3 rounded-lg border border-slate-700/80 text-xs">
-              <h4 id="sim-status-title" class="font-bold text-amber-400">Phase: Ice Age Deep Freeze</h4>
+              <h4 id="sim-status-title" class="font-bold text-amber-400">Phase: Ice Age Glacier Lock</h4>
               <p id="sim-status-desc" class="text-slate-300">Vast glacial caps hold global sea waters. The Beringia corridor is fully exposed and covered in rich tundra vegetation, inviting herds of megafauna and hunting clans to walk across.</p>
             </div>
           </div>
@@ -497,7 +497,7 @@
                 <h4 class="font-bold text-sm">1. Connection to Land</h4>
                 <p class="text-[10px] text-emerald-200">Click to flip...</p>
               </div>
-              <div class="flip-card-back bg-white text-slate-700 p-4 flex flex-col justify-center border-2 border-emerald-800 shadow-sm text-left">
+              <div class="flip-card-back bg-white text-slate-750 p-4 flex flex-col justify-center border-2 border-emerald-800 shadow-sm text-left">
                 <h4 class="font-bold text-emerald-800 text-xs mb-1">Sacred Stewardship</h4>
                 <p class="text-[10px] leading-relaxed">
                   Unlike Europeans, Native Americans **did not believe individuals could own land**. Land was a sacred element of nature, to be shared and protected by all.
@@ -514,7 +514,7 @@
                 <h4 class="font-bold text-sm">2. Spiritual World</h4>
                 <p class="text-[10px] text-amber-100">Click to flip...</p>
               </div>
-              <div class="flip-card-back bg-white text-slate-700 p-4 flex flex-col justify-center border-2 border-amber-700 shadow-sm text-left">
+              <div class="flip-card-back bg-white text-slate-750 p-4 flex flex-col justify-center border-2 border-amber-700 shadow-sm text-left">
                 <h4 class="font-bold text-amber-700 text-xs mb-1">Natural Spirits</h4>
                 <p class="text-[10px] leading-relaxed">
                   They believed the natural world was filled with living spirits (animism). Everything from wind and rain to animals held deep significance and demanded respect.
@@ -531,7 +531,7 @@
                 <h4 class="font-bold text-sm">3. Kinship (Clans)</h4>
                 <p class="text-[10px] text-slate-300">Click to flip...</p>
               </div>
-              <div class="flip-card-back bg-white text-slate-700 p-4 flex flex-col justify-center border-2 border-slate-800 shadow-sm text-left">
+              <div class="flip-card-back bg-white text-slate-750 p-4 flex flex-col justify-center border-2 border-slate-800 shadow-sm text-left">
                 <h4 class="font-bold text-slate-800 text-xs mb-1">Strong Kinship Bonds</h4>
                 <p class="text-[10px] leading-relaxed">
                   Customs focused on family clans. Elders passed down oral histories and rules. Division of labor was balanced: men hunted, women farmed.
@@ -1460,6 +1460,10 @@
       }
     }
 
+    function flipCard(cardElement) {
+      cardElement.classList.toggle('flipped');
+    }
+
     function makeCouncilDecision(choice) {
       const panel = document.getElementById('council-feedback-panel');
       panel.classList.remove('hidden');
@@ -1612,9 +1616,9 @@
       const optsContainer = document.getElementById('quiz-options');
       optsContainer.innerHTML = '';
 
-      qData.options.forEach((opt) => {
+      qData.options.forEach((opt, idx) => {
         const btn = document.createElement('button');
-        btn.onclick = () => selectQuizAnswer(opt);
+        btn.onclick = () => selectQuizAnswer(idx);
         btn.className = "w-full text-left p-3 border-2 border-slate-200 hover:border-amber-400 rounded-xl font-medium text-xs transition-all bg-slate-50 text-slate-700 shadow-sm";
         btn.innerText = opt;
         optsContainer.appendChild(btn);
@@ -1646,11 +1650,11 @@
         state.quiz.score++;
         feedbackBox.className = "mt-3 p-3.5 rounded-xl border border-emerald-200 bg-emerald-50 text-emerald-800 text-xs font-semibold leading-relaxed";
         feedbackBox.innerText = `✅ Excellent! ${qData.feedback}`;
-        triggerCoachSpeak(`Superb! That's another point on your diploma.`);
+        triggerCoachSpeak("Superb! That's another point on your diploma.");
       } else {
         feedbackBox.className = "mt-3 p-3.5 rounded-xl border border-red-200 bg-red-50 text-red-800 text-xs font-semibold leading-relaxed";
         feedbackBox.innerText = `❌ Incorrect. ${qData.feedback}`;
-        triggerCoachSpeak(`A minor bump in our timeline! Review your facts and let's try the next one.`);
+        triggerCoachSpeak("A minor bump in our timeline! Review your facts and let's try the next one.");
       }
 
       const nextQBtn = document.createElement('button');
