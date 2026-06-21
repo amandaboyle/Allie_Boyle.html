@@ -3,17 +3,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Interactive U.S. History: Unit 1 Explorer Pro</title>
+  <title>Interactive U.S. History: Unit 1 Explorer Cyber-Edition</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Google Fonts: Playfair Display for headings, Inter for body -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <!-- Google Fonts: Orbitron for titles/headers, Inter for clean copy reading -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;600;700;900&display=swap" rel="stylesheet">
   <style>
     body {
       font-family: 'Inter', sans-serif;
     }
-    h1, h2, h3, .serif-font {
-      font-family: 'Playfair Display', serif;
+    h1, h2, h3, .retro-font {
+      font-family: 'Orbitron', sans-serif;
+    }
+    /* Cyber/Neon Glow Styles */
+    .neon-text-pink {
+      text-shadow: 0 0 5px #ec4899, 0 0 10px #ec4899, 0 0 20px #db2777;
+    }
+    .neon-text-cyan {
+      text-shadow: 0 0 5px #06b6d4, 0 0 10px #06b6d4, 0 0 20px #0891b2;
+    }
+    .neon-border-pink {
+      box-shadow: 0 0 10px rgba(236, 72, 153, 0.4), inset 0 0 10px rgba(236, 72, 153, 0.2);
+    }
+    .neon-border-cyan {
+      box-shadow: 0 0 10px rgba(6, 182, 212, 0.4), inset 0 0 10px rgba(6, 182, 212, 0.2);
+    }
+    /* Grid Overlay Pattern */
+    .bg-grid-overlay {
+      background-size: 30px 30px;
+      background-image: 
+        linear-gradient(to right, rgba(236, 72, 153, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(236, 72, 153, 0.05) 1px, transparent 1px);
     }
     /* Card Flip CSS */
     .flip-card {
@@ -48,42 +68,58 @@
       cursor: pointer;
     }
     .map-region:hover {
-      fill-opacity: 0.8;
-      filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.3));
+      fill-opacity: 0.9;
+      filter: drop-shadow(0px 0px 10px rgba(255,0,127,0.8));
     }
     .map-region.active-region {
       fill-opacity: 0.95;
-      stroke: #ffffff;
-      stroke-width: 3px;
+      stroke: #00f0ff;
+      stroke-width: 4px;
+      filter: drop-shadow(0px 0px 15px rgba(0,240,255,0.9));
+    }
+    /* Scrollbar Style */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #09070f;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #ec4899;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #f472b6;
     }
   </style>
 </head>
-<body class="bg-[#fcf8f2] text-slate-800 min-h-screen flex flex-col selection:bg-amber-200">
+<body class="bg-[#09070f] text-slate-100 min-h-screen flex flex-col selection:bg-pink-500 selection:text-white bg-grid-overlay">
 
   <!-- Header Banner -->
-  <header class="bg-emerald-900 text-white shadow-md border-b-4 border-amber-500 py-5 px-4 md:px-8 relative overflow-hidden">
-    <!-- Overlay Pattern -->
-    <div class="absolute inset-0 bg-grid-pattern opacity-5 pointer-events-none"></div>
+  <header class="bg-[#120d24] text-white shadow-[0_0_20px_rgba(236,72,153,0.3)] border-b-4 border-pink-500 py-5 px-4 md:px-8 relative overflow-hidden">
+    <!-- Glowing Laser Line -->
+    <div class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-pink-500 via-cyan-400 to-purple-600 animate-pulse"></div>
+    
     <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 relative z-10">
       <div class="flex items-center gap-3">
-        <!-- SVG Compass/Shield Icon -->
-        <svg class="w-12 h-12 text-amber-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <!-- SVG Cyber Compass Icon -->
+        <svg class="w-12 h-12 text-cyan-400 flex-shrink-0 filter drop-shadow-[0_0_5px_#06b6d4]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
         </svg>
         <div>
-          <span class="text-xs font-bold tracking-widest text-amber-300 uppercase block">McDougal & Littell • Companion Edition</span>
-          <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight">Unit 1: Three Worlds Meet</h1>
+          <span class="text-xs font-bold tracking-widest text-pink-400 uppercase block retro-font">RETRO-CURRICULUM MODULE</span>
+          <h1 class="text-2xl md:text-3xl font-black tracking-wider uppercase text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-fuchsia-400 to-cyan-400">Three Worlds Meet</h1>
         </div>
       </div>
       
       <!-- Progress tracker -->
       <div class="flex items-center gap-4 w-full md:w-auto justify-between md:justify-end">
-        <div class="bg-emerald-950/80 px-4 py-2 rounded-xl border border-emerald-800 text-right w-full md:w-auto">
-          <p class="text-[10px] text-emerald-300 font-extrabold tracking-wider">HISTORIAN RANK</p>
-          <div class="w-36 bg-emerald-950 h-2.5 rounded-full overflow-hidden mt-1 inline-block">
-            <div id="overall-progress-bar" class="bg-gradient-to-r from-amber-400 to-amber-500 h-full w-[5%] transition-all duration-500"></div>
+        <div class="bg-black/40 px-4 py-2 rounded-xl border border-cyan-500/40 text-right w-full md:w-auto neon-border-cyan">
+          <p class="text-[10px] text-cyan-400 font-extrabold tracking-widest retro-font">CYBER RANK</p>
+          <div class="w-36 bg-slate-950 h-2.5 rounded-full overflow-hidden mt-1 inline-block border border-pink-500/30">
+            <div id="overall-progress-bar" class="bg-gradient-to-r from-pink-500 to-cyan-400 h-full w-[5%] transition-all duration-500"></div>
           </div>
-          <p id="overall-progress-text" class="text-xs font-bold text-amber-300 mt-1">Explorer (5%)</p>
+          <p id="overall-progress-text" class="text-xs font-bold text-pink-400 mt-1 retro-font">Explorer (5%)</p>
         </div>
       </div>
     </div>
@@ -95,56 +131,56 @@
     <!-- Sidebar / Nav & Teacher Guide -->
     <aside class="w-full lg:w-1/4 flex flex-col gap-6">
       
-      <!-- Teacher Avatar Box -->
-      <div class="bg-white rounded-2xl shadow-md border border-slate-200 p-5 relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-24 h-24 bg-amber-100 rounded-full -mr-8 -mt-8 opacity-40"></div>
+      <!-- Cyber Coach Avatar Box -->
+      <div class="bg-[#120d24] rounded-2xl shadow-md border border-pink-500/40 p-5 relative overflow-hidden neon-border-pink">
+        <div class="absolute top-0 right-0 w-24 h-24 bg-cyan-500/10 rounded-full -mr-8 -mt-8 opacity-40"></div>
         <div class="flex items-center gap-3 mb-4">
-          <!-- SVG Teacher Avatar -->
-          <div class="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center border-2 border-amber-400">
-            <svg class="w-8 h-8 text-amber-700" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <!-- Cyber Teacher Avatar -->
+          <div class="w-12 h-12 bg-pink-950/50 rounded-full flex items-center justify-center border-2 border-pink-500 shadow-[0_0_8px_#ec4899]">
+            <svg class="w-8 h-8 text-cyan-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
               <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-2.35-.174l-.152-.01a1 1 0 01-.81-.996V10.9a1 1 0 01.622-.924l.001-.001zm13.38 0a1 1 0 01.622.923v1.638a1 1 0 01-.81.996l-.152.01a8.969 8.969 0 00-2.35.174v-4.1l1.69-.724z"></path>
               <path d="M7.167 11.854l1.94.83a3 3 0 002.386 0l1.94-.83A11.963 11.963 0 0110 14.282a11.963 11.963 0 01-2.833-2.428z"></path>
             </svg>
           </div>
           <div>
-            <h4 class="font-bold text-slate-800">Coach Henderson</h4>
-            <span class="text-[10px] bg-amber-100 text-amber-800 font-bold px-2 py-0.5 rounded-full">Class Guide</span>
+            <h4 class="font-bold text-slate-100 retro-font text-xs tracking-wider">Coach Henderson</h4>
+            <span class="text-[9px] bg-cyan-950 text-cyan-300 font-extrabold px-2 py-0.5 rounded-full border border-cyan-500/40 uppercase">AI Class Guide</span>
           </div>
         </div>
-        <p id="teacher-bubble" class="text-sm text-slate-600 italic bg-amber-50/50 p-3 rounded-lg border-l-4 border-amber-400">
-          "Hello! Let's get started. Create your Historian card below, and let's explore Unit One with our brand-new interactive simulators!"
+        <p id="teacher-bubble" class="text-xs text-slate-300 italic bg-black/40 p-3 rounded-lg border-l-4 border-pink-500">
+          "Ready to hack into past dimensions, Scribe? Log your profile name below to initiate the temporal grid!"
         </p>
       </div>
 
       <!-- Navigation Tabs -->
-      <nav class="bg-white rounded-2xl shadow-md border border-slate-200 p-4 flex flex-col gap-1">
-        <h5 class="text-xs font-bold text-slate-400 uppercase tracking-widest px-3 mb-2">Lesson Sections</h5>
+      <nav class="bg-[#120d24] rounded-2xl shadow-md border border-cyan-500/30 p-4 flex flex-col gap-1.5 neon-border-cyan">
+        <h5 class="text-[10px] font-bold text-pink-400 uppercase tracking-widest px-3 mb-2 retro-font">Lesson Matrices</h5>
         
-        <button onclick="switchTab('welcome')" id="tab-welcome" class="tab-btn w-full text-left px-4 py-2.5 rounded-xl flex items-center gap-3 font-semibold transition-all duration-200 bg-emerald-50 text-emerald-800 border-l-4 border-emerald-600 text-sm">
+        <button onclick="switchTab('welcome')" id="tab-welcome" class="tab-btn w-full text-left px-4 py-2.5 rounded-xl flex items-center gap-3 font-semibold transition-all duration-200 bg-pink-950/40 text-pink-300 border-l-4 border-pink-500 text-xs retro-font">
           <span class="text-base">👋</span> Welcome Desk
         </button>
         
-        <button onclick="switchTab('peopling')" id="tab-peopling" class="tab-btn w-full text-left px-4 py-2.5 rounded-xl flex items-center gap-3 font-semibold transition-all duration-200 text-slate-600 hover:bg-slate-50 text-sm">
-          <span class="text-base">❄️</span> 1. Ice Age Land Bridge
+        <button onclick="switchTab('peopling')" id="tab-peopling" class="tab-btn w-full text-left px-4 py-2.5 rounded-xl flex items-center gap-3 font-semibold transition-all duration-200 text-slate-400 hover:bg-slate-800/50 text-xs retro-font">
+          <span class="text-base">❄️</span> 1. Land Bridge Sim
         </button>
         
-        <button onclick="switchTab('regions')" id="tab-regions" class="tab-btn w-full text-left px-4 py-2.5 rounded-xl flex items-center gap-3 font-semibold transition-all duration-200 text-slate-600 hover:bg-slate-50 text-sm">
+        <button onclick="switchTab('regions')" id="tab-regions" class="tab-btn w-full text-left px-4 py-2.5 rounded-xl flex items-center gap-3 font-semibold transition-all duration-200 text-slate-400 hover:bg-slate-800/50 text-xs retro-font">
           <span class="text-base">🗺️</span> 2. Clickable Region Map
         </button>
         
-        <button onclick="switchTab('civilizations')" id="tab-civilizations" class="tab-btn w-full text-left px-4 py-2.5 rounded-xl flex items-center gap-3 font-semibold transition-all duration-200 text-slate-600 hover:bg-slate-50 text-sm">
+        <button onclick="switchTab('civilizations')" id="tab-civilizations" class="tab-btn w-full text-left px-4 py-2.5 rounded-xl flex items-center gap-3 font-semibold transition-all duration-200 text-slate-400 hover:bg-slate-800/50 text-xs retro-font">
           <span class="text-base">🏛️</span> 3. Early Civilizations
         </button>
         
-        <button onclick="switchTab('cultures')" id="tab-cultures" class="tab-btn w-full text-left px-4 py-2.5 rounded-xl flex items-center gap-3 font-semibold transition-all duration-200 text-slate-600 hover:bg-slate-50 text-sm">
+        <button onclick="switchTab('cultures')" id="tab-cultures" class="tab-btn w-full text-left px-4 py-2.5 rounded-xl flex items-center gap-3 font-semibold transition-all duration-200 text-slate-400 hover:bg-slate-800/50 text-xs retro-font">
           <span class="text-base">🔥</span> 4. Council Fire Sim
         </button>
 
-        <button onclick="switchTab('vocab')" id="tab-vocab" class="tab-btn w-full text-left px-4 py-2.5 rounded-xl flex items-center gap-3 font-semibold transition-all duration-200 text-slate-600 hover:bg-slate-50 text-sm">
+        <button onclick="switchTab('vocab')" id="tab-vocab" class="tab-btn w-full text-left px-4 py-2.5 rounded-xl flex items-center gap-3 font-semibold transition-all duration-200 text-slate-400 hover:bg-slate-800/50 text-xs retro-font">
           <span class="text-base">📝</span> 5. Vocabulary Sandbox
         </button>
         
-        <button onclick="switchTab('quiz')" id="tab-quiz" class="tab-btn w-full text-left px-4 py-2.5 rounded-xl flex items-center gap-3 font-semibold transition-all duration-200 text-slate-600 hover:bg-slate-50 border-t border-slate-100 pt-3 mt-2 text-sm">
+        <button onclick="switchTab('quiz')" id="tab-quiz" class="tab-btn w-full text-left px-4 py-2.5 rounded-xl flex items-center gap-3 font-semibold transition-all duration-200 text-slate-400 hover:bg-slate-800/50 border-t border-slate-800/80 pt-3 mt-2 text-xs retro-font">
           <span class="text-base">🏆</span> Historian Challenge
         </button>
       </nav>
@@ -152,46 +188,46 @@
     </aside>
 
     <!-- Main Content Panel -->
-    <section class="w-full lg:w-3/4 bg-white rounded-3xl shadow-xl border border-slate-200 p-6 md:p-8 min-h-[550px] flex flex-col justify-between">
+    <section class="w-full lg:w-3/4 bg-[#120d24]/90 rounded-3xl shadow-[0_0_20px_rgba(6,182,212,0.15)] border border-cyan-500/30 p-6 md:p-8 min-h-[550px] flex flex-col justify-between relative overflow-hidden">
       
       <!-- TAB: WELCOME -->
       <div id="content-welcome" class="tab-content block">
         <div class="text-center max-w-2xl mx-auto py-4">
-          <span class="text-emerald-700 font-extrabold text-xs tracking-widest uppercase bg-emerald-50 px-3 py-1 rounded-full">Unit 1: Beginnings to 1500</span>
-          <h2 class="text-3xl md:text-4xl font-bold mt-4 mb-4 text-slate-800">Three Worlds Meet</h2>
-          <p class="text-slate-600 leading-relaxed mb-6 text-sm">
+          <span class="text-cyan-400 font-extrabold text-[10px] tracking-widest uppercase bg-cyan-950/60 border border-cyan-500/40 px-3 py-1 rounded-full retro-font">Unit 1: Beginnings to 1500</span>
+          <h2 class="text-3xl md:text-4xl font-extrabold mt-4 mb-4 text-slate-100 uppercase tracking-wide">Three Worlds Meet</h2>
+          <p class="text-slate-350 leading-relaxed mb-6 text-sm">
             Before European ships crossed the Atlantic Ocean, North America was a thriving continent filled with massive cities, intricate trade networks, complex farming systems, and incredibly diverse cultures. In this interactive lesson, we'll examine how the first humans adapted to varied physical environments and built unique societies.
           </p>
 
-          <div class="bg-amber-50/70 border border-amber-200 p-6 rounded-2xl mb-6 text-left">
-            <h3 class="font-bold text-amber-900 mb-2 flex items-center gap-2">
-              <span class="text-xl">✍️</span> Setup Your Historian Notebook:
+          <div class="bg-pink-950/20 border border-pink-500/30 p-6 rounded-2xl mb-6 text-left neon-border-pink">
+            <h3 class="font-bold text-pink-400 mb-2 flex items-center gap-2 retro-font text-xs tracking-widest uppercase">
+              <span class="text-xl">🌌</span> Setup Your Chrono-Log:
             </h3>
-            <p class="text-xs text-amber-800 mb-4">Your name will be written on your official Certificate of Completion at the end of the unit challenge!</p>
+            <p class="text-[11px] text-slate-400 mb-4">Your name will be written on your official Certificate of Completion at the end of the unit challenge!</p>
             <div class="flex flex-col sm:flex-row gap-3">
-              <input type="text" id="student-name" placeholder="Enter Your Name..." class="flex-grow px-4 py-3 rounded-xl border-2 border-amber-300 focus:outline-none focus:border-amber-500 text-slate-700 font-semibold shadow-sm text-sm">
-              <button onclick="startJourney()" class="bg-amber-500 hover:bg-amber-600 text-white font-bold px-6 py-3 rounded-xl shadow-md transition-colors duration-200 shrink-0 text-sm">
-                Begin Exploration
+              <input type="text" id="student-name" placeholder="Enter Your Name..." class="flex-grow px-4 py-3 rounded-xl border-2 border-pink-500/30 focus:border-pink-500 focus:outline-none bg-black/60 text-pink-300 font-semibold shadow-sm text-sm placeholder-slate-600">
+              <button onclick="startJourney()" class="bg-pink-600 hover:bg-pink-500 text-white font-extrabold px-6 py-3 rounded-xl shadow-lg shadow-pink-500/20 transition-all text-xs tracking-widest uppercase shrink-0 retro-font">
+                Initialize Grid
               </button>
             </div>
           </div>
 
           <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4">
-            <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 text-center">
+            <div class="p-3 bg-black/40 rounded-xl border border-slate-800/80 text-center">
               <span class="text-xl block mb-1"> Beringia</span>
-              <span class="text-[9px] font-semibold text-slate-500 uppercase">Migration Map</span>
+              <span class="text-[9px] font-bold text-cyan-400 uppercase tracking-wider retro-font">Migration Map</span>
             </div>
-            <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 text-center">
+            <div class="p-3 bg-black/40 rounded-xl border border-slate-800/80 text-center">
               <span class="text-xl block mb-1">🗺️ SVG Map</span>
-              <span class="text-[9px] font-semibold text-slate-500 uppercase">Interactive Explorer</span>
+              <span class="text-[9px] font-bold text-cyan-400 uppercase tracking-wider retro-font">Interactive</span>
             </div>
-            <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 text-center">
+            <div class="p-3 bg-black/40 rounded-xl border border-slate-800/80 text-center">
               <span class="text-xl block mb-1">🏛️ Cahokia</span>
-              <span class="text-[9px] font-semibold text-slate-500 uppercase">Mounds & Cities</span>
+              <span class="text-[9px] font-bold text-cyan-400 uppercase tracking-wider retro-font">Mounds & Cities</span>
             </div>
-            <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 text-center">
+            <div class="p-3 bg-black/40 rounded-xl border border-slate-800/80 text-center">
               <span class="text-xl block mb-1">📝 Sandbox</span>
-              <span class="text-[9px] font-semibold text-slate-500 uppercase">Interactive Glossary</span>
+              <span class="text-[9px] font-bold text-cyan-400 uppercase tracking-wider retro-font">Glossary Matrix</span>
             </div>
           </div>
         </div>
@@ -200,50 +236,50 @@
       <!-- TAB: PEOPLING THE AMERICAS (ICE AGE SLIDER) -->
       <div id="content-peopling" class="tab-content hidden">
         <div class="mb-4">
-          <span class="text-xs font-bold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-full uppercase">SECTION 1: Peopling of the Americas</span>
-          <h2 class="text-2xl font-bold mt-2 text-slate-800">The Ice Age & Beringia Land Bridge</h2>
+          <span class="text-xs font-bold text-pink-400 bg-pink-950/40 px-2.5 py-1 rounded-full uppercase tracking-wider retro-font">SECTION 1: Peopling of the Americas</span>
+          <h2 class="text-2xl font-bold mt-2 text-slate-100 uppercase tracking-wider">The Ice Age & Beringia Land Bridge</h2>
         </div>
 
-        <p class="text-slate-600 mb-4 leading-relaxed text-sm">
+        <p class="text-slate-300 mb-4 leading-relaxed text-sm">
           How did people first reach North America? Around 15,000 to 30,000 years ago, our planet was locked in a bitter Ice Age. Glaciers trapped seawater, lowering global ocean levels. Drag the slider below to control global temperatures and see the land bridge appear!
         </p>
 
         <!-- Beringia Interactive Map Simulator with dynamic sea level slider -->
-        <div class="bg-slate-900 text-white rounded-2xl p-5 mb-6 border border-slate-700 relative">
+        <div class="bg-black/60 text-white rounded-2xl p-5 mb-6 border border-pink-500/30 relative neon-border-pink">
           
           <!-- Climate/Temperature Controller Slider -->
-          <div class="bg-slate-850 p-4 rounded-xl border border-slate-700/60 mb-4">
+          <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-800 mb-4">
             <div class="flex justify-between items-center mb-1 text-xs">
-              <span class="text-sky-300 font-bold flex items-center gap-1">❄️ Ice Age Era</span>
-              <span id="temp-indicator-text" class="font-extrabold text-amber-400">Deep Freeze (-8°C)</span>
-              <span class="text-amber-500 font-bold flex items-center gap-1">☀️ Warm Era</span>
+              <span class="text-cyan-400 font-bold flex items-center gap-1 retro-font">❄️ Ice Age Era</span>
+              <span id="temp-indicator-text" class="font-extrabold text-pink-400 retro-font">Deep Freeze (-8°C)</span>
+              <span class="text-pink-500 font-bold flex items-center gap-1 retro-font">☀️ Warm Era</span>
             </div>
-            <input type="range" id="climate-slider" min="1" max="100" value="20" class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-amber-400" oninput="updateClimateSim(this.value)">
+            <input type="range" id="climate-slider" min="1" max="100" value="20" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-pink-500" oninput="updateClimateSim(this.value)">
           </div>
 
           <!-- Simulation Graphic Container -->
-          <div class="relative h-56 bg-sky-950 rounded-xl overflow-hidden mb-4 border border-sky-900 flex items-center justify-center">
+          <div class="relative h-56 bg-slate-950 rounded-xl overflow-hidden mb-4 border border-cyan-500/40 flex items-center justify-center neon-border-cyan">
             
             <div id="sim-map" class="absolute inset-0 w-full h-full p-4 flex flex-col justify-between">
               
               <!-- Map Layout Base Canvas/SVGs -->
               <svg class="absolute inset-0 w-full h-full opacity-80 pointer-events-none" viewBox="0 0 400 200" preserveAspectRatio="none">
                 <!-- Water BG -->
-                <rect width="100%" height="100%" fill="#101f30" />
+                <rect width="100%" height="100%" fill="#0a0518" />
                 <!-- Siberia -->
-                <path d="M 0,0 L 110,0 Q 130,100 100,160 L 0,200 Z" fill="#2d3748" stroke="#1a202c" stroke-width="2"/>
+                <path d="M 0,0 L 110,0 Q 130,100 100,160 L 0,200 Z" fill="#1b1236" stroke="#ec4899" stroke-width="1.5" stroke-opacity="0.4"/>
                 <!-- Alaska -->
-                <path d="M 400,0 L 290,0 Q 270,100 300,160 L 400,200 Z" fill="#2d3748" stroke="#1a202c" stroke-width="2"/>
+                <path d="M 400,0 L 290,0 Q 270,100 300,160 L 400,200 Z" fill="#1b1236" stroke="#ec4899" stroke-width="1.5" stroke-opacity="0.4"/>
                 
                 <!-- Beringia Land Bridge (OPACITY AND SCALE CONTROLLED BY JS SLIDER) -->
-                <path id="land-bridge-polygon" d="M 110,30 Q 200,10 290,30 L 295,110 Q 200,160 105,110 Z" fill="#556b2f" stroke="#3b4a20" stroke-width="2" class="transition-all duration-200" />
+                <path id="land-bridge-polygon" d="M 110,30 Q 200,10 290,30 L 295,110 Q 200,160 105,110 Z" fill="#059669" stroke="#34d399" stroke-width="2" class="transition-all duration-200" />
                 
                 <!-- Dynamic Glacier Overlays (Siberia and Alaska ice caps) -->
-                <path id="glacier-left" d="M 0,0 L 80,0 Q 90,70 50,110 L 0,130 Z" fill="#e2e8f0" opacity="0.85" />
-                <path id="glacier-right" d="M 400,0 L 320,0 Q 310,70 350,110 L 400,130 Z" fill="#e2e8f0" opacity="0.85" />
+                <path id="glacier-left" d="M 0,0 L 80,0 Q 90,70 50,110 L 0,130 Z" fill="#00f0ff" opacity="0.65" />
+                <path id="glacier-right" d="M 400,0 L 320,0 Q 310,70 350,110 L 400,130 Z" fill="#00f0ff" opacity="0.65" />
 
                 <!-- Migration Path Line (Dotted) -->
-                <path id="migration-path-svg" d="M 60,60 Q 200,90 340,60" fill="none" stroke="#f59e0b" stroke-dasharray="6" stroke-width="3" class="opacity-100 transition-opacity duration-300" />
+                <path id="migration-path-svg" d="M 60,60 Q 200,90 340,60" fill="none" stroke="#e11d48" stroke-dasharray="6" stroke-width="3" class="opacity-100 transition-opacity duration-300" />
                 
                 <!-- Migrator Human Dots -->
                 <g id="human-migrators" class="transition-transform duration-300">
@@ -256,22 +292,22 @@
               <!-- Map Labels (Interactive) -->
               <div class="relative z-10 flex justify-between h-full pointer-events-none text-[10px] tracking-wide">
                 <div class="text-left font-bold text-slate-300">
-                  <span class="bg-slate-800/90 px-1.5 py-0.5 rounded">SIBERIA</span>
+                  <span class="bg-[#120d24]/90 px-1.5 py-0.5 rounded border border-pink-500/20 retro-font text-pink-400">SIBERIA</span>
                 </div>
                 <div id="bridge-center-label" class="self-center text-center">
-                  <span id="bridge-badge" class="bg-emerald-600 text-white font-extrabold px-2.5 py-0.5 rounded shadow-sm text-xs">LAND BRIDGE OPEN</span>
-                  <span id="sea-depth" class="block text-[8px] text-amber-300 font-bold mt-0.5">Sea Level: -320 feet</span>
+                  <span id="bridge-badge" class="bg-emerald-600 text-white font-extrabold px-2.5 py-0.5 rounded shadow-sm text-xs retro-font border border-emerald-400">LAND BRIDGE OPEN</span>
+                  <span id="sea-depth" class="block text-[8px] text-cyan-300 font-bold mt-0.5 retro-font uppercase">Sea Level: -320 feet</span>
                 </div>
                 <div class="text-right font-bold text-slate-300">
-                  <span class="bg-slate-800/90 px-1.5 py-0.5 rounded">ALASKA</span>
+                  <span class="bg-[#120d24]/90 px-1.5 py-0.5 rounded border border-pink-500/20 retro-font text-pink-400">ALASKA</span>
                 </div>
               </div>
 
             </div>
 
             <!-- Descriptive Overlay Panel -->
-            <div class="absolute bottom-2 left-2 right-2 bg-slate-900/95 p-3 rounded-lg border border-slate-700/80 text-xs">
-              <h4 id="sim-status-title" class="font-bold text-amber-400">Phase: Ice Age Glacier Lock</h4>
+            <div class="absolute bottom-2 left-2 right-2 bg-slate-950/95 p-3 rounded-lg border border-cyan-500/30 text-xs">
+              <h4 id="sim-status-title" class="font-bold text-pink-400 uppercase tracking-wider retro-font text-[10px]">Phase: Ice Age Glacier Lock</h4>
               <p id="sim-status-desc" class="text-slate-300">Vast glacial caps hold global sea waters. The Beringia corridor is fully exposed and covered in rich tundra vegetation, inviting herds of megafauna and hunting clans to walk across.</p>
             </div>
           </div>
@@ -279,35 +315,35 @@
           <!-- Quick interactive migration game -->
           <div class="flex flex-col sm:flex-row justify-between items-center gap-3">
             <span class="text-[11px] text-slate-400 text-center sm:text-left">Adjust the slider until the bridge is fully green to unlock migration!</span>
-            <button onclick="triggerMigration()" id="migration-action-btn" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold px-4 py-2 rounded-lg text-xs tracking-wider uppercase transition-all shadow-md">
-              👣 Guide Hunter-Gatherers Across
+            <button onclick="triggerMigration()" id="migration-action-btn" class="bg-pink-600 hover:bg-pink-500 text-white font-extrabold px-4 py-2 rounded-lg text-xs tracking-wider uppercase transition-all shadow-md retro-font">
+              👣 Guide Hunters Across
             </button>
           </div>
         </div>
 
         <!-- The Agricultural Shift Checkpoint -->
-        <div class="bg-emerald-50 border border-emerald-100 rounded-2xl p-5 mt-4">
+        <div class="bg-cyan-950/20 border border-cyan-500/30 rounded-2xl p-5 mt-4">
           <div class="flex items-start gap-4">
-            <div class="bg-emerald-100 text-emerald-800 p-2 rounded-xl font-bold text-xl flex-shrink-0">🌾</div>
+            <div class="bg-cyan-900/40 text-cyan-400 p-2 rounded-xl font-bold text-xl flex-shrink-0 border border-cyan-500/30 shadow-[0_0_8px_rgba(6,182,212,0.3)]">🌾</div>
             <div>
-              <h3 class="font-bold text-emerald-900 text-sm mb-1">The Great Agricultural Revolution</h3>
-              <p class="text-slate-600 text-xs leading-relaxed mb-3">
+              <h3 class="font-bold text-cyan-300 text-sm mb-1 retro-font uppercase tracking-wider">The Great Agricultural Revolution</h3>
+              <p class="text-slate-350 text-xs leading-relaxed mb-3">
                 Over thousands of years, early Americans moved south. Eventually, in central Mexico, they domesticated a simple grass called Teosinte into **Maize (Corn)**. Try this question to proceed:
               </p>
               
               <!-- Mini Maize Game -->
-              <div class="bg-white p-3.5 rounded-xl border border-emerald-100 shadow-sm">
-                <p class="text-xs font-bold text-slate-700 mb-2">How did farming Maize alter early American civilizations compared to nomadic life?</p>
+              <div class="bg-black/40 p-3.5 rounded-xl border border-slate-800 shadow-sm">
+                <p class="text-xs font-bold text-slate-200 mb-2">How did farming Maize alter early American civilizations compared to nomadic life?</p>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
-                  <button onclick="checkWelcomePuzzle(this, false, 'Actually, nomads lacked settled centers. Try again!')" class="p-2.5 text-left border rounded-lg hover:bg-slate-50 text-[11px] text-slate-700 transition-all font-medium">
+                  <button onclick="checkWelcomePuzzle(this, false, 'Actually, nomads lacked settled centers. Try again!')" class="p-2.5 text-left border border-slate-800 rounded-lg hover:border-pink-500 hover:bg-slate-900/60 text-[11px] text-slate-300 transition-all font-medium">
                     A) It forced clans to move even faster to hunt woolly mammoths.
                   </button>
-                  <button onclick="checkWelcomePuzzle(this, true, 'Excellent! Agriculture created food surpluses, allowing people to build permanent cities, organize governments, and specialize in jobs.')" class="p-2.5 text-left border rounded-lg hover:bg-slate-50 text-[11px] text-slate-700 transition-all font-medium">
+                  <button onclick="checkWelcomePuzzle(this, true, 'Excellent! Agriculture created food surpluses, allowing people to build permanent cities, organize governments, and specialize in jobs.')" class="p-2.5 text-left border border-slate-800 rounded-lg hover:border-pink-500 hover:bg-slate-900/60 text-[11px] text-slate-300 transition-all font-medium">
                     B) It anchored permanent villages, stimulated job specialization, and grew cities.
                   </button>
                 </div>
-                <p id="maize-feedback" class="mt-2 text-xs font-semibold text-emerald-800 hidden"></p>
+                <p id="maize-feedback" class="mt-2 text-xs font-semibold text-emerald-400 hidden"></p>
               </div>
             </div>
           </div>
@@ -318,19 +354,19 @@
       <!-- TAB: GEOGRAPHIC REGIONS (INTERACTIVE MAP) -->
       <div id="content-regions" class="tab-content hidden">
         <div class="mb-4">
-          <span class="text-xs font-bold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-full uppercase">SECTION 2: Geographic Regions</span>
-          <h2 class="text-2xl font-bold mt-2 text-slate-800">Adaptive Climates of North America</h2>
+          <span class="text-xs font-bold text-pink-400 bg-pink-950/40 px-2.5 py-1 rounded-full uppercase tracking-wider retro-font">SECTION 2: Geographic Regions</span>
+          <h2 class="text-2xl font-bold mt-2 text-slate-100 uppercase tracking-wider">Adaptive Climates of North America</h2>
         </div>
 
-        <p class="text-slate-600 mb-4 leading-relaxed text-xs">
+        <p class="text-slate-300 mb-4 leading-relaxed text-xs">
           Physical landscapes shaped how native societies adapted. Hover and **click directly on the interactive regional map** below to study each area's distinctive climate, survival style, and architecture!
         </p>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start mb-6">
           
           <!-- Interactive Map SVG Column -->
-          <div class="lg:col-span-6 bg-slate-900 border border-slate-700 rounded-2xl p-4 shadow-inner relative">
-            <h4 class="text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-2 text-center flex items-center justify-center gap-1">
+          <div class="lg:col-span-6 bg-black/60 border border-cyan-500/30 rounded-2xl p-4 shadow-inner relative neon-border-cyan">
+            <h4 class="text-[10px] uppercase font-bold text-cyan-400 tracking-wider mb-2 text-center flex items-center justify-center gap-1 retro-font">
               <span>📍</span> Interactive Map (Tap to Explore)
             </h4>
             
@@ -338,32 +374,32 @@
               <!-- SVG map of North America representing regions -->
               <svg viewBox="0 0 400 400" class="w-full h-full drop-shadow-md">
                 <!-- Background sea -->
-                <rect width="100%" height="100%" fill="#14213d" rx="12" />
+                <rect width="100%" height="100%" fill="#0a0518" rx="12" />
                 
                 <!-- Continental land outline (Gray base) -->
-                <path d="M 40,80 Q 80,40 180,30 T 360,50 Q 380,180 340,300 T 200,380 Q 150,300 110,240 T 40,80 Z" fill="#334155" />
+                <path d="M 40,80 Q 80,40 180,30 T 360,50 Q 380,180 340,300 T 200,380 Q 150,300 110,240 T 40,80 Z" fill="#1b1236" stroke="#2d1c4e" stroke-width="2" />
                 
                 <!-- Interactive Region: Pacific Northwest (Green) -->
-                <path id="svg-reg-northwest" onclick="clickRegionSvg('northwest')" class="map-region fill-emerald-600 stroke-emerald-400 stroke-2" fill-opacity="0.6" d="M 40,80 Q 75,40 100,55 L 110,120 L 70,180 L 45,110 Z" />
+                <path id="svg-reg-northwest" onclick="clickRegionSvg('northwest')" class="map-region fill-emerald-600 stroke-emerald-400 stroke-2" fill-opacity="0.5" d="M 40,80 Q 75,40 100,55 L 110,120 L 70,180 L 45,110 Z" />
                 
                 <!-- Interactive Region: Southwest (Orange/Sandy) -->
-                <path id="svg-reg-southwest" onclick="clickRegionSvg('southwest')" class="map-region fill-amber-500 stroke-amber-400 stroke-2" fill-opacity="0.6" d="M 70,180 L 110,120 L 170,150 L 160,250 L 95,230 Z" />
+                <path id="svg-reg-southwest" onclick="clickRegionSvg('southwest')" class="map-region fill-amber-500 stroke-amber-400 stroke-2" fill-opacity="0.5" d="M 70,180 L 110,120 L 170,150 L 160,250 L 95,230 Z" />
                 
                 <!-- Interactive Region: Great Plains (Yellow/Golden) -->
-                <path id="svg-reg-plains" onclick="clickRegionSvg('plains')" class="map-region fill-yellow-500 stroke-yellow-400 stroke-2" fill-opacity="0.6" d="M 110,120 L 180,60 L 250,70 L 260,200 L 160,250 Z" />
+                <path id="svg-reg-plains" onclick="clickRegionSvg('plains')" class="map-region fill-fuchsia-600 stroke-fuchsia-400 stroke-2" fill-opacity="0.5" d="M 110,120 L 180,60 L 250,70 L 260,200 L 160,250 Z" />
                 
                 <!-- Interactive Region: Eastern Woodlands (Rust/Brown) -->
-                <path id="svg-reg-woodlands" onclick="clickRegionSvg('woodlands')" class="map-region fill-orange-800 stroke-orange-600 stroke-2" fill-opacity="0.6" d="M 250,70 L 360,50 Q 380,180 340,240 L 260,200 Z" />
+                <path id="svg-reg-woodlands" onclick="clickRegionSvg('woodlands')" class="map-region fill-cyan-600 stroke-cyan-400 stroke-2" fill-opacity="0.5" d="M 250,70 L 360,50 Q 380,180 340,240 L 260,200 Z" />
 
                 <!-- Text labels -->
-                <text x="50" y="100" fill="#fff" font-size="10" font-weight="bold" pointer-events="none" class="opacity-80">NORTHWEST</text>
-                <text x="110" y="190" fill="#fff" font-size="10" font-weight="bold" pointer-events="none" class="opacity-80">SOUTHWEST</text>
-                <text x="175" y="110" fill="#fff" font-size="10" font-weight="bold" pointer-events="none" class="opacity-80">PLAINS</text>
-                <text x="280" y="140" fill="#fff" font-size="10" font-weight="bold" pointer-events="none" class="opacity-80">WOODLANDS</text>
+                <text x="50" y="100" fill="#fff" font-size="9" font-weight="bold" font-family="'Orbitron', sans-serif" pointer-events="none" class="opacity-80">NORTHWEST</text>
+                <text x="110" y="190" fill="#fff" font-size="9" font-weight="bold" font-family="'Orbitron', sans-serif" pointer-events="none" class="opacity-80">SOUTHWEST</text>
+                <text x="175" y="110" fill="#fff" font-size="9" font-weight="bold" font-family="'Orbitron', sans-serif" pointer-events="none" class="opacity-80">PLAINS</text>
+                <text x="280" y="140" fill="#fff" font-size="9" font-weight="bold" font-family="'Orbitron', sans-serif" pointer-events="none" class="opacity-80">WOODLANDS</text>
               </svg>
             </div>
             
-            <div class="flex justify-between mt-2 text-[9px] text-slate-400">
+            <div class="flex justify-between mt-2 text-[9px] text-slate-500 retro-font font-bold">
               <span>⬅️ Pacific Ocean</span>
               <span>Atlantic Ocean ➡️</span>
             </div>
@@ -371,30 +407,30 @@
 
           <!-- Region Detail Card Display -->
           <div class="lg:col-span-6 h-full flex flex-col justify-between">
-            <div id="region-card" class="bg-amber-50/50 border border-slate-200 rounded-2xl p-5 transition-all duration-300">
+            <div id="region-card" class="bg-pink-950/15 border border-pink-500/30 rounded-2xl p-5 transition-all duration-300 neon-border-pink">
               <div class="flex items-center gap-2.5 mb-2">
                 <span id="region-icon" class="text-3xl">🏜️</span>
-                <h3 id="region-title" class="font-bold text-xl text-slate-800">The Southwest</h3>
+                <h3 id="region-title" class="font-bold text-lg text-slate-100 uppercase tracking-wider retro-font">The Southwest</h3>
               </div>
-              <p id="region-desc" class="text-slate-600 text-xs leading-relaxed mb-4">
+              <p id="region-desc" class="text-slate-300 text-xs leading-relaxed mb-4">
                 The Southwest region covers dry desert valleys and canyons. Groups like the Anasazi (Ancestral Puebloans) adapted by building multi-story apartments using clay mud called adobe.
               </p>
               
-              <div class="grid grid-cols-2 gap-3 bg-white p-3 rounded-xl border border-slate-200 text-[10px] mb-4">
+              <div class="grid grid-cols-2 gap-3 bg-black/60 p-3 rounded-xl border border-slate-800 text-[10px] mb-4">
                 <div>
-                  <span class="font-bold text-slate-400 uppercase block">Shelter Style</span>
-                  <p id="region-shelter" class="font-bold text-slate-800 mt-0.5">Adobe Complexes</p>
+                  <span class="font-bold text-pink-400 uppercase block tracking-wider retro-font text-[8px]">Shelter Style</span>
+                  <p id="region-shelter" class="font-bold text-slate-200 mt-0.5">Adobe Complexes</p>
                 </div>
                 <div>
-                  <span class="font-bold text-slate-400 uppercase block">Key Strategy</span>
-                  <p id="region-key" class="font-bold text-slate-800 mt-0.5">Irrigation Systems</p>
+                  <span class="font-bold text-cyan-400 uppercase block tracking-wider retro-font text-[8px]">Key Strategy</span>
+                  <p id="region-key" class="font-bold text-slate-200 mt-0.5">Irrigation Systems</p>
                 </div>
               </div>
 
               <!-- Adaptation Mini Challenge -->
-              <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
-                <span class="text-[10px] bg-amber-100 text-amber-800 font-bold px-2 py-0.5 rounded-full uppercase tracking-wider block mb-2 w-max">Survival Challenge!</span>
-                <p id="challenge-question" class="text-xs font-semibold text-slate-800 mb-3">Loading Challenge...</p>
+              <div class="bg-black/40 p-4 rounded-xl border border-slate-800 shadow-sm">
+                <span class="text-[9px] bg-pink-950/60 text-pink-300 font-extrabold px-2.5 py-1 rounded-full uppercase tracking-widest block mb-2 w-max retro-font border border-pink-500/30">Survival Challenge!</span>
+                <p id="challenge-question" class="text-xs font-semibold text-slate-200 mb-3">Loading Challenge...</p>
                 
                 <div id="challenge-answers" class="flex flex-col gap-1.5">
                   <!-- Dynamic options loaded via JS -->
@@ -412,24 +448,24 @@
       <!-- TAB: EARLY CIVILIZATIONS -->
       <div id="content-civilizations" class="tab-content hidden">
         <div class="mb-4">
-          <span class="text-xs font-bold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-full uppercase">SECTION 3: Early Civilizations in North America</span>
-          <h2 class="text-2xl font-bold mt-2 text-slate-800">Architects of Clay and Earthen Mounds</h2>
+          <span class="text-xs font-bold text-pink-400 bg-pink-950/40 px-2.5 py-1 rounded-full uppercase tracking-wider retro-font">SECTION 3: Early Civilizations in North America</span>
+          <h2 class="text-2xl font-bold mt-2 text-slate-100 uppercase tracking-wider">Architects of Clay and Earthen Mounds</h2>
         </div>
 
-        <p class="text-slate-600 mb-4 leading-relaxed text-xs">
+        <p class="text-slate-300 mb-4 leading-relaxed text-xs">
           While empires like the Maya and Aztec built monumental structures in Mesoamerica, early societies in North America constructed amazing engineering marvels. Complete the matchmaker game below by clicking a civilization and its famous architectural masterpiece to connect them!
         </p>
 
         <!-- Interactive Matchmaker Game -->
-        <div class="bg-indigo-50 border border-indigo-100 rounded-2xl p-5">
-          <div class="flex flex-col md:flex-row items-center justify-between gap-3 border-b border-indigo-200 pb-3 mb-3">
+        <div class="bg-purple-950/20 border border-purple-500/30 rounded-2xl p-5 neon-border-pink">
+          <div class="flex flex-col md:flex-row items-center justify-between gap-3 border-b border-purple-500/20 pb-3 mb-3">
             <div>
-              <h3 class="font-bold text-indigo-950 text-base flex items-center gap-1.5">
+              <h3 class="font-bold text-pink-400 text-sm flex items-center gap-1.5 uppercase tracking-wider retro-font">
                 <span>🧩</span> Architectural Matchmaker
               </h3>
-              <p class="text-[11px] text-indigo-800">Select a civilization on the left, then select its achievement on the right.</p>
+              <p class="text-[10px] text-slate-400">Select a civilization on the left, then select its achievement on the right.</p>
             </div>
-            <div class="bg-indigo-900 text-white px-3 py-1 rounded-lg text-xs font-bold">
+            <div class="bg-black/60 border border-cyan-500/40 text-cyan-400 px-3 py-1 rounded-lg text-xs font-bold retro-font">
               Correct Pairs: <span id="match-score">0 / 4</span>
             </div>
           </div>
@@ -438,40 +474,40 @@
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <!-- Civilizations Cards (Left) -->
             <div class="flex flex-col gap-2">
-              <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest block">CIVILIZATION</span>
-              <button onclick="selectCiv('anasazi', this)" class="civ-card p-3 rounded-xl border-2 border-slate-200 bg-white hover:border-indigo-400 text-left font-semibold text-xs transition-all shadow-sm">
+              <span class="text-[9px] font-bold text-slate-400 uppercase tracking-widest block retro-font">CIVILIZATION</span>
+              <button onclick="selectCiv('anasazi', this)" class="civ-card p-3 rounded-xl border border-slate-800 bg-black/40 hover:border-pink-500 text-left font-semibold text-xs text-slate-200 transition-all shadow-sm">
                 🏚️ Ancestral Puebloan (Anasazi)
               </button>
-              <button onclick="selectCiv('mississippian', this)" class="civ-card p-3 rounded-xl border-2 border-slate-200 bg-white hover:border-indigo-400 text-left font-semibold text-xs transition-all shadow-sm">
+              <button onclick="selectCiv('mississippian', this)" class="civ-card p-3 rounded-xl border border-slate-800 bg-black/40 hover:border-pink-500 text-left font-semibold text-xs text-slate-200 transition-all shadow-sm">
                 ⛰️ Mississippian Culture
               </button>
-              <button onclick="selectCiv('aztec', this)" class="civ-card p-3 rounded-xl border-2 border-slate-200 bg-white hover:border-indigo-400 text-left font-semibold text-xs transition-all shadow-sm">
+              <button onclick="selectCiv('aztec', this)" class="civ-card p-3 rounded-xl border border-slate-800 bg-black/40 hover:border-pink-500 text-left font-semibold text-xs text-slate-200 transition-all shadow-sm">
                 🏝️ Aztec Empire
               </button>
-              <button onclick="selectCiv('hohokam', this)" class="civ-card p-3 rounded-xl border-2 border-slate-200 bg-white hover:border-indigo-400 text-left font-semibold text-xs transition-all shadow-sm">
+              <button onclick="selectCiv('hohokam', this)" class="civ-card p-3 rounded-xl border-2 border-slate-800 bg-black/40 hover:border-pink-500 text-left font-semibold text-xs text-slate-200 transition-all shadow-sm">
                 💦 Hohokam Civilization
               </button>
             </div>
 
             <!-- Achievements Cards (Right) -->
             <div class="flex flex-col gap-2">
-              <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest block">FAMOUS ACHIEVEMENT</span>
-              <button onclick="selectAch('cliff-dwellings', this)" class="ach-card p-3 rounded-xl border-2 border-slate-200 bg-white hover:border-indigo-400 text-left text-[11px] text-slate-700 transition-all shadow-sm flex items-center">
+              <span class="text-[9px] font-bold text-slate-400 uppercase tracking-widest block retro-font">FAMOUS ACHIEVEMENT</span>
+              <button onclick="selectAch('cliff-dwellings', this)" class="ach-card p-3 rounded-xl border border-slate-800 bg-black/40 hover:border-pink-500 text-left text-[11px] text-slate-350 transition-all shadow-sm flex items-center">
                 Built multi-story sandstone dwellings carved deep into high canyon walls like Mesa Verde.
               </button>
-              <button onclick="selectAch('cahokia', this)" class="ach-card p-3 rounded-xl border-2 border-slate-200 bg-white hover:border-indigo-400 text-left text-[11px] text-slate-700 transition-all shadow-sm flex items-center">
+              <button onclick="selectAch('cahokia', this)" class="ach-card p-3 rounded-xl border border-slate-800 bg-black/40 hover:border-pink-500 text-left text-[11px] text-slate-350 transition-all shadow-sm flex items-center">
                 Constructed massive flat-topped dirt pyramids like Monk's Mound in Cahokia, a metropolitan center of 20,000 people.
               </button>
-              <button onclick="selectAch('tenochtitlan', this)" class="ach-card p-3 rounded-xl border-2 border-slate-200 bg-white hover:border-indigo-400 text-left text-[11px] text-slate-700 transition-all shadow-sm flex items-center">
+              <button onclick="selectAch('tenochtitlan', this)" class="ach-card p-3 rounded-xl border-2 border-slate-800 bg-black/40 hover:border-pink-500 text-left text-[11px] text-slate-350 transition-all shadow-sm flex items-center">
                 Built a magnificent capital city, Tenochtitlan, directly on floating gardens within Lake Texcoco.
               </button>
-              <button onclick="selectAch('canal-irrigation', this)" class="ach-card p-3 rounded-xl border-2 border-slate-200 bg-white hover:border-indigo-400 text-left text-[11px] text-slate-700 transition-all shadow-sm flex items-center">
+              <button onclick="selectAch('canal-irrigation', this)" class="ach-card p-3 rounded-xl border-2 border-slate-800 bg-black/40 hover:border-pink-500 text-left text-[11px] text-slate-350 transition-all shadow-sm flex items-center">
                 Engineered hundreds of miles of deep irrigation trenches to route water from rivers directly to crops in the desert.
               </button>
             </div>
           </div>
           
-          <p id="matchmaker-feedback" class="mt-3 text-xs font-semibold text-indigo-950 text-center bg-indigo-100 p-2 rounded-xl hidden">Awesome! That's a perfect match!</p>
+          <p id="matchmaker-feedback" class="mt-3 text-xs font-semibold text-pink-400 text-center bg-pink-950/40 border border-pink-500/30 p-2 rounded-xl hidden retro-font uppercase">Awesome! That's a perfect match!</p>
         </div>
 
       </div>
@@ -479,11 +515,11 @@
       <!-- TAB: NATIVE AMERICAN CULTURES (COUNCIL SIMULATOR) -->
       <div id="content-cultures" class="tab-content hidden">
         <div class="mb-4">
-          <span class="text-xs font-bold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-full uppercase">SECTION 4: Shared Beliefs & Iroquois Council</span>
-          <h2 class="text-2xl font-bold mt-2 text-slate-800">The Spiritual Web & The Council Fire</h2>
+          <span class="text-xs font-bold text-pink-400 bg-pink-950/40 px-2.5 py-1 rounded-full uppercase tracking-wider retro-font">SECTION 4: Shared Beliefs & Iroquois Council</span>
+          <h2 class="text-2xl font-bold mt-2 text-slate-100 uppercase tracking-wider">The Spiritual Web & The Council Fire</h2>
         </div>
 
-        <p class="text-slate-600 mb-4 leading-relaxed text-xs">
+        <p class="text-slate-300 mb-4 leading-relaxed text-xs">
           Early Americans did not write laws on paper; they shared stories and governed themselves collectively. They believed no person could own land. Instead, it was a sacred, shared trust. Click the cards below to examine their values, then resolve a tribal issue in the **Council Fire Simulator**!
         </p>
 
@@ -492,13 +528,13 @@
           <!-- Card 1 -->
           <div onclick="flipCard(this)" class="flip-card h-40 cursor-pointer group">
             <div class="flip-card-inner duration-500 w-full h-full">
-              <div class="flip-card-front bg-emerald-800 text-white p-4 flex flex-col justify-between border border-emerald-700 shadow-sm">
+              <div class="flip-card-front bg-[#1c0d2e] text-white p-4 flex flex-col justify-between border border-pink-500/30 shadow-sm">
                 <span class="text-2xl">🌱</span>
-                <h4 class="font-bold text-sm">1. Connection to Land</h4>
-                <p class="text-[10px] text-emerald-200">Click to flip...</p>
+                <h4 class="font-bold text-xs retro-font uppercase text-pink-400">1. Connection to Land</h4>
+                <p class="text-[9px] text-pink-300 uppercase tracking-widest retro-font">Click to flip...</p>
               </div>
-              <div class="flip-card-back bg-white text-slate-750 p-4 flex flex-col justify-center border-2 border-emerald-800 shadow-sm text-left">
-                <h4 class="font-bold text-emerald-800 text-xs mb-1">Sacred Stewardship</h4>
+              <div class="flip-card-back bg-black/90 text-slate-300 p-4 flex flex-col justify-center border-2 border-pink-500 shadow-sm text-left">
+                <h4 class="font-bold text-pink-400 text-xs mb-1 retro-font uppercase tracking-wide">Sacred Stewardship</h4>
                 <p class="text-[10px] leading-relaxed">
                   Unlike Europeans, Native Americans **did not believe individuals could own land**. Land was a sacred element of nature, to be shared and protected by all.
                 </p>
@@ -509,13 +545,13 @@
           <!-- Card 2 -->
           <div onclick="flipCard(this)" class="flip-card h-40 cursor-pointer group">
             <div class="flip-card-inner duration-500 w-full h-full">
-              <div class="flip-card-front bg-amber-700 text-white p-4 flex flex-col justify-between border border-amber-800 shadow-sm">
+              <div class="flip-card-front bg-amber-900/80 text-white p-4 flex flex-col justify-between border border-amber-800 shadow-sm">
                 <span class="text-2xl">💨</span>
                 <h4 class="font-bold text-sm">2. Spiritual World</h4>
                 <p class="text-[10px] text-amber-100">Click to flip...</p>
               </div>
-              <div class="flip-card-back bg-white text-slate-750 p-4 flex flex-col justify-center border-2 border-amber-700 shadow-sm text-left">
-                <h4 class="font-bold text-amber-700 text-xs mb-1">Natural Spirits</h4>
+              <div class="flip-card-back bg-white text-slate-750 p-4 flex flex-col justify-center border-2 border-amber-600 shadow-sm text-left">
+                <h4 class="font-bold text-amber-700 text-xs mb-1 retro-font uppercase tracking-wide">Natural Spirits</h4>
                 <p class="text-[10px] leading-relaxed">
                   They believed the natural world was filled with living spirits (animism). Everything from wind and rain to animals held deep significance and demanded respect.
                 </p>
@@ -526,13 +562,13 @@
           <!-- Card 3 -->
           <div onclick="flipCard(this)" class="flip-card h-40 cursor-pointer group">
             <div class="flip-card-inner duration-500 w-full h-full">
-              <div class="flip-card-front bg-slate-800 text-white p-4 flex flex-col justify-between border border-slate-700 shadow-sm">
+              <div class="flip-card-front bg-[#0f1f3a] text-white p-4 flex flex-col justify-between border border-cyan-500/30 shadow-sm">
                 <span class="text-2xl">👥</span>
-                <h4 class="font-bold text-sm">3. Kinship (Clans)</h4>
-                <p class="text-[10px] text-slate-300">Click to flip...</p>
+                <h4 class="font-bold text-sm retro-font uppercase text-cyan-400">3. Kinship (Clans)</h4>
+                <p class="text-[10px] text-cyan-300 uppercase tracking-widest retro-font">Click to flip...</p>
               </div>
-              <div class="flip-card-back bg-white text-slate-750 p-4 flex flex-col justify-center border-2 border-slate-800 shadow-sm text-left">
-                <h4 class="font-bold text-slate-800 text-xs mb-1">Strong Kinship Bonds</h4>
+              <div class="flip-card-back bg-black/90 text-slate-350 p-4 flex flex-col justify-center border-2 border-cyan-500 shadow-sm text-left">
+                <h4 class="font-bold text-cyan-400 text-xs mb-1 retro-font uppercase tracking-wide">Strong Kinship Bonds</h4>
                 <p class="text-[10px] leading-relaxed">
                   Customs focused on family clans. Elders passed down oral histories and rules. Division of labor was balanced: men hunted, women farmed.
                 </p>
@@ -542,32 +578,32 @@
         </div>
 
         <!-- Council Fire Simulator Panel -->
-        <div class="bg-amber-950 text-amber-100 rounded-2xl p-5 border border-amber-800 shadow-lg relative overflow-hidden">
-          <div class="absolute right-4 top-4 w-12 h-12 bg-orange-600 rounded-full blur-xl opacity-30 animate-pulse"></div>
+        <div class="bg-black/60 text-slate-200 rounded-2xl p-5 border border-pink-500/30 shadow-lg relative overflow-hidden">
+          <div class="absolute right-4 top-4 w-12 h-12 bg-pink-500 rounded-full blur-xl opacity-20 animate-pulse"></div>
           
-          <h3 class="font-bold text-base text-amber-400 mb-2 flex items-center gap-1.5">
-            <span>🔥</span> Live Iroquois Council Fire Simulator
+          <h3 class="font-bold text-base text-pink-400 mb-2 flex items-center gap-1.5 retro-font uppercase tracking-wider">
+            <span>🔥</span> Live Council Fire Simulator
           </h3>
-          <p class="text-[11px] text-amber-200 leading-relaxed mb-4">
+          <p class="text-[11px] text-slate-350 leading-relaxed mb-4">
             You are a leader representing your clan at the **Iroquois Confederacy Grand Council**. A dispute has broken out: *The Seneca and Mohawk clans are arguing over who has hunting rights to the beaver valley.* How will you advise them?
           </p>
 
           <div class="grid grid-cols-1 md:grid-cols-3 gap-3" id="council-options">
-            <button onclick="makeCouncilDecision('claim')" class="p-3 bg-stone-900 hover:bg-stone-850 rounded-xl border border-stone-800 text-left text-xs transition-all text-amber-200">
-              <span class="font-extrabold text-amber-400 block mb-1">Option A: Claim Territories</span>
+            <button onclick="makeCouncilDecision('claim')" class="p-3 bg-slate-950 hover:bg-slate-900 rounded-xl border border-slate-800 text-left text-xs transition-all text-pink-200">
+              <span class="font-extrabold text-pink-400 block mb-1 retro-font uppercase text-[9px] tracking-widest">Option A: Claim Ranges</span>
               Award the land to the Mohawk exclusively and build stone border walls to keep out others.
             </button>
-            <button onclick="makeCouncilDecision('share')" class="p-3 bg-stone-900 hover:bg-stone-850 rounded-xl border border-stone-800 text-left text-xs transition-all text-amber-200">
-              <span class="font-extrabold text-amber-400 block mb-1">Option B: Shared Stewardship</span>
+            <button onclick="makeCouncilDecision('share')" class="p-3 bg-slate-950 hover:bg-slate-900 rounded-xl border border-slate-800 text-left text-xs transition-all text-pink-200">
+              <span class="font-extrabold text-cyan-400 block mb-1 retro-font uppercase text-[9px] tracking-widest">Option B: Shared Trust</span>
               Remind both clans that the land belongs to the Great Spirit; they must hunt seasonally in turn and share the harvest.
             </button>
-            <button onclick="makeCouncilDecision('fight')" class="p-3 bg-stone-900 hover:bg-stone-850 rounded-xl border border-stone-800 text-left text-xs transition-all text-amber-200">
-              <span class="font-extrabold text-amber-400 block mb-1">Option C: Combat Trial</span>
+            <button onclick="makeCouncilDecision('fight')" class="p-3 bg-slate-950 hover:bg-slate-900 rounded-xl border border-slate-800 text-left text-xs transition-all text-pink-200">
+              <span class="font-extrabold text-purple-400 block mb-1 retro-font uppercase text-[9px] tracking-widest">Option C: Combat Trial</span>
               Organize a physical challenge between the two strongest warriors to decide sole ownership.
             </button>
           </div>
 
-          <div id="council-feedback-panel" class="mt-4 p-4 rounded-xl bg-orange-950/40 border border-orange-900/50 hidden text-xs leading-relaxed">
+          <div id="council-feedback-panel" class="mt-4 p-4 rounded-xl bg-slate-950 border border-slate-800 hidden text-xs leading-relaxed">
             <!-- Feed back generated via JS -->
           </div>
         </div>
@@ -585,11 +621,11 @@
         <!-- Live Search Filter -->
         <div class="mb-4 flex gap-2">
           <span class="bg-amber-100 text-amber-800 px-3 py-2 rounded-xl flex items-center justify-center font-bold text-sm">🔍</span>
-          <input type="text" id="vocab-search" oninput="filterVocab(this.value)" placeholder="Search vocabulary terms (e.g., Beringia, Mesoamerica, Hohokam)..." class="w-full px-4 py-2 border-2 border-slate-200 focus:border-amber-400 focus:outline-none rounded-xl text-xs font-medium text-slate-700">
+          <input type="text" id="vocab-search" oninput="filterVocab(this.value)" placeholder="Search vocabulary terms (e.g., Beringia, Mesoamerica, Hohokam)..." class="w-full px-4 py-2 border-2 border-slate-200 focus:border-amber-400 focus:outline-none rounded-xl text-xs font-medium text-slate-700 bg-white">
         </div>
 
         <!-- Vocabulary Flip Card Board Container (Scrollable) -->
-        <div class="max-h-[360px] overflow-y-auto border border-slate-100 p-2 rounded-2xl bg-amber-50/20 mb-6">
+        <div class="max-h-[360px] overflow-y-auto border border-slate-200 p-3 rounded-2xl bg-[#faf6ee] mb-6 shadow-inner">
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3" id="vocab-grid-container">
             <!-- Populated dynamically via JS -->
           </div>
@@ -620,19 +656,19 @@
       <!-- TAB: FINAL CHALLENGE (QUIZ) -->
       <div id="content-quiz" class="tab-content hidden">
         <div class="mb-4">
-          <span class="text-xs font-bold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-full uppercase">THE HISTORIAN'S CHALLENGE</span>
-          <h2 class="text-2xl font-bold mt-1 text-slate-800">Unit 1 Assessment</h2>
-          <p class="text-slate-600 text-xs mt-0.5">Let's prove your mastery of these pre-Columbian American history topics!</p>
+          <span class="text-xs font-bold text-pink-400 bg-pink-950/40 px-2.5 py-1 rounded-full uppercase tracking-wider retro-font">THE HISTORIAN'S CHALLENGE</span>
+          <h2 class="text-2xl font-bold mt-1 text-slate-100 uppercase tracking-wider">Unit 1 Assessment</h2>
+          <p class="text-slate-350 text-xs mt-0.5">Let's prove your mastery of these pre-Columbian American history topics!</p>
         </div>
 
         <!-- Quiz Container -->
-        <div id="quiz-question-box" class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm mb-6">
+        <div id="quiz-question-box" class="bg-black/40 border border-cyan-500/30 rounded-2xl p-5 shadow-sm mb-6 neon-border-cyan">
           <div class="flex justify-between items-center mb-3">
-            <span class="text-xs text-slate-400 font-bold uppercase" id="quiz-question-number">Question 1 of 6</span>
-            <span class="text-xs text-emerald-800 bg-emerald-100 font-bold px-2.5 py-0.5 rounded-full" id="quiz-badge">Level: Historian</span>
+            <span class="text-xs text-pink-400 font-bold uppercase retro-font" id="quiz-question-number">Question 1 of 6</span>
+            <span class="text-xs text-cyan-300 bg-cyan-950/80 border border-cyan-500/40 font-bold px-2.5 py-0.5 rounded-full retro-font" id="quiz-badge">Level: Historian</span>
           </div>
 
-          <h3 class="font-bold text-base text-slate-800 mb-4" id="quiz-question-text">Preparing challenge...</h3>
+          <h3 class="font-bold text-base text-slate-200 mb-4" id="quiz-question-text">Preparing challenge...</h3>
 
           <!-- Answers Grid -->
           <div class="grid grid-cols-1 gap-2.5" id="quiz-options">
@@ -645,48 +681,48 @@
         </div>
 
         <!-- Certificate Container (Hidden until quiz passes) -->
-        <div id="certificate-box" class="hidden border-8 border-double border-amber-600 bg-white rounded-3xl p-6 max-w-2xl mx-auto shadow-2xl text-center relative overflow-hidden">
+        <div id="certificate-box" class="hidden border-8 border-double border-pink-500 bg-[#0d071c] rounded-3xl p-6 max-w-2xl mx-auto shadow-[0_0_30px_rgba(236,72,153,0.3)] text-center relative overflow-hidden">
           
           <!-- Decorative Background Elements -->
-          <div class="absolute -top-12 -left-12 w-32 h-32 bg-amber-100 rounded-full opacity-30"></div>
-          <div class="absolute -bottom-12 -right-12 w-32 h-32 bg-amber-100 rounded-full opacity-30"></div>
+          <div class="absolute -top-12 -left-12 w-32 h-32 bg-pink-500/10 rounded-full opacity-30"></div>
+          <div class="absolute -bottom-12 -right-12 w-32 h-32 bg-cyan-500/10 rounded-full opacity-30"></div>
 
-          <span class="text-amber-800 font-bold text-[10px] tracking-widest uppercase block mb-1">MCDOUGAL LITTELL AMERICAN HISTORY</span>
-          <h3 class="serif-font text-2xl font-extrabold text-amber-900 border-b border-amber-200 pb-3 mb-4">CERTIFICATE OF HISTORIAN MASTERY</h3>
+          <span class="text-pink-400 font-bold text-[10px] tracking-widest uppercase block mb-1 retro-font">MCDOUGAL LITTELL AMERICAN HISTORY</span>
+          <h3 class="retro-font text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-cyan-400 border-b border-pink-500/20 pb-3 mb-4">CERTIFICATE OF HISTORIAN MASTERY</h3>
           
-          <p class="text-slate-500 italic text-xs mb-1">This official document certifies that</p>
-          <h4 id="cert-student-name" class="serif-font text-2xl font-extrabold text-slate-800 tracking-wider mb-2">JUNIOR HISTORIAN</h4>
-          <p class="text-slate-600 text-xs max-w-md mx-auto mb-4 leading-relaxed">
+          <p class="text-slate-400 italic text-xs mb-1">This official document certifies that</p>
+          <h4 id="cert-student-name" class="retro-font text-2xl font-extrabold text-slate-100 tracking-wider mb-2">JUNIOR HISTORIAN</h4>
+          <p class="text-slate-350 text-xs max-w-md mx-auto mb-4 leading-relaxed">
             has successfully mastered the historical principles of Unit 1: **Beginnings through Reconstruction (Peopling of the Americas, Geographic Regions, and Early Civilizations)**.
           </p>
 
           <!-- Interactive Seal Customizer inside Certificate -->
-          <div class="bg-amber-50/60 p-3 rounded-xl border border-amber-200 mb-4 max-w-sm mx-auto text-[10px] text-amber-900">
-            <span class="font-bold uppercase block mb-1.5">Customize Your Clan Crest Seal:</span>
+          <div class="bg-slate-950 p-3 rounded-xl border border-pink-500/30 mb-4 max-w-sm mx-auto text-[10px] text-pink-300">
+            <span class="font-bold uppercase block mb-1.5 retro-font text-[9px] tracking-wider">Customize Your Clan Crest Seal:</span>
             <div class="flex justify-center gap-2">
-              <button onclick="setSeal('🐻 Bear')" class="px-2 py-1 bg-white border rounded hover:bg-amber-100 font-semibold transition-all">🐻 Bear Clan</button>
-              <button onclick="setSeal('🦅 Eagle')" class="px-2 py-1 bg-white border rounded hover:bg-amber-100 font-semibold transition-all">🦅 Eagle Clan</button>
-              <button onclick="setSeal('🐢 Turtle')" class="px-2 py-1 bg-white border rounded hover:bg-amber-100 font-semibold transition-all">🐢 Turtle Clan</button>
+              <button onclick="setSeal('🐻 Bear')" class="px-2 py-1 bg-[#120d24] border border-pink-500/30 rounded hover:bg-pink-900/40 font-semibold transition-all">🐻 Bear Clan</button>
+              <button onclick="setSeal('🦅 Eagle')" class="px-2 py-1 bg-[#120d24] border border-pink-500/30 rounded hover:bg-pink-900/40 font-semibold transition-all">🦅 Eagle Clan</button>
+              <button onclick="setSeal('🐢 Turtle')" class="px-2 py-1 bg-[#120d24] border border-pink-500/30 rounded hover:bg-pink-900/40 font-semibold transition-all">🐢 Turtle Clan</button>
             </div>
           </div>
 
-          <div class="flex items-center justify-between border-t border-amber-200 pt-4 mt-4 max-w-md mx-auto text-xs text-slate-500">
+          <div class="flex items-center justify-between border-t border-pink-500/20 pt-4 mt-4 max-w-md mx-auto text-xs text-slate-500">
             <div>
-              <p class="font-bold text-slate-800">Coach Henderson</p>
-              <p class="italic text-[9px]">8th Grade History Guide</p>
+              <p class="font-bold text-slate-300 retro-font text-[9px]">Coach Henderson</p>
+              <p class="italic text-[9px] text-slate-500">Cybernet History Guide</p>
             </div>
             <!-- Custom Dynamic Seal Graphic -->
-            <div class="w-16 h-16 bg-amber-100 rounded-full border-2 border-amber-500 flex flex-col items-center justify-center text-amber-800 shadow-md transform rotate-12">
+            <div class="w-16 h-16 bg-black rounded-full border-2 border-cyan-400 flex flex-col items-center justify-center text-cyan-400 shadow-[0_0_10px_rgba(6,182,212,0.6)] transform rotate-12">
               <span id="custom-seal-icon" class="text-xl">🐻</span>
-              <span class="text-[8px] font-extrabold tracking-tight uppercase">Mastery Seal</span>
+              <span class="text-[7px] font-extrabold tracking-tight uppercase retro-font">MASTER SEAL</span>
             </div>
             <div>
-              <p class="font-bold text-slate-800" id="cert-date">June 21, 2026</p>
-              <p class="italic text-[9px]">Date of Accomplishment</p>
+              <p class="font-bold text-slate-300 retro-font text-[9px]" id="cert-date">June 21, 2026</p>
+              <p class="italic text-[9px] text-slate-500">Matrix Log Date</p>
             </div>
           </div>
           
-          <button onclick="window.print()" class="mt-6 bg-emerald-700 hover:bg-emerald-800 text-white font-bold px-6 py-2 rounded-xl shadow text-xs transition-colors">
+          <button onclick="window.print()" class="mt-6 bg-pink-600 hover:bg-pink-500 text-white font-bold px-6 py-2 rounded-xl shadow-lg shadow-pink-500/20 text-xs transition-colors retro-font uppercase tracking-wider">
             🖨️ Print Certificate
           </button>
         </div>
@@ -694,12 +730,12 @@
       </div>
 
       <!-- Navigation Footer -->
-      <footer class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
-        <button id="btn-footer-prev" onclick="navigateTab(-1)" class="flex items-center gap-2 px-4 py-2 text-slate-500 hover:text-slate-800 font-semibold text-xs transition-all" disabled>
+      <footer class="mt-6 pt-4 border-t border-slate-800 flex items-center justify-between">
+        <button id="btn-footer-prev" onclick="navigateTab(-1)" class="flex items-center gap-2 px-4 py-2 text-slate-400 hover:text-slate-100 font-semibold text-xs transition-all retro-font uppercase tracking-wider" disabled>
           ← Back
         </button>
-        <span id="p-indicator-text" class="text-[10px] text-slate-400 font-bold tracking-wider uppercase">Progress: Welcome</span>
-        <button id="btn-footer-next" onclick="navigateTab(1)" class="flex items-center gap-2 px-5 py-2.5 bg-emerald-700 text-white hover:bg-emerald-800 font-semibold text-xs rounded-xl shadow-md transition-all">
+        <span id="p-indicator-text" class="text-[10px] text-pink-400 font-bold tracking-wider uppercase retro-font">Progress: Welcome</span>
+        <button id="btn-footer-next" onclick="navigateTab(1)" class="flex items-center gap-2 px-5 py-2.5 bg-pink-600 text-white hover:bg-pink-500 font-semibold text-xs rounded-xl shadow-lg shadow-pink-500/20 transition-all retro-font uppercase tracking-wider">
           Next Section →
         </button>
       </footer>
@@ -709,21 +745,22 @@
   </main>
 
   <!-- Modal custom popup for milestone celebrations -->
-  <div id="milestone-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
-    <div class="bg-white rounded-3xl max-w-sm w-full p-6 text-center shadow-2xl border border-slate-100 transform scale-95 transition-transform duration-300">
+  <div id="milestone-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
+    <div class="bg-[#120d24] rounded-3xl max-w-sm w-full p-6 text-center shadow-2xl border border-pink-500 transform scale-95 transition-transform duration-300 neon-border-pink">
       <span class="text-5xl block mb-2">🎉</span>
-      <h3 class="font-bold text-xl text-slate-800 mb-2" id="modal-title">Milestone Met!</h3>
-      <p class="text-slate-500 text-xs mb-6" id="modal-desc">You've successfully completed this historical segment.</p>
-      <button onclick="closeMilestoneModal()" class="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 rounded-xl transition-colors text-sm">
-        Awesome, Keep Going!
+      <h3 class="font-bold text-xl text-pink-400 mb-2 retro-font uppercase" id="modal-title">Milestone Met!</h3>
+      <p class="text-slate-350 text-xs mb-6" id="modal-desc">You've successfully completed this historical segment.</p>
+      <button onclick="closeMilestoneModal()" class="w-full bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black py-3 rounded-xl transition-colors text-xs retro-font uppercase tracking-widest shadow-md">
+        Continue Mission
       </button>
     </div>
   </div>
 
-  <footer class="bg-slate-900 text-slate-400 text-[10px] py-4 text-center border-t border-slate-800 mt-6">
-    <div class="max-w-6xl mx-auto px-4">
-      <p>© U.S. History Curriculum Companion • Adapted from McDougal and Littell • Interactive Learning Edition</p>
-      <p class="mt-1 text-slate-600">Middle School Social Studies Classrooms.</p>
+  <footer class="bg-black text-slate-500 text-[10px] py-4 text-center border-t border-slate-900 mt-6 relative">
+    <div class="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-pink-500/20 via-cyan-400/20 to-purple-600/20"></div>
+    <div class="max-w-6xl mx-auto px-4 retro-font tracking-wide uppercase">
+      <p>© U.S. History Curriculum Companion • Adapted from McDougal and Littell • Cyber Interactive Edition</p>
+      <p class="mt-1 text-slate-700">Restructured for Cybernetic Social Studies Classrooms.</p>
     </div>
   </footer>
 
@@ -833,8 +870,8 @@
       },
       {
         term: "Nomad",
-        emoji: "⛺",
-        def: "A person or group with no permanent home, moving constantly in search of food, water, and hunting lands.",
+        emoji: "👣",
+        def: "A person or group with no permanent home, moving constantly in search of food, water, and grazing lands.",
         context: "Early Americans lived as nomadic hunters before domesticating agricultural crops."
       },
       {
@@ -1092,8 +1129,8 @@
 
     function switchTab(tabId) {
       document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.classList.remove('bg-emerald-50', 'text-emerald-800', 'border-l-4', 'border-emerald-600');
-        btn.classList.add('text-slate-600', 'hover:bg-slate-50');
+        btn.classList.remove('bg-pink-950/40', 'text-pink-300', 'border-l-4', 'border-pink-500');
+        btn.classList.add('text-slate-400', 'hover:bg-slate-800/50');
       });
       document.querySelectorAll('.tab-content').forEach(content => {
         content.classList.add('hidden');
@@ -1102,8 +1139,8 @@
 
       const activeBtn = document.getElementById(`tab-${tabId}`);
       if (activeBtn) {
-        activeBtn.classList.remove('text-slate-600', 'hover:bg-slate-50');
-        activeBtn.classList.add('bg-emerald-50', 'text-emerald-800', 'border-l-4', 'border-emerald-600');
+        activeBtn.classList.remove('text-slate-400', 'hover:bg-slate-800/50');
+        activeBtn.classList.add('bg-pink-950/40', 'text-pink-300', 'border-l-4', 'border-pink-500');
       }
 
       const activeContent = document.getElementById(`content-${tabId}`);
@@ -1233,20 +1270,20 @@
       document.getElementById('temp-indicator-text').innerText = `Global Temp: ${temperature}°C`;
 
       if (isIceAge) {
-        bridgePoly.style.fill = "#4d7c0f";
-        bridgePoly.style.stroke = "#34510b";
+        bridgePoly.style.fill = "#059669";
+        bridgePoly.style.stroke = "#34d399";
         bridgePoly.style.opacity = "1";
-        leftGlacier.style.opacity = "0.9";
-        rightGlacier.style.opacity = "0.9";
+        leftGlacier.style.opacity = "0.7";
+        rightGlacier.style.opacity = "0.7";
         
         bridgeBadge.innerText = "LAND BRIDGE EXPOSED";
-        bridgeBadge.className = "bg-emerald-600 text-white font-extrabold px-2.5 py-0.5 rounded shadow-sm text-xs";
+        bridgeBadge.className = "bg-emerald-600 border border-emerald-400 text-white font-extrabold px-2.5 py-0.5 rounded shadow-sm text-xs retro-font";
         seaLevelText.innerText = `Sea Level: -${seaLevelDrop} feet`;
         
         document.getElementById('sim-status-title').innerText = "Phase: Ice Age Glacier Lock";
         document.getElementById('sim-status-desc').innerText = `Deep temperatures freeze ocean water into ice sheets. Sea levels plunge over 300 feet, creating Beringia—a dry, walkable grassland bridging Siberia and Alaska.`;
         actionBtn.disabled = false;
-        actionBtn.className = "bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold px-4 py-2 rounded-lg text-xs tracking-wider uppercase transition-all shadow-md cursor-pointer";
+        actionBtn.className = "bg-pink-600 hover:bg-pink-500 text-white font-extrabold px-4 py-2 rounded-lg text-xs tracking-wider uppercase transition-all shadow-md cursor-pointer retro-font shadow-pink-500/20";
       } else {
         bridgePoly.style.fill = "#0f2238";
         bridgePoly.style.stroke = "#0b1828";
@@ -1255,13 +1292,13 @@
         rightGlacier.style.opacity = "0.2";
         
         bridgeBadge.innerText = "BERING STRAIT FLOODED";
-        bridgeBadge.className = "bg-blue-600 text-white font-extrabold px-2.5 py-0.5 rounded shadow-sm text-xs";
+        bridgeBadge.className = "bg-cyan-600 border border-cyan-400 text-white font-extrabold px-2.5 py-0.5 rounded shadow-sm text-xs retro-font";
         seaLevelText.innerText = `Sea Level: Normal (+${Math.max(0, 100 - seaLevelDrop)}ft)`;
         
         document.getElementById('sim-status-title').innerText = "Phase: Meltdown & Isolation";
         document.getElementById('sim-status-desc').innerText = "Warmer global temperatures melt glaciers. Seawater flows back to flood Beringia. The corridor becomes the Bering Strait, isolating people in the Americas.";
         actionBtn.disabled = true;
-        actionBtn.className = "bg-slate-700 text-slate-400 font-extrabold px-4 py-2 rounded-lg text-xs tracking-wider uppercase transition-all shadow-md cursor-not-allowed";
+        actionBtn.className = "bg-slate-800 text-slate-500 font-extrabold px-4 py-2 rounded-lg text-xs tracking-wider uppercase transition-all shadow-md cursor-not-allowed retro-font";
       }
     }
 
@@ -1299,10 +1336,10 @@
       feedbackEl.innerText = feedback;
       
       if (isCorrect) {
-        feedbackEl.className = "mt-2 text-xs font-bold text-emerald-800 bg-emerald-50 p-2.5 rounded-lg border border-emerald-100";
+        feedbackEl.className = "mt-2 text-xs font-bold text-cyan-400 bg-cyan-950/40 p-2.5 rounded-lg border border-cyan-500/30";
         triggerCoachSpeak("Exactly! Agriculture changes everything. It's the blueprint for complex societies.");
       } else {
-        feedbackEl.className = "mt-2 text-xs font-bold text-red-800 bg-red-50 p-2.5 rounded-lg border border-red-100";
+        feedbackEl.className = "mt-2 text-xs font-bold text-pink-400 bg-pink-950/40 p-2.5 rounded-lg border border-pink-500/30";
       }
     }
 
@@ -1339,7 +1376,7 @@
       data.answers.forEach((ans) => {
         const btn = document.createElement('button');
         btn.onclick = () => checkRegionChallenge(ans.correct);
-        btn.className = "w-full p-2.5 text-left border rounded-lg hover:bg-slate-50 text-[11px] transition-all font-semibold text-slate-700 bg-white shadow-sm";
+        btn.className = "w-full p-2.5 text-left border border-slate-800 rounded-lg hover:border-cyan-400 bg-black/40 text-slate-200 text-xs transition-all font-semibold";
         btn.innerText = ans.text;
         ansContainer.appendChild(btn);
       });
@@ -1351,11 +1388,11 @@
       const feedback = document.getElementById('challenge-feedback');
       feedback.classList.remove('hidden');
       if (isCorrect) {
-        feedback.className = "mt-2 text-xs font-bold text-emerald-800 bg-emerald-50 p-2 rounded-lg border border-emerald-100";
+        feedback.className = "mt-2 text-xs font-bold text-cyan-400 bg-cyan-950/40 p-2 rounded-lg border border-cyan-500/30";
         feedback.innerText = "Excellent historical reasoning! That represents the exact regional adaptation.";
         triggerCoachSpeak("Yes! Environmental adaptability is why early cultures were so unique.");
       } else {
-        feedback.className = "mt-2 text-xs font-bold text-red-800 bg-red-50 p-2 rounded-lg border border-red-100";
+        feedback.className = "mt-2 text-xs font-bold text-pink-400 bg-pink-950/40 p-2 rounded-lg border border-pink-500/30";
         feedback.innerText = "Incorrect. Think about how local environmental resources define their materials!";
       }
     }
@@ -1387,11 +1424,13 @@
 
     function selectCiv(civId, element) {
       for (const k in state.matchGame.civilizationElements) {
-        state.matchGame.civilizationElements[k].classList.remove('border-indigo-600', 'bg-indigo-50/70');
+        state.matchGame.civilizationElements[k].classList.remove('border-pink-500', 'bg-pink-950/40');
+        state.matchGame.civilizationElements[k].classList.add('border-slate-800', 'bg-black/40');
       }
 
       state.matchGame.selectedCiv = civId;
-      element.classList.add('border-indigo-600', 'bg-indigo-50/70');
+      element.classList.remove('border-slate-800', 'bg-black/40');
+      element.classList.add('border-pink-500', 'bg-pink-950/40');
 
       checkMatch();
     }
@@ -1401,11 +1440,13 @@
     // ----------------------------------------------------
     function selectAch(achId, element) {
       for (const k in state.matchGame.achievementElements) {
-        state.matchGame.achievementElements[k].classList.remove('border-indigo-600', 'bg-indigo-50/70');
+        state.matchGame.achievementElements[k].classList.remove('border-cyan-500', 'bg-cyan-950/40');
+        state.matchGame.achievementElements[k].classList.add('border-slate-800', 'bg-black/40');
       }
 
       state.matchGame.selectedAch = achId;
-      element.classList.add('border-indigo-600', 'bg-indigo-50/70');
+      element.classList.remove('border-slate-800', 'bg-black/40');
+      element.classList.add('border-cyan-500', 'bg-cyan-950/40');
 
       checkMatch();
     }
@@ -1422,8 +1463,8 @@
           const civCard = state.matchGame.civilizationElements[civ];
           const achCard = state.matchGame.achievementElements[ach];
 
-          civCard.className = "p-3 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-slate-700 text-left font-semibold text-xs transition-all shadow-sm cursor-not-allowed";
-          achCard.className = "p-3 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-slate-700 text-left text-[11px] transition-all shadow-sm cursor-not-allowed flex items-center";
+          civCard.className = "p-3 rounded-xl border border-emerald-500 bg-emerald-950/40 text-emerald-300 text-left font-semibold text-xs transition-all shadow-sm cursor-not-allowed";
+          achCard.className = "p-3 rounded-xl border border-emerald-500 bg-emerald-950/40 text-emerald-300 text-left text-[11px] transition-all shadow-sm cursor-not-allowed flex items-center";
           
           civCard.onclick = null;
           achCard.onclick = null;
@@ -1441,17 +1482,14 @@
           const civCard = state.matchGame.civilizationElements[civ];
           const achCard = state.matchGame.achievementElements[ach];
 
-          civCard.classList.remove('border-indigo-600', 'bg-indigo-50/70');
-          achCard.classList.remove('border-indigo-600', 'bg-indigo-50/70');
-
-          civCard.classList.add('border-red-400', 'bg-red-50');
-          achCard.classList.add('border-red-400', 'bg-red-50');
+          civCard.className = "p-3 rounded-xl border border-red-500 bg-red-950/40 text-red-300 text-left font-semibold text-xs transition-all shadow-sm";
+          achCard.className = "p-3 rounded-xl border border-red-500 bg-red-950/40 text-red-300 text-left text-[11px] transition-all shadow-sm flex items-center";
 
           triggerCoachSpeak("Hmm, those don't match. Re-read the regional descriptions and try again!");
 
           setTimeout(() => {
-            civCard.classList.remove('border-red-400', 'bg-red-50');
-            achCard.classList.remove('border-red-400', 'bg-red-50');
+            civCard.className = "civ-card p-3 rounded-xl border border-slate-800 bg-black/40 hover:border-pink-500 text-left font-semibold text-xs text-slate-200 transition-all shadow-sm";
+            achCard.className = "ach-card p-3 rounded-xl border border-slate-800 bg-black/40 hover:border-pink-500 text-left text-[11px] text-slate-350 transition-all shadow-sm flex items-center";
           }, 1200);
 
           state.matchGame.selectedCiv = null;
@@ -1476,21 +1514,21 @@
       if (choice === 'share') {
         panel.className = "mt-4 p-4 rounded-xl bg-emerald-950/80 border-2 border-emerald-500 text-emerald-100 text-xs leading-relaxed";
         panel.innerHTML = `
-          <strong class="text-emerald-400 text-sm block mb-1">🌲 Great Consensus Reached!</strong>
+          <strong class="text-emerald-400 text-sm block mb-1 retro-font uppercase text-[10px]">🌲 Great Consensus Reached!</strong>
           You selected **Shared Stewardship**. Because Native Americans do not believe individuals or clans own the earth, both clans agree to share the beaver valley according to seasonal hunting caps. Peace is preserved at the Council Fire without a single arrow drawn!
         `;
         triggerCoachSpeak("Exceptional! Consensual representation and collective stewardship were the pillars of the democratic Iroquois Confederacy.");
       } else if (choice === 'claim') {
         panel.className = "mt-4 p-4 rounded-xl bg-red-950/80 border-2 border-red-500 text-red-100 text-xs leading-relaxed";
         panel.innerHTML = `
-          <strong class="text-red-400 text-sm block mb-1">⚠️ Boundary Dispute Intensifies!</strong>
+          <strong class="text-red-400 text-sm block mb-1 retro-font uppercase text-[10px]">⚠️ Boundary Dispute Intensifies!</strong>
           You selected **Claim Territories**. By attempting to award the land exclusively and building walls, you violate the core belief that land cannot be privately owned. The Seneca are deeply insulted. Conflict threatens the unity of the League. Try another option!
         `;
         triggerCoachSpeak("Oh no! Private borders and land deeds were concepts brought later by Europeans; Native Americans avoided them.");
       } else {
         panel.className = "mt-4 p-4 rounded-xl bg-red-950/80 border-2 border-red-500 text-red-100 text-xs leading-relaxed";
         panel.innerHTML = `
-          <strong class="text-red-400 text-sm block mb-1">💥 Peace Shatters!</strong>
+          <strong class="text-red-400 text-sm block mb-1 retro-font uppercase text-[10px]">💥 Peace Shatters!</strong>
           You selected **Combat Trial**. Forcing a combat trial ignores the values of kinship ties and democratic representation. The Great Law of Peace was created precisely to stop clan bloodshed. The League elders strongly reject your advice. Choose a different path!
         `;
         triggerCoachSpeak("Avoid warfare! The Grand Council was engineered specifically to prevent physical conflict among the Five Nations.");
@@ -1510,14 +1548,14 @@
         card.setAttribute('onclick', 'flipCard(this)');
         card.innerHTML = `
           <div class="flip-card-inner duration-500 w-full h-full">
-            <div class="flip-card-front bg-amber-600/90 text-white p-4 flex flex-col justify-between border border-amber-700 shadow-sm">
+            <div class="flip-card-front bg-[#1b1236] text-white p-4 flex flex-col justify-between border border-pink-500/30 shadow-sm">
               <span class="text-2xl">${item.emoji}</span>
-              <h4 class="font-extrabold text-xs tracking-wide">${item.term}</h4>
-              <p class="text-[8px] text-amber-100 uppercase tracking-widest">Click to Flip</p>
+              <h4 class="font-extrabold text-xs tracking-wide retro-font text-pink-400">${item.term}</h4>
+              <p class="text-[8px] text-pink-300 uppercase tracking-widest retro-font">Click to Flip</p>
             </div>
-            <div class="flip-card-back bg-white text-slate-750 p-3.5 flex flex-col justify-center border-2 border-amber-500 shadow-sm text-left">
-              <h5 class="font-black text-amber-800 text-[11px] mb-1">${item.term}</h5>
-              <p class="text-[10px] leading-relaxed mb-1 text-slate-700 font-medium">${item.def}</p>
+            <div class="flip-card-back bg-black/95 text-slate-300 p-3.5 flex flex-col justify-center border-2 border-cyan-500 shadow-sm text-left">
+              <h5 class="font-black text-cyan-400 text-[11px] mb-1 retro-font uppercase">${item.term}</h5>
+              <p class="text-[10px] leading-relaxed mb-1 text-slate-300 font-medium">${item.def}</p>
               <p class="text-[9px] italic text-slate-500 leading-tight">"${item.context}"</p>
             </div>
           </div>
@@ -1554,7 +1592,7 @@
       answers.forEach((ans) => {
         const btn = document.createElement('button');
         btn.onclick = () => checkVocabAnswer(ans, target.def);
-        btn.className = "w-full text-left p-2.5 border-2 border-slate-200 hover:border-amber-400 rounded-xl text-xs font-semibold bg-white text-slate-700 shadow-sm transition-all";
+        btn.className = "w-full text-left p-2.5 border border-slate-800 hover:border-pink-500 rounded-xl text-xs font-semibold bg-black/40 text-slate-300 shadow-sm transition-all";
         btn.innerText = ans;
         optionsContainer.appendChild(btn);
       });
@@ -1570,23 +1608,23 @@
       for (let i = 0; i < options.length; i++) {
         options[i].disabled = true;
         if (options[i].innerText === correct) {
-          options[i].className = "w-full text-left p-2.5 border-2 border-emerald-500 rounded-xl text-xs font-bold bg-emerald-50 text-emerald-800 cursor-not-allowed";
+          options[i].className = "w-full text-left p-2.5 border border-emerald-500 rounded-xl text-xs font-bold bg-emerald-950/40 text-emerald-400 cursor-not-allowed";
         } else if (options[i].innerText === selected) {
-          options[i].className = "w-full text-left p-2.5 border-2 border-red-500 rounded-xl text-xs font-bold bg-red-50 text-red-800 cursor-not-allowed";
+          options[i].className = "w-full text-left p-2.5 border border-red-500 rounded-xl text-xs font-bold bg-red-950/40 text-red-400 cursor-not-allowed";
         } else {
-          options[i].className = "w-full text-left p-2.5 border border-slate-200 rounded-xl text-xs text-slate-400 bg-slate-100 cursor-not-allowed";
+          options[i].className = "w-full text-left p-2.5 border border-slate-900 rounded-xl text-xs text-slate-500 bg-black/20 cursor-not-allowed";
         }
       }
 
       if (selected === correct) {
-        feedback.className = "mt-3 text-xs font-bold p-2.5 rounded-lg border border-emerald-200 bg-emerald-50 text-emerald-800";
+        feedback.className = "mt-3 text-xs font-bold p-2.5 rounded-lg border border-emerald-500/30 bg-emerald-950/40 text-emerald-400";
         feedback.innerText = "🎉 Spot on! That's the perfect match.";
         triggerCoachSpeak("Sensational vocabulary control! You're ready to absolutely crush the final challenge.");
         
         state.progress.vocab = true;
         updateProgressBar();
       } else {
-        feedback.className = "mt-3 text-xs font-bold p-2.5 rounded-lg border border-red-200 bg-red-50 text-red-800";
+        feedback.className = "mt-3 text-xs font-bold p-2.5 rounded-lg border border-red-500/30 bg-red-950/40 text-red-400";
         feedback.innerText = "❌ That's not the correct match. Check the glossary cards above and try again!";
         triggerCoachSpeak("Not quite! Take a quick peek at the glossary flashcards to review the terms.");
       }
@@ -1594,7 +1632,7 @@
       const retryBtn = document.createElement('button');
       retryBtn.innerText = "Test Another Term 🔄";
       retryBtn.onclick = () => generateVocabGame();
-      retryBtn.className = "mt-2 block bg-slate-800 hover:bg-slate-700 text-white font-bold px-3 py-1.5 rounded-lg text-[10px] transition-all ml-auto";
+      retryBtn.className = "mt-2 block bg-pink-600 hover:bg-pink-500 text-white font-bold px-3 py-1.5 rounded-lg text-[10px] transition-all ml-auto retro-font uppercase tracking-wider";
       feedback.appendChild(retryBtn);
     }
 
@@ -1619,7 +1657,7 @@
       qData.options.forEach((opt, idx) => {
         const btn = document.createElement('button');
         btn.onclick = () => selectQuizAnswer(idx);
-        btn.className = "w-full text-left p-3 border-2 border-slate-200 hover:border-amber-400 rounded-xl font-medium text-xs transition-all bg-slate-50 text-slate-700 shadow-sm";
+        btn.className = "w-full text-left p-3 border border-slate-800 hover:border-pink-500 rounded-xl font-medium text-xs transition-all bg-black/40 text-slate-350 shadow-sm";
         btn.innerText = opt;
         optsContainer.appendChild(btn);
       });
@@ -1638,21 +1676,21 @@
       for (let i = 0; i < options.length; i++) {
         options[i].disabled = true;
         if (i === qData.answer) {
-          options[i].className = "w-full text-left p-3 border-2 border-emerald-500 rounded-xl font-bold text-xs bg-emerald-50 text-emerald-800 shadow-sm cursor-not-allowed";
+          options[i].className = "w-full text-left p-3 border-2 border-emerald-500 rounded-xl font-bold text-xs bg-emerald-950/40 text-emerald-400 shadow-sm cursor-not-allowed";
         } else if (i === idx) {
-          options[i].className = "w-full text-left p-3 border-2 border-red-500 rounded-xl font-bold text-xs bg-red-50 text-red-800 shadow-sm cursor-not-allowed";
+          options[i].className = "w-full text-left p-3 border-2 border-red-500 rounded-xl font-bold text-xs bg-red-950/40 text-red-400 shadow-sm cursor-not-allowed";
         } else {
-          options[i].className = "w-full text-left p-3 border border-slate-200 rounded-xl text-xs text-slate-400 bg-slate-100 shadow-sm cursor-not-allowed";
+          options[i].className = "w-full text-left p-3 border border-slate-900 rounded-xl text-xs text-slate-500 bg-black/20 shadow-sm cursor-not-allowed";
         }
       }
 
       if (idx === qData.answer) {
         state.quiz.score++;
-        feedbackBox.className = "mt-3 p-3.5 rounded-xl border border-emerald-200 bg-emerald-50 text-emerald-800 text-xs font-semibold leading-relaxed";
+        feedbackBox.className = "mt-3 p-3.5 rounded-xl border border-emerald-500/30 bg-emerald-950/40 text-emerald-400 text-xs font-semibold leading-relaxed shadow-[0_0_8px_rgba(16,185,129,0.3)]";
         feedbackBox.innerText = `✅ Excellent! ${qData.feedback}`;
         triggerCoachSpeak("Superb! That's another point on your diploma.");
       } else {
-        feedbackBox.className = "mt-3 p-3.5 rounded-xl border border-red-200 bg-red-50 text-red-800 text-xs font-semibold leading-relaxed";
+        feedbackBox.className = "mt-3 p-3.5 rounded-xl border border-red-500/30 bg-red-950/40 text-red-400 text-xs font-semibold leading-relaxed shadow-[0_0_8px_rgba(239,68,68,0.3)]";
         feedbackBox.innerText = `❌ Incorrect. ${qData.feedback}`;
         triggerCoachSpeak("A minor bump in our timeline! Review your facts and let's try the next one.");
       }
@@ -1663,7 +1701,7 @@
         state.quiz.currentQuestion++;
         renderQuizQuestion();
       };
-      nextQBtn.className = "mt-3 bg-slate-800 hover:bg-slate-700 text-white font-bold px-4 py-1.5 rounded-lg text-xs transition-all float-right block";
+      nextQBtn.className = "mt-3 bg-pink-600 hover:bg-pink-500 text-white font-bold px-4 py-1.5 rounded-lg text-xs transition-all float-right block retro-font uppercase tracking-wider shadow-md shadow-pink-500/20";
       feedbackBox.appendChild(nextQBtn);
     }
 
