@@ -42,7 +42,18 @@
 
 <script>
     const units = [
-        { id: 1, title: "The First Americans", desc: "Migration, early indigenous cultures, and environmental adaptations.", link: "https://www.nps.gov/subjects/archeology/first-americans.htm", extraLink: "American_History_Unit1.html", extraLabel: "View Unit 1 Document", videoLink: "https://www.youtube.com/watch?v=fyZNYdZynb0", videoTitle: "The Ice Age" },
+        { 
+            id: 1, 
+            title: "The First Americans", 
+            desc: "Migration, early indigenous cultures, and environmental adaptations.", 
+            link: "https://www.nps.gov/subjects/archeology/first-americans.htm", 
+            extraLink: "American_History_Unit1.html", 
+            extraLabel: "View Unit 1 Document", 
+            videos: [
+                { url: "https://www.youtube.com/watch?v=fyZNYdZynb0", title: "The Ice Age" },
+                { url: "https://www.youtube.com/watch?v=Pg0Z3LappEM", title: "Geography of the Ice Age" }
+            ]
+        },
         { id: 2, title: "Exploration and colonization", desc: "European voyages, the Columbian Exchange, and early interactions.", link: "https://www.loc.gov/collections/exploring-the-early-americas/", extraLink: "American_History_Unit2.html", extraLabel: "View Unit 2 Document" },
         { id: 3, title: "Colonial America", desc: "Regional differences in New England, Middle, and Southern colonies.", link: "https://www.ushistory.org/us/2.asp", extraLink: "American_History_Unit3.html", extraLabel: "View Unit 3 Document" },
         { id: 4, title: "The Road to Revolution", desc: "Tensions, French & Indian War, and the path to independence.", link: "https://www.history.com/topics/american-revolution/road-to-revolution", extraLink: "American_History_Unit4.html", extraLabel: "View Unit 4 Document" },
@@ -50,7 +61,7 @@
         { id: 6, title: "Creating a New Nation", desc: "Drafting the Constitution and establishing government.", link: "https://www.archives.gov/founding-docs/constitution", extraLink: "American_History_Unit6.html", extraLabel: "View Unit 6 Document" },
         { id: 7, title: "The Early Republic", desc: "The first presidencies and the Louisiana Purchase.", link: "https://www.mountvernon.org/", extraLink: "American_History_Unit7.html", extraLabel: "View Unit 7 Document" },
         { id: 8, title: "Growth and Expansion", desc: "Manifest Destiny and westward movement.", link: "https://www.loc.gov/exhibits/odyssey/archive.html", extraLink: "American_History_Unit8.html", extraLabel: "View Unit 8 Document" },
-        { id: 9, title: "The North and South", desc: "Economic and social divide, slavery, and industrialization.", link: "https://www.history.com/topics/19th-century/north-and-south", extraLink: "American_History_Unit9.html", extraLabel: "View Unit 9 Document" },
+        { id: 9, title: "The North and South", desc: "Economic and social divide, slavery, and industrialization.", link: "https://www.history.com/topics/19th-century/north-and-south", extraLink: "American_History_Unit9.html", extraLabel: "View Unit9 Document" },
         { id: 10, title: "Reform Movements", desc: "Abolitionism, women's suffrage, and temperance.", link: "https://www.gilderlehrman.org/", extraLink: "American_History_Unit10.html", extraLabel: "View Unit 10 Document" },
         { id: 11, title: "Sectionalism and the Civil War", desc: "Crisis of the Union and the war itself.", link: "https://www.battlefields.org/learn/civil-war", extraLink: "American_History_Unit11.html", extraLabel: "View Unit 11 Document" },
         { id: 12, title: "Reconstruction", desc: "Efforts to rebuild the South and rights of freedmen.", link: "https://www.history.com/topics/american-civil-war/reconstruction", extraLink: "American_History_Unit12.html", extraLabel: "View Unit 12 Document" }
@@ -78,8 +89,10 @@
                 htmlContent += `<a href="${unit.extraLink}" target="_blank" class="link-item">${unit.extraLabel}</a>`;
             }
 
-            if (unit.videoLink) {
-                htmlContent += `<a href="${unit.videoLink}" target="_blank" class="link-item">${unit.videoTitle}</a>`;
+            if (unit.videos) {
+                unit.videos.forEach(video => {
+                    htmlContent += `<a href="${video.url}" target="_blank" class="link-item">${video.title}</a>`;
+                });
             }
             
             htmlContent += `</div>`;
@@ -89,7 +102,5 @@
     });
 </script>
 
-</body>
-</html>
 </body>
 </html>
