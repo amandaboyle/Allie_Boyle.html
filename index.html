@@ -3,77 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Allie's Learning Platform</title>
+    <title>Allie Boyle's Neon Platform</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
         :root {
-            --main-pink: #ff9a9e;
-            --main-purple: #a18cd1;
-            --main-yellow: #fbc2eb;
-            --text-color: #4a4a4a;
+            --neon-pink: #ff00ff;
+            --neon-cyan: #00ffff;
+            --neon-purple: #9d00ff;
+            --bg-dark: #0d0221;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, var(--main-pink), var(--main-purple));
+            font-family: 'Orbitron', sans-serif;
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 50% 50%, #1a0033 0%, #0d0221 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             margin: 0;
             padding: 20px;
+            color: white;
         }
 
         .card {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 2rem;
-            border-radius: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            background: rgba(13, 2, 33, 0.8);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 0 20px var(--neon-purple), 0 0 40px var(--neon-pink);
             text-align: center;
-            max-width: 500px;
+            max-width: 450px;
             width: 100%;
-            border: 8px solid white;
+            border: 2px solid var(--neon-cyan);
         }
 
-        h1 { color: #d63384; font-size: 2.5rem; margin-bottom: 0.5rem; }
-        .position { color: #6f42c1; font-weight: bold; font-size: 1.2rem; margin-bottom: 1rem; }
-        
-        .eagle-badge {
-            background: #008080;
-            color: #ffffff;
-            padding: 10px 20px;
-            border-radius: 50px;
-            font-weight: 800;
-            display: inline-block;
-            margin: 10px 0;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        h1 { 
+            color: var(--neon-cyan); 
+            font-size: 2rem; 
+            margin-bottom: 0.5rem; 
+            text-shadow: 0 0 10px var(--neon-cyan);
+            text-transform: uppercase;
         }
+
+        .position { 
+            color: var(--neon-pink); 
+            font-weight: bold; 
+            font-size: 1rem; 
+            margin-bottom: 2rem; 
+            letter-spacing: 2px;
+        }
+        
+        .btn-container { display: flex; flex-direction: column; gap: 15px; }
 
         .btn {
-            display: block;
-            background: #6f42c1;
-            color: white;
-            padding: 12px 25px;
-            border-radius: 20px;
+            background: transparent;
+            color: var(--neon-cyan);
+            padding: 12px;
+            border-radius: 5px;
             text-decoration: none;
-            font-weight: bold;
-            margin-top: 15px;
-            transition: transform 0.2s;
+            font-weight: 700;
+            border: 2px solid var(--neon-cyan);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            box-shadow: inset 0 0 5px var(--neon-cyan), 0 0 5px var(--neon-cyan);
         }
 
-        .btn:hover { transform: scale(1.05); background: #5a32a3; }
+        .btn:hover {
+            background: var(--neon-cyan);
+            color: var(--bg-dark);
+            text-shadow: none;
+            box-shadow: 0 0 20px var(--neon-cyan);
+            transform: scale(1.02);
+        }
+
+        #greeting { font-size: 0.8rem; color: #fff; margin-bottom: 1.5rem; opacity: 0.8; }
     </style>
 </head>
 <body>
 
     <div class="card">
-        <h1>Allie's Learning Platform</h1>
+        <h1>Allie Boyle</h1>
         <p class="position">Student Extraordinaire</p>
-        <div class="eagle-badge">TCS Eagle</div>
 
-        <p id="greeting">Ready to learn something new today?</p>
+        <p id="greeting">READY TO POWER UP? ⚡</p>
 
-        <a href="learning_style.html" class="btn">Explore Learning Styles</a>
-        <a href="American_History.html" class="btn">American History</a>
+        <div class="btn-container">
+            <a href="learning_style.html" class="btn">Learning Styles</a>
+            <a href="American_History.html" class="btn">American History</a>
+            <a href="Bible.html" class="btn">Bible</a>
+            <a href="Math.html" class="btn">Math</a>
+            <a href="IPC.html" class="btn">Integrated Physics & Chemistry</a>
+            <a href="Grammar.html" class="btn">Language Arts</a>
+        </div>
     </div>
 
 </body>
