@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Psalm 119:11 - Verse Memory Lab</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Dyslexia-friendly font: Lexend -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800&family=Open+Dyslexic&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Lexend', sans-serif;
+            background-color: #F0FDF4; /* Gentle mint botanical background */
+            background-image: radial-gradient(#CBD5E1 0.75px, transparent 0.75px), radial-gradient(#CBD5E1 0.75px, #F0FDF4 0.75px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            color: #1E293B;
+            letter-spacing: 0.03em;
+            word-spacing: 0.08em;
+            line-height: 1.7;
+            touch-action: manipulation;
+        }
+
+        /* High contrast / Forest Night theme option */
+        body.theme-contrast {
+            background-color: #064E3B !important;
+            background-image: none !important;
+            color: #F0FDF4 !important;
+        }
+        body.theme-contrast .bg-card {
+            background-color: #022C22 !important;
+            border-color: #065F46 !important;
+            color: #F0FDF4 !important;
+        }
+
+        /* Font options */
+        .font-dyslexic {
+            font-family: 'Lexend', sans-serif !important;
+        }
+        .extra-spacing {
+            letter-spacing: 0.08em !important;
+            word-spacing: 0.18em !important;
+        }
+
+        /* Touch & interactive visual feedback */
+        .interactive-btn {
+            transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.2s ease;
+            min-height: 52px;
+        }
+        .interactive-btn:active {
+            transform: scale(0.96);
+        }
+
+        /* Green & Blue Floral Chunk Palette */
+        .chunk-0 { background-color: #D1FAE5; border-color: #10B981; color: #047857; }
+        .chunk-1 { background-color: #E0F2FE; border-color: #38BDF8; color: #0369A1; }
+        .chunk-2 { background-color: #CCFBF1; border-color: #14B8A6; color: #0F766E; }
+        .chunk-3 { background-color: #E0E7FF; border-color: #6366F1; color: #4338CA; }
+
+        .theme-contrast .chunk-0 { background-color: #065F46; border-color: #34D399; color: #ECFDF5; }
+        .theme-contrast .chunk-1 { background-color: #075985; border-color: #38BDF8; color: #E0F2FE; }
+        .theme-contrast .chunk-2 { background-color: #115E59; border-color: #2DD4BF; color: #CCFBF1; }
+        .theme-contrast .chunk-3 { background-color: #3730A3; border-color: #818CF8; color: #EEF2FF; }
+
+        /* Custom pulse for active retrieval */
+        @keyframes gentle-glow {
+            0%, 100% { box-shadow: 0 0 15px rgba(16, 185, 129, 0.3); }
+            50% { box-shadow: 0 0 25px rgba(14, 165, 233, 0.5); }
+        }
+        .glow-active {
+            animation: gentle-glow 2s infinite;
+        }
+
+        /* Hide scrollbars cleanly */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between p-3 sm:p-6 transition-colors duration-300" id="mainBody">
+
+    <!-- Top Bar: Title & Accessibility Controls -->
+    <header class="max-w-4xl mx-auto w-full mb-4 relative">
+        <div class="bg-card bg-white/95 backdrop-blur p-4 sm:p-5 rounded-3xl shadow-md border-2 border-emerald-200/80 flex flex-wrap items-center justify-between gap-3 relative overflow-hidden">
+            
+            <!-- Floral Decorative SVG Ornaments -->
+            <div class="absolute -top-3 -right-3 text-emerald-200/40 pointer-events-none select-none">
+                <svg width="120" height="120" viewBox="0 0 100 100" fill="currentColor">
+                    <path d="M50 0 C60 30 70 40 100 50 C70 60 60 70 50 100 C40 70 30 60 0 50 C30 40 40 30 50 0 Z" />
+                </svg>
+            </div>
+
+            <div class="flex items-center gap-3 z-10">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500 to-sky-500 text-white flex items-center justify-center font-bold text-2xl shadow-md shadow-emerald-200">
+                    🌿
+                </div>
+                <div>
+                    <h1 class="text-xl sm:text-2xl font-black tracking-tight text-emerald-950 dark:text-emerald-100 flex items-center gap-2">
+                        Psalm 119:11 Memory Quest 🌸
+                    </h1>
+                    <p class="text-xs sm:text-sm text-sky-700 dark:text-sky-300 font-semibold">
+                        Botanical Scripture Lab for ADHD & Dyslexia
+                    </p>
+                </div>
+            </div>
+
+            <!-- Dyslexia & ADHD Accessibility Controls -->
+            <div class="flex items-center gap-2 flex-wrap z-10">
+                <!-- Translation Switch -->
+                <button onclick="toggleTranslation()" id="transBtn" title="Switch Translation" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-emerald-100 text-emerald-900 hover:bg-emerald-200 transition border border-emerald-300">
+                    Translation: ESV
+                </button>
+
+                <!-- Font Spacing Toggle -->
+                <button onclick="toggleSpacing()" id="spacingBtn" title="Toggle Extra Spacing" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-sky-100 text-sky-900 hover:bg-sky-200 transition border border-sky-300">
+                    Spacing: Standard
+                </button>
+
+                <!-- Contrast Toggle -->
+                <button onclick="toggleTheme()" id="themeBtn" title="Change Theme / Contrast" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-teal-100 text-teal-900 hover:bg-teal-200 transition border border-teal-300">
+                    🌸 Botanical Mint
+                </button>
+
+                <!-- Audio Speed Toggle -->
+                <button onclick="toggleTTSSpeed()" id="speedBtn" title="Speech Speed" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-blue-100 text-blue-900 hover:bg-blue-200 transition border border-blue-300">
+                    🔊 1.0x Speed
+                </button>
+            </div>
+        </div>
+
+        <!-- Level Stepper Bar -->
+        <nav class="mt-4 bg-card bg-white/90 p-2.5 rounded-2xl shadow-sm border border-sky-200 flex justify-between items-center overflow-x-auto gap-2 no-scrollbar">
+            <button onclick="goToLevel(1)" id="stepTab-1" class="flex-1 min-w-[110px] py-2 px-3 rounded-xl text-xs sm:text-sm font-extrabold transition text-center flex items-center justify-center gap-1.5 bg-gradient-to-r from-emerald-500 to-teal-600 text-white shadow">
+                <span>1.</span> Explore 🍃
+            </button>
+            <button onclick="goToLevel(2)" id="stepTab-2" class="flex-1 min-w-[110px] py-2 px-3 rounded-xl text-xs sm:text-sm font-extrabold transition text-center flex items-center justify-center gap-1.5 bg-emerald-50 text-emerald-800 hover:bg-emerald-100">
+                <span>2.</span> Chunks 🌺
+            </button>
+            <button onclick="goToLevel(3)" id="stepTab-3" class="flex-1 min-w-[110px] py-2 px-3 rounded-xl text-xs sm:text-sm font-extrabold transition text-center flex items-center justify-center gap-1.5 bg-emerald-50 text-emerald-800 hover:bg-emerald-100">
+                <span>3.</span> Words 🌼
+            </button>
+            <button onclick="goToLevel(4)" id="stepTab-4" class="flex-1 min-w-[110px] py-2 px-3 rounded-xl text-xs sm:text-sm font-extrabold transition text-center flex items-center justify-center gap-1.5 bg-emerald-50 text-emerald-800 hover:bg-emerald-100">
+                <span>4.</span> First Letters 🌸
+            </button>
+            <button onclick="goToLevel(5)" id="stepTab-5" class="flex-1 min-w-[110px] py-2 px-3 rounded-xl text-xs sm:text-sm font-extrabold transition text-center flex items-center justify-center gap-1.5 bg-emerald-50 text-emerald-800 hover:bg-emerald-100">
+                <span>5.</span> Master 👑
+            </button>
+        </nav>
+    </header>
+
+    <!-- Main Interactive Canvas -->
+    <main class="max-w-4xl mx-auto w-full flex-grow flex flex-col justify-center my-2">
+        
+        <!-- Score & Progress Display -->
+        <div class="mb-4 flex items-center justify-between px-2">
+            <div class="flex items-center gap-2">
+                <span class="text-sm font-bold text-emerald-900 dark:text-emerald-200">Progress:</span>
+                <div class="w-36 sm:w-56 bg-emerald-100/80 rounded-full h-3.5 overflow-hidden border border-emerald-300">
+                    <div id="progressBar" class="bg-gradient-to-r from-emerald-500 to-sky-500 h-full w-1/5 transition-all duration-500 rounded-full"></div>
+                </div>
+            </div>
+            <div class="flex items-center gap-1.5 font-extrabold text-teal-800 text-sm bg-teal-50 px-3.5 py-1.5 rounded-full border border-teal-200 shadow-sm">
+                <span>⭐ Stars Earned:</span>
+                <span id="starCounter">0</span>
+            </div>
+        </div>
+
+        <!-- Dynamic Container for Levels -->
+        <div id="appStage" class="bg-card bg-white/95 p-6 sm:p-8 rounded-3xl shadow-lg border-2 border-emerald-200/80 min-h-[380px] flex flex-col justify-center items-center relative overflow-hidden">
+            <!-- Content injects dynamically here -->
+        </div>
+
+    </main>
+
+    <!-- Footer Encouragement -->
+    <footer class="max-w-4xl mx-auto w-full mt-4 text-center">
+        <div class="p-3 bg-emerald-50/90 rounded-2xl border border-emerald-200 inline-block text-xs sm:text-sm font-bold text-emerald-900 shadow-sm">
+            🌸 <span id="teacherTip">"Storing God's Word in your heart gives you guidance and strength every day!" - Mr. Davis</span>
+        </div>
+    </footer>
+
+    <!-- Audio Synthesis & Logic JavaScript -->
+    <script>
+        // State Management for Psalm 119:11
+        const state = {
+            level: 1,
+            translation: 'ESV', // 'ESV' or 'KJV'
+            spacingExtra: false,
+            theme: 'light',
+            ttsSpeed: 1.0,
+            stars: 0,
+            
+            // Psalm 119:11 Verse Data & Chunks
+            verses: {
+                ESV: {
+                    reference: "Psalm 119:11 (ESV)",
+                    full: "I have stored up your word in my heart, that I might not sin against you.",
+                    chunks: [
+                        { text: "I have stored up", meaning: "I have carefully saved and treasured..." },
+                        { text: "your word in my heart,", meaning: "God's truth kept deep inside my mind and feelings..." },
+                        { text: "that I might not", meaning: "So that I am guarded and helped not to..." },
+                        { text: "sin against you.", meaning: "Make choices that dishonor or hurt God." }
+                    ],
+                    words: ["I", "have", "stored", "up", "your", "word", "in", "my", "heart,", "that", "I", "might", "not", "sin", "against", "you."]
+                },
+                KJV: {
+                    reference: "Psalm 119:11 (KJV)",
+                    full: "Thy word have I hid in mine heart, that I might not sin against thee.",
+                    chunks: [
+                        { text: "Thy word have I hid", meaning: "I have safely kept God's holy message..." },
+                        { text: "in mine heart,", meaning: "Deep within my inner spirit and memory..." },
+                        { text: "that I might not sin", meaning: "To keep me safe from doing wrong..." },
+                        { text: "against thee.", meaning: "Against God who loves and guides me." }
+                    ],
+                    words: ["Thy", "word", "have", "I", "hid", "in", "mine", "heart,", "that", "I", "might", "not", "sin", "against", "thee."]
+                }
+            }
+        };
+
+        // ... existing sound logic ...
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+        function playSound(type) {
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            const now = audioCtx.currentTime;
+
+            if (type === 'pop') {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(450, now);
+                osc.frequency.exponentialRampToValueAtTime(900, now + 0.08);
+                gain.gain.setValueAtTime(0.3, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.08);
+                osc.start(now);
+                osc.stop(now + 0.08);
+            } else if (type === 'success') {
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(523.25, now);
+                osc.frequency.setValueAtTime(659.25, now + 0.1);
+                osc.frequency.setValueAtTime(783.99, now + 0.2);
+                gain.gain.setValueAtTime(0.2, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
+                osc.start(now);
+                osc.stop(now + 0.4);
+            } else if (type === 'error') {
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(220, now);
+                osc.frequency.setValueAtTime(180, now + 0.15);
+                gain.gain.setValueAtTime(0.2, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+                osc.start(now);
+                osc.stop(now + 0.3);
+            } else if (type === 'fanfare') {
+                const notes = [523.25, 659.25, 783.99, 1046.50];
+                notes.forEach((freq, idx) => {
+                    const o = audioCtx.createOscillator();
+                    const g = audioCtx.createGain();
+                    o.connect(g);
+                    g.connect(audioCtx.destination);
+                    o.type = 'triangle';
+                    o.frequency.setValueAtTime(freq, now + (idx * 0.12));
+                    g.gain.setValueAtTime(0.2, now + (idx * 0.12));
+                    g.gain.exponentialRampToValueAtTime(0.01, now + (idx * 0.12) + 0.3);
+                    o.start(now + (idx * 0.12));
+                    o.stop(now + (idx * 0.12) + 0.3);
+                });
+            }
+        }
+
+        function speak(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.rate = state.ttsSpeed;
+                utterance.pitch = 1.0;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        function toggleTranslation() {
+            state.translation = state.translation === 'ESV' ? 'KJV' : 'ESV';
+            document.getElementById('transBtn').innerText = `Translation: ${state.translation}`;
+            playSound('pop');
+            goToLevel(state.level);
+        }
+
+        function toggleSpacing() {
+            state.spacingExtra = !state.spacingExtra;
+            const btn = document.getElementById('spacingBtn');
+            const body = document.getElementById('mainBody');
+            
+            if (state.spacingExtra) {
+                body.classList.add('extra-spacing');
+                btn.innerText = "Spacing: Wide";
+            } else {
+                body.classList.remove('extra-spacing');
+                btn.innerText = "Spacing: Standard";
+            }
+            playSound('pop');
+        }
+
+        function toggleTheme() {
+            const body = document.getElementById('mainBody');
+            const btn = document.getElementById('themeBtn');
+            if (state.theme === 'light') {
+                state.theme = 'contrast';
+                body.classList.add('theme-contrast');
+                btn.innerText = "🌲 Forest Night";
+            } else {
+                state.theme = 'light';
+                body.classList.remove('theme-contrast');
+                btn.innerText = "🌸 Botanical Mint";
+            }
+            playSound('pop');
+        }
+
+        function toggleTTSSpeed() {
+            if (state.ttsSpeed === 1.0) state.ttsSpeed = 0.8;
+            else if (state.ttsSpeed === 0.8) state.ttsSpeed = 1.2;
+            else state.ttsSpeed = 1.0;
+
+            document.getElementById('speedBtn').innerText = `🔊 ${state.ttsSpeed}x Speed`;
+            playSound('pop');
+            speak(`Speech speed ${state.ttsSpeed}`);
+        }
+
+        function addStar(count = 1) {
+            state.stars += count;
+            document.getElementById('starCounter').innerText = state.stars;
+            playSound('success');
+        }
+
+        function goToLevel(levelNum) {
+            state.level = levelNum;
+            
+            for (let i = 1; i <= 5; i++) {
+                const tab = document.getElementById(`stepTab-${i}`);
+                if (i === levelNum) {
+                    tab.className = "flex-1 min-w-[110px] py-2 px-3 rounded-xl text-xs sm:text-sm font-extrabold transition text-center flex items-center justify-center gap-1.5 bg-gradient-to-r from-emerald-500 to-sky-500 text-white shadow glow-active";
+                } else {
+                    tab.className = "flex-1 min-w-[110px] py-2 px-3 rounded-xl text-xs sm:text-sm font-extrabold transition text-center flex items-center justify-center gap-1.5 bg-emerald-50 text-emerald-800 hover:bg-emerald-100";
+                }
+            }
+
+            document.getElementById('progressBar').style.width = `${(levelNum / 5) * 100}%`;
+
+            const tips = [
+                '"Visual chunking helps your working memory organize Scripture effortlessly!" - Mr. Davis',
+                '"Arranging phrases in order strengthens visual-spatial memory pathways!" - Mr. Davis',
+                '"Matching individual words reinforces visual decoding and spell patterns!" - Mr. Davis',
+                '"First-letter prompts act as memory scaffolding until recall becomes second nature!" - Mr. Davis',
+                '"You are a memory champion! Storing God\'s word in your heart brings lifelong wisdom!" - Mr. Davis'
+            ];
+            document.getElementById('teacherTip').innerText = tips[levelNum - 1];
+
+            const stage = document.getElementById('appStage');
+            stage.innerHTML = '';
+
+            switch (levelNum) {
+                case 1: renderLevel1(stage); break;
+                case 2: renderLevel2(stage); break;
+                case 3: renderLevel3(stage); break;
+                case 4: renderLevel4(stage); break;
+                case 5: renderLevel5(stage); break;
+            }
+        }
+
+        // LEVEL 1: Explore & Chunking (Multi-Sensory Intro)
+        function renderLevel1(container) {
+            const verseData = state.verses[state.translation];
+            
+            let html = `
+                <div class="w-full text-center max-w-2xl">
+                    <div class="inline-block bg-emerald-100 text-emerald-900 font-extrabold px-3.5 py-1 rounded-full text-xs uppercase tracking-wider mb-2 border border-emerald-300">
+                        Step 1: Explore & Listen 🌿
+                    </div>
+                    <h2 class="text-xl sm:text-2xl font-black mb-1 text-emerald-950">${verseData.reference}</h2>
+                    <p class="text-xs sm:text-sm text-emerald-800/80 mb-6 font-medium">Tap any phrase chunk below to hear it spoken and reveal its meaning!</p>
+                    
+                    <div class="grid grid-cols-1 gap-3 text-left mb-6">
+            `;
+
+            verseData.chunks.forEach((chunk, index) => {
+                html += `
+                    <div onclick="playChunkAudio(${index})" class="chunk-${index} p-4 rounded-2xl border-2 cursor-pointer interactive-btn flex flex-col sm:flex-row sm:items-center justify-between gap-2 shadow-sm hover:shadow-md">
+                        <div>
+                            <div class="text-base sm:text-lg font-extrabold">${chunk.text}</div>
+                            <div class="text-xs sm:text-sm opacity-90 mt-0.5 font-medium">🍃 ${chunk.meaning}</div>
+                        </div>
+                        <button class="self-end sm:self-center bg-white/80 hover:bg-white text-emerald-950 px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1 shadow-sm border border-emerald-200">
+                            🔊 Listen
+                        </button>
+                    </div>
+                `;
+            });
+
+            html += `
+                    </div>
+                    
+                    <div class="flex justify-center gap-3">
+                        <button onclick="speak('${verseData.full.replace(/'/g, "\\'")}')" class="bg-sky-100 hover:bg-sky-200 text-sky-900 font-bold px-5 py-3 rounded-2xl interactive-btn text-sm flex items-center gap-2 border border-sky-300">
+                            🔊 Read Whole Verse
+                        </button>
+                        <button onclick="addStar(1); goToLevel(2);" class="bg-gradient-to-r from-emerald-500 to-sky-500 hover:from-emerald-600 hover:to-sky-600 text-white font-extrabold px-6 py-3 rounded-2xl interactive-btn text-sm shadow-md flex items-center gap-2">
+                            Next Step: Chunks ➔
+                        </button>
+                    </div>
+                </div>
+            `;
+            container.innerHTML = html;
+        }
+
+        function playChunkAudio(index) {
+            const chunk = state.verses[state.translation].chunks[index];
+            playSound('pop');
+            speak(chunk.text);
+        }
+
+        // LEVEL 2: Phrase Sequence Builder
+        let level2Selected = [];
+        function renderLevel2(container) {
+            const verseData = state.verses[state.translation];
+            level2Selected = [];
+
+            const scrambled = [...verseData.chunks]
+                .map((c, originalIdx) => ({ ...c, originalIdx }))
+                .sort(() => Math.random() - 0.5);
+
+            let html = `
+                <div class="w-full text-center max-w-2xl">
+                    <div class="inline-block bg-emerald-100 text-emerald-900 font-extrabold px-3.5 py-1 rounded-full text-xs uppercase tracking-wider mb-2 border border-emerald-300">
+                        Step 2: Phrase Chunk Builder 🌺
+                    </div>
+                    <h2 class="text-xl font-black mb-1 text-emerald-950">Tap Chunks in the Correct Order</h2>
+                    <p class="text-xs sm:text-sm text-emerald-800/80 mb-6 font-medium">Rebuild ${verseData.reference} phrase by phrase!</p>
+
+                    <!-- Target Drop Zone -->
+                    <div id="targetZone" class="min-h-[140px] p-4 bg-emerald-50/60 rounded-2xl border-2 border-dashed border-emerald-300 mb-6 flex flex-col gap-2 justify-center items-center">
+                        <span class="text-xs text-emerald-600/70 font-semibold placeholder-text">Tap the tiles below to place them here in order...</span>
+                    </div>
+
+                    <!-- Scrambled Tile Source -->
+                    <div id="scrambledZone" class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+            `;
+
+            scrambled.forEach((item, idx) => {
+                html += `
+                    <button id="tile-${idx}" onclick="selectChunkTile(${idx}, ${item.originalIdx}, '${item.text.replace(/'/g, "\\'")}')" class="chunk-${item.originalIdx} p-3.5 rounded-2xl border-2 font-bold text-sm text-left interactive-btn shadow-sm">
+                        ${item.text}
+                    </button>
+                `;
+            });
+
+            html += `
+                    </div>
+
+                    <div class="flex justify-center gap-3">
+                        <button onclick="goToLevel(2)" class="bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold px-4 py-2.5 rounded-xl text-sm border border-gray-300">
+                            🔄 Reset
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+        }
+
+        function selectChunkTile(scrambledIdx, originalIdx, text) {
+            const target = state.verses[state.translation].chunks[level2Selected.length];
+            
+            if (originalIdx === level2Selected.length) {
+                playSound('pop');
+                speak(text);
+                level2Selected.push(originalIdx);
+
+                document.getElementById(`tile-${scrambledIdx}`).style.visibility = 'hidden';
+
+                const zone = document.getElementById('targetZone');
+                const placeholder = zone.querySelector('.placeholder-text');
+                if (placeholder) placeholder.remove();
+
+                const newBlock = document.createElement('div');
+                newBlock.className = `chunk-${originalIdx} w-full p-3.5 rounded-2xl border-2 font-bold text-sm text-left shadow-sm`;
+                newBlock.innerText = text;
+                zone.appendChild(newBlock);
+
+                if (level2Selected.length === state.verses[state.translation].chunks.length) {
+                    playSound('success');
+                    addStar(2);
+                    setTimeout(() => {
+                        alert("🎉 Wonderful! You sequenced all phrases correctly!");
+                        goToLevel(3);
+                    }, 400);
+                }
+            } else {
+                playSound('error');
+            }
+        }
+
+        // LEVEL 3: Interactive Word Fill-In
+        let level3CurrentWordIndex = 0;
+        function renderLevel3(container) {
+            const verseData = state.verses[state.translation];
+            level3CurrentWordIndex = 0;
+
+            const scrambledWords = [...verseData.words]
+                .map((w, origIdx) => ({ word: w, origIdx }))
+                .sort(() => Math.random() - 0.5);
+
+            let html = `
+                <div class="w-full text-center max-w-2xl">
+                    <div class="inline-block bg-emerald-100 text-emerald-900 font-extrabold px-3.5 py-1 rounded-full text-xs uppercase tracking-wider mb-2 border border-emerald-300">
+                        Step 3: Word-by-Word Puzzle 🌼
+                    </div>
+                    <h2 class="text-xl font-black mb-1 text-emerald-950">Tap the Next Word</h2>
+                    <p class="text-xs sm:text-sm text-emerald-800/80 mb-6 font-medium">Construct Psalm 119:11 word by word!</p>
+
+                    <!-- Constructed Text Area -->
+                    <div id="wordDisplayArea" class="p-5 bg-sky-50/70 rounded-2xl border-2 border-sky-200 mb-6 min-h-[120px] text-lg sm:text-xl font-black flex flex-wrap gap-2 items-center justify-center">
+                        <!-- Words append here -->
+                    </div>
+
+                    <!-- Word Bank -->
+                    <div id="wordBank" class="flex flex-wrap gap-2 justify-center mb-6">
+            `;
+
+            scrambledWords.forEach((item, idx) => {
+                html += `
+                    <button id="wbtn-${idx}" onclick="selectWordTile(${idx}, ${item.origIdx}, '${item.word.replace(/'/g, "\\'")}')" class="bg-white hover:bg-emerald-100 border-2 border-emerald-300 text-emerald-950 font-bold px-3.5 py-2 rounded-xl text-sm sm:text-base interactive-btn shadow-sm">
+                        ${item.word}
+                    </button>
+                `;
+            });
+
+            html += `
+                    </div>
+
+                    <button onclick="goToLevel(3)" class="bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold px-4 py-2 rounded-xl text-xs border border-gray-300">
+                        🔄 Reset Words
+                    </button>
+                </div>
+            `;
+
+            container.innerHTML = html;
+        }
+
+        function selectWordTile(btnIdx, origIdx, wordText) {
+            if (origIdx === level3CurrentWordIndex) {
+                playSound('pop');
+                level3CurrentWordIndex++;
+
+                document.getElementById(`wbtn-${btnIdx}`).style.visibility = 'hidden';
+
+                const area = document.getElementById('wordDisplayArea');
+                const span = document.createElement('span');
+                span.className = "bg-emerald-200 text-emerald-950 px-2.5 py-1 rounded-lg text-base sm:text-lg border border-emerald-300";
+                span.innerText = wordText;
+                area.appendChild(span);
+
+                if (level3CurrentWordIndex === state.verses[state.translation].words.length) {
+                    playSound('success');
+                    addStar(2);
+                    setTimeout(() => {
+                        alert("🌟 Outstanding! You completed the full verse word-by-word!");
+                        goToLevel(4);
+                    }, 400);
+                }
+            } else {
+                playSound('error');
+            }
+        }
+
+        // LEVEL 4: First-Letter Memory Prompting
+        function renderLevel4(container) {
+            const verseData = state.verses[state.translation];
+
+            const maskedChunks = verseData.chunks.map(chunk => {
+                const words = chunk.text.split(' ');
+                const maskedWords = words.map(w => {
+                    const firstChar = w.charAt(0);
+                    const rest = w.slice(1).replace(/[a-zA-Z]/g, '_');
+                    return `<span class="inline-block font-mono font-black text-teal-900 bg-teal-100 px-2 py-0.5 rounded-lg border border-teal-300">${firstChar}${rest}</span>`;
+                });
+                return maskedWords.join(' ');
+            });
+
+            let html = `
+                <div class="w-full text-center max-w-2xl">
+                    <div class="inline-block bg-emerald-100 text-emerald-900 font-extrabold px-3.5 py-1 rounded-full text-xs uppercase tracking-wider mb-2 border border-emerald-300">
+                        Step 4: First-Letter Recall 🌸
+                    </div>
+                    <h2 class="text-xl font-black mb-1 text-emerald-950">Use First-Letter Hints</h2>
+                    <p class="text-xs sm:text-sm text-emerald-800/80 mb-6 font-medium">Recite the verse aloud using initial letter hints!</p>
+
+                    <div class="space-y-3 mb-6 text-left">
+            `;
+
+            maskedChunks.forEach((maskedText, idx) => {
+                html += `
+                    <div class="chunk-${idx} p-4 rounded-2xl border-2 text-base sm:text-lg flex flex-col gap-2 shadow-sm">
+                        <div>${maskedText}</div>
+                        <button onclick="toggleChunkPeek(${idx})" class="self-end text-xs font-bold underline text-emerald-900 hover:text-emerald-950">
+                            👁️ Peek Phrase
+                        </button>
+                        <div id="peek-${idx}" class="hidden text-xs sm:text-sm font-bold opacity-95 border-t border-emerald-300 pt-2 mt-1">
+                            Full: "${verseData.chunks[idx].text}"
+                        </div>
+                    </div>
+                `;
+            });
+
+            html += `
+                    </div>
+
+                    <div class="flex justify-center gap-3">
+                        <button onclick="speak('${verseData.full.replace(/'/g, "\\'")}')" class="bg-sky-100 hover:bg-sky-200 text-sky-900 font-bold px-4 py-2.5 rounded-2xl text-sm border border-sky-300">
+                            🔊 Listen for Help
+                        </button>
+                        <button onclick="addStar(3); goToLevel(5);" class="bg-gradient-to-r from-emerald-500 to-sky-500 hover:from-emerald-600 hover:to-sky-600 text-white font-extrabold px-6 py-2.5 rounded-2xl text-sm shadow-md">
+                            Ready for Final Challenge! ⭐
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+        }
+
+        function toggleChunkPeek(idx) {
+            const el = document.getElementById(`peek-${idx}`);
+            if (el.classList.contains('hidden')) {
+                el.classList.remove('hidden');
+                playSound('pop');
+            } else {
+                el.classList.add('hidden');
+            }
+        }
+
+        // LEVEL 5: Master Memory Challenge
+        function renderLevel5(container) {
+            const verseData = state.verses[state.translation];
+
+            let html = `
+                <div class="w-full text-center max-w-xl">
+                    <div class="inline-block bg-emerald-100 text-emerald-900 font-extrabold px-3.5 py-1 rounded-full text-xs uppercase tracking-wider mb-2 border border-emerald-300">
+                        Step 5: Master Challenge 👑
+                    </div>
+                    <h2 class="text-2xl font-black mb-2 text-emerald-950">Can You Recite Psalm 119:11?</h2>
+                    <p class="text-xs sm:text-sm text-emerald-800/80 mb-6 font-medium">Recite the verse out loud from memory, then reveal the answer below!</p>
+
+                    <!-- Reveal Box -->
+                    <div id="masterVerseBox" class="hidden p-6 bg-gradient-to-br from-emerald-100 via-teal-50 to-sky-100 rounded-3xl border-2 border-emerald-300 text-emerald-950 text-lg sm:text-xl font-black shadow-inner mb-6">
+                        "${verseData.full}"
+                        <div class="text-xs text-emerald-800 font-bold mt-3">— ${verseData.reference}</div>
+                    </div>
+
+                    <div class="flex flex-col gap-3 items-center">
+                        <button id="revealBtn" onclick="revealMasterVerse()" class="w-full sm:w-auto bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-black px-8 py-4 rounded-2xl text-lg shadow-lg interactive-btn">
+                            👑 Reveal Full Verse
+                        </button>
+
+                        <div id="victoryActions" class="hidden flex-col gap-3 w-full">
+                            <button onclick="celebrateCompletion()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold px-6 py-3.5 rounded-2xl text-base shadow-md interactive-btn flex items-center justify-center gap-2">
+                                🎉 I Recited It Perfectly! Claim Badge 🌸
+                            </button>
+                            <button onclick="goToLevel(1)" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold px-6 py-2.5 rounded-xl text-sm border border-gray-300">
+                                🔄 Practice Again
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+        }
+
+        function revealMasterVerse() {
+            playSound('fanfare');
+            document.getElementById('masterVerseBox').classList.remove('hidden');
+            document.getElementById('revealBtn').classList.add('hidden');
+            document.getElementById('victoryActions').classList.remove('hidden');
+            document.getElementById('victoryActions').classList.add('flex');
+            addStar(5);
+        }
+
+        function celebrateCompletion() {
+            playSound('fanfare');
+            const stage = document.getElementById('appStage');
+            stage.innerHTML = `
+                <div class="text-center p-6">
+                    <div class="text-6xl mb-3">🏆🌸🌿</div>
+                    <h2 class="text-3xl font-black text-emerald-800 mb-2">Memory Champion!</h2>
+                    <p class="text-base font-extrabold text-emerald-950 mb-4">You have stored Psalm 119:11 in your heart!</p>
+                    <div class="p-4 bg-emerald-50 rounded-2xl border-2 border-emerald-300 mb-6 text-emerald-950 font-extrabold text-base sm:text-lg">
+                        "${state.verses[state.translation].full}"
+                    </div>
+                    <p class="text-xs font-bold text-sky-800 mb-6">Total Stars Earned: ⭐ ${state.stars}</p>
+                    <button onclick="goToLevel(1)" class="bg-gradient-to-r from-emerald-500 to-sky-500 hover:from-emerald-600 hover:to-sky-600 text-white font-extrabold px-6 py-3 rounded-2xl text-sm shadow-md">
+                        Start Fresh / Try KJV Translation ➔
+                    </button>
+                </div>
+            `;
+        }
+
+        window.onload = function() {
+            goToLevel(1);
+        };
+    </script>
+</body>
+</html>
